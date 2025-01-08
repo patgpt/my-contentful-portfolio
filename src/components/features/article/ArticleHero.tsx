@@ -32,7 +32,7 @@ export const ArticleHero = ({
   return (
     <div
       className={twMerge(
-        'card bg-base-100 shadow-xl lg:card-side',
+        'card my-8 bg-base-100 shadow-xl lg:card-side',
         isReversedLayout ? 'lg:flex-row-reverse' : '',
       )}
     >

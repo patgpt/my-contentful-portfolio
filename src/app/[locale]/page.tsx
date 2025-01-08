@@ -85,13 +85,13 @@ export default async function Page({ params: { locale } }: LandingPageProps) {
   return (
     <TranslationsProvider locale={locale} resources={resources}>
       <Hero locale={locale} />
-      <Link href={`/${page.featuredBlogPost.slug}`}>
-        <ArticleHero article={page.featuredBlogPost} />
-      </Link>
 
-      <Container className="my-8  md:mb-10 lg:mb-16">
+      <Container className="my-8 md:mb-10 lg:mb-16">
         <h2 className="mb-4 md:mb-6">{t('landingPage.latestArticles')}</h2>
-        <ArticleTileGrid className="md:grid-cols-2 lg:grid-cols-3" articles={posts} />
+        <Link className="my-8" href={`/${page.featuredBlogPost.slug}`}>
+          <ArticleHero article={page.featuredBlogPost} />
+        </Link>
+        <ArticleTileGrid className="my-md:grid-cols-2 lg:grid-cols-3" articles={posts} />
       </Container>
     </TranslationsProvider>
   );

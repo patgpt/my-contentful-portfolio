@@ -47,7 +47,7 @@ export default async function PageLayout({ children, params }: LayoutProps) {
       <head>
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
       </head>
-      <body>
+      <body className="min-h-screen bg-base-100 text-base-content">
         <ThemeProvider attribute="class">
           <TranslationsProvider locale={locale} resources={resources}>
             <ContentfulPreviewProvider
@@ -56,7 +56,7 @@ export default async function PageLayout({ children, params }: LayoutProps) {
               enableLiveUpdates={preview}
               targetOrigin={allowedOriginList}
             >
-              <main className={cn(urbanist.variable, 'font-sans')}>
+              <main className={cn(urbanist.variable, 'min-h-screen font-sans')}>
                 <Header locale={locale} />
                 {children}
                 <Footer />

@@ -17,8 +17,8 @@ async function ExperiencePage({ params: { locale, slug } }: ExperiencePageProps)
   const experienceList = allExperiences.pageExperienceCollection?.items;
   console.log(experienceList);
   return (
-    <div>
-      <h1>Experience Page</h1>
+    <div className="container mx-auto">
+      <h1 className="text-2xl">Experience Page</h1>
     </div>
   );
 }
