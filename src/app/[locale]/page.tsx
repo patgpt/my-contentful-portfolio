@@ -62,7 +62,7 @@ export default async function Page({ params: { locale } }: LandingPageProps) {
 
   const landingPageData = await gqlClient.pageLanding({ locale, preview });
   const page = landingPageData.pageLandingCollection?.items[0];
-
+  console.log(page?.hero);
   if (!page) {
     notFound();
   }
@@ -84,7 +84,7 @@ export default async function Page({ params: { locale } }: LandingPageProps) {
 
   return (
     <TranslationsProvider locale={locale} resources={resources}>
-      <Hero />
+      <Hero locale={locale} />
       <Link href={`/${page.featuredBlogPost.slug}`}>
         <ArticleHero article={page.featuredBlogPost} />
       </Link>
