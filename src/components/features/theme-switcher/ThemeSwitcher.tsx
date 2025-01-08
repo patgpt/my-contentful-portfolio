@@ -1,53 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 function ThemeSwitcher() {
+  const [theme, setTheme] = useState('light');
+  const { t } = useTranslation();
+  useEffect(() => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme) setTheme(currentTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    setTheme(newTheme);
+  };
+
   return (
-    <div className="dropdown mb-72">
-      <div tabIndex={0} role="button" className="btn m-1">
-        Theme
-        <svg
-          width="12px"
-          height="12px"
-          className="inline-block h-2 w-2 fill-current opacity-60"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 2048 2048"
-        >
-          <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z" />
-        </svg>
-      </div>
-      <ul
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-        tabIndex={0}
-        className="dropdown-content z-[1] w-52 rounded-box bg-base-300 p-2 shadow-2xl"
-      >
-        <li>
-          <input
-            type="radio"
-            name="theme-dropdown"
-            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
-            aria-label="Default"
-            value="default"
-          />
-        </li>
-        <li>
-          <input
-            type="radio"
-            name="theme-dropdown"
-            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
-            aria-label="Light"
-            value="light"
-          />
-        </li>
-        <li>
-          <input
-            type="radio"
-            name="theme-dropdown"
-            className="theme-controller btn btn-ghost btn-sm btn-block justify-start"
-            aria-label="Dark"
-            value="dark"
-          />
-        </li>
-      </ul>
+    <div className="flex items-center gap-2">
+      <span className="text-sm font-medium">{t('common.theme')}</span>
+      <label className="swap swap-rotate">
+        <input
+          type="checkbox"
+          className="theme-controller"
+          checked={theme === 'dark'}
+          onChange={toggleTheme}
+        />
+        <FiSun className="swap-on h-6 w-6" />
+        <FiMoon className="swap-off h-6 w-6" />
+      </label>
     </div>
   );
 }

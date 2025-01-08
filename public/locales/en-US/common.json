@@ -10,7 +10,8 @@
     "regionalSettings": "Regional Settings",
     "homepage": "Homepage",
     "language": "Language",
-    "languageDrawer": "Toggle language drawer"
+    "languageDrawer": "Toggle language drawer",
+    "theme": "Theme"
   },
   "footer": {
     "aboutUs": "about us",

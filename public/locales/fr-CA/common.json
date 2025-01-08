@@ -10,7 +10,8 @@
     "homepage": "Page d'accueil",
     "regionalSettings": "Paramètres régionaux",
     "language": "Langue",
-    "languageDrawer": "Basculer le tiroir des langues"
+    "languageDrawer": "Basculer le tiroir des langues",
+    "theme": "Thème"
   },
   "footer": {
     "aboutUs": "À propos de nous",

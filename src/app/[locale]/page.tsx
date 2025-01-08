@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { ArticleHero, ArticleTileGrid } from '@src/components/features/article';
+import { Hero } from '@src/components/features/hero/Hero';
 import { Container } from '@src/components/shared/container';
 import TranslationsProvider from '@src/components/shared/i18n/TranslationProvider';
 import initTranslations from '@src/i18n';
@@ -83,11 +84,10 @@ export default async function Page({ params: { locale } }: LandingPageProps) {
 
   return (
     <TranslationsProvider locale={locale} resources={resources}>
-      <Container>
-        <Link href={`/${page.featuredBlogPost.slug}`}>
-          <ArticleHero article={page.featuredBlogPost} />
-        </Link>
-      </Container>
+      <Hero />
+      <Link href={`/${page.featuredBlogPost.slug}`}>
+        <ArticleHero article={page.featuredBlogPost} />
+      </Link>
 
       <Container className="my-8  md:mb-10 lg:mb-16">
         <h2 className="mb-4 md:mb-6">{t('landingPage.latestArticles')}</h2>
