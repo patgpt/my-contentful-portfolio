@@ -99,6 +99,7 @@ type AssetLinkingCollections {
   componentSeoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentSeoCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   pageBlogPostCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageBlogPostCollection
+  pageExperienceCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageExperienceCollection
 }
 
 enum AssetOrder {
@@ -1193,6 +1194,136 @@ enum PageBlogPostRelatedBlogPostsCollectionOrder {
 }
 
 """
+Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience)
+"""
+type PageExperience implements Entry & _Node {
+  _id: ID!
+  bannerImage(locale: String, preview: Boolean): Asset
+  companyLogo(locale: String, preview: Boolean): Asset
+  companyName(locale: String): String
+  content(locale: String): String
+  contentfulMetadata: ContentfulMetadata!
+  endDate(locale: String): DateTime
+  internalTitle(locale: String): String
+  linkedFrom(allowedLocales: [String]): PageExperienceLinkingCollections
+  positionTitle(locale: String): String
+  skillsUsed(locale: String): [String]
+  slug(locale: String): String
+  startDate(locale: String): DateTime
+  sys: Sys!
+  website(locale: String): String
+}
+
+type PageExperienceCollection {
+  items: [PageExperience]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input PageExperienceFilter {
+  AND: [PageExperienceFilter]
+  OR: [PageExperienceFilter]
+  bannerImage_exists: Boolean
+  companyLogo_exists: Boolean
+  companyName: String
+  companyName_contains: String
+  companyName_exists: Boolean
+  companyName_in: [String]
+  companyName_not: String
+  companyName_not_contains: String
+  companyName_not_in: [String]
+  content: String
+  content_contains: String
+  content_exists: Boolean
+  content_in: [String]
+  content_not: String
+  content_not_contains: String
+  content_not_in: [String]
+  contentfulMetadata: ContentfulMetadataFilter
+  endDate: DateTime
+  endDate_exists: Boolean
+  endDate_gt: DateTime
+  endDate_gte: DateTime
+  endDate_in: [DateTime]
+  endDate_lt: DateTime
+  endDate_lte: DateTime
+  endDate_not: DateTime
+  endDate_not_in: [DateTime]
+  internalTitle: String
+  internalTitle_contains: String
+  internalTitle_exists: Boolean
+  internalTitle_in: [String]
+  internalTitle_not: String
+  internalTitle_not_contains: String
+  internalTitle_not_in: [String]
+  positionTitle: String
+  positionTitle_contains: String
+  positionTitle_exists: Boolean
+  positionTitle_in: [String]
+  positionTitle_not: String
+  positionTitle_not_contains: String
+  positionTitle_not_in: [String]
+  skillsUsed_contains_all: [String]
+  skillsUsed_contains_none: [String]
+  skillsUsed_contains_some: [String]
+  skillsUsed_exists: Boolean
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  startDate: DateTime
+  startDate_exists: Boolean
+  startDate_gt: DateTime
+  startDate_gte: DateTime
+  startDate_in: [DateTime]
+  startDate_lt: DateTime
+  startDate_lte: DateTime
+  startDate_not: DateTime
+  startDate_not_in: [DateTime]
+  sys: SysFilter
+  website: String
+  website_contains: String
+  website_exists: Boolean
+  website_in: [String]
+  website_not: String
+  website_not_contains: String
+  website_not_in: [String]
+}
+
+type PageExperienceLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum PageExperienceOrder {
+  companyName_ASC
+  companyName_DESC
+  endDate_ASC
+  endDate_DESC
+  internalTitle_ASC
+  internalTitle_DESC
+  positionTitle_ASC
+  positionTitle_DESC
+  slug_ASC
+  slug_DESC
+  startDate_ASC
+  startDate_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  website_ASC
+  website_DESC
+}
+
+"""
 To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageLanding)
 """
 type PageLanding implements Entry & _Node {
@@ -1276,6 +1407,8 @@ type Query {
   navigationMenuCollection(limit: Int = 100, locale: String, order: [NavigationMenuOrder], preview: Boolean, skip: Int = 0, where: NavigationMenuFilter): NavigationMenuCollection
   pageBlogPost(id: String!, locale: String, preview: Boolean): PageBlogPost
   pageBlogPostCollection(limit: Int = 100, locale: String, order: [PageBlogPostOrder], preview: Boolean, skip: Int = 0, where: PageBlogPostFilter): PageBlogPostCollection
+  pageExperience(id: String!, locale: String, preview: Boolean): PageExperience
+  pageExperienceCollection(limit: Int = 100, locale: String, order: [PageExperienceOrder], preview: Boolean, skip: Int = 0, where: PageExperienceFilter): PageExperienceCollection
   pageLanding(id: String!, locale: String, preview: Boolean): PageLanding
   pageLandingCollection(limit: Int = 100, locale: String, order: [PageLandingOrder], preview: Boolean, skip: Int = 0, where: PageLandingFilter): PageLandingCollection
 }

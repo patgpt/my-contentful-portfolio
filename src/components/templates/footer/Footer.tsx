@@ -3,8 +3,6 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
-import { Container } from '@src/components/shared/container';
-
 export const Footer = () => {
   const { t } = useTranslation();
 

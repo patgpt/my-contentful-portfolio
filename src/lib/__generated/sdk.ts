@@ -177,6 +177,7 @@ export type AssetLinkingCollections = {
   componentSeoCollection?: Maybe<ComponentSeoCollection>;
   entryCollection?: Maybe<EntryCollection>;
   pageBlogPostCollection?: Maybe<PageBlogPostCollection>;
+  pageExperienceCollection?: Maybe<PageExperienceCollection>;
 };
 
 
@@ -229,6 +230,14 @@ export type AssetLinkingCollectionsEntryCollectionArgs = {
 
 
 export type AssetLinkingCollectionsPageBlogPostCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AssetLinkingCollectionsPageExperienceCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -1739,6 +1748,219 @@ export enum PageBlogPostRelatedBlogPostsCollectionOrder {
   TitleDesc = 'title_DESC'
 }
 
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperience = Entry & _Node & {
+  __typename?: 'PageExperience';
+  _id: Scalars['ID'];
+  bannerImage?: Maybe<Asset>;
+  companyLogo?: Maybe<Asset>;
+  companyName?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  endDate?: Maybe<Scalars['DateTime']>;
+  internalTitle?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<PageExperienceLinkingCollections>;
+  positionTitle?: Maybe<Scalars['String']>;
+  skillsUsed?: Maybe<Array<Maybe<Scalars['String']>>>;
+  slug?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['DateTime']>;
+  sys: Sys;
+  website?: Maybe<Scalars['String']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceBannerImageArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceCompanyLogoArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceCompanyNameArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceContentArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceEndDateArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceInternalTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperiencePositionTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceSkillsUsedArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceSlugArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceStartDateArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceWebsiteArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type PageExperienceCollection = {
+  __typename?: 'PageExperienceCollection';
+  items: Array<Maybe<PageExperience>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type PageExperienceFilter = {
+  AND?: InputMaybe<Array<InputMaybe<PageExperienceFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageExperienceFilter>>>;
+  bannerImage_exists?: InputMaybe<Scalars['Boolean']>;
+  companyLogo_exists?: InputMaybe<Scalars['Boolean']>;
+  companyName?: InputMaybe<Scalars['String']>;
+  companyName_contains?: InputMaybe<Scalars['String']>;
+  companyName_exists?: InputMaybe<Scalars['Boolean']>;
+  companyName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  companyName_not?: InputMaybe<Scalars['String']>;
+  companyName_not_contains?: InputMaybe<Scalars['String']>;
+  companyName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  content?: InputMaybe<Scalars['String']>;
+  content_contains?: InputMaybe<Scalars['String']>;
+  content_exists?: InputMaybe<Scalars['Boolean']>;
+  content_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  content_not?: InputMaybe<Scalars['String']>;
+  content_not_contains?: InputMaybe<Scalars['String']>;
+  content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  endDate?: InputMaybe<Scalars['DateTime']>;
+  endDate_exists?: InputMaybe<Scalars['Boolean']>;
+  endDate_gt?: InputMaybe<Scalars['DateTime']>;
+  endDate_gte?: InputMaybe<Scalars['DateTime']>;
+  endDate_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  endDate_lt?: InputMaybe<Scalars['DateTime']>;
+  endDate_lte?: InputMaybe<Scalars['DateTime']>;
+  endDate_not?: InputMaybe<Scalars['DateTime']>;
+  endDate_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  internalTitle?: InputMaybe<Scalars['String']>;
+  internalTitle_contains?: InputMaybe<Scalars['String']>;
+  internalTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  internalTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalTitle_not?: InputMaybe<Scalars['String']>;
+  internalTitle_not_contains?: InputMaybe<Scalars['String']>;
+  internalTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  positionTitle?: InputMaybe<Scalars['String']>;
+  positionTitle_contains?: InputMaybe<Scalars['String']>;
+  positionTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  positionTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  positionTitle_not?: InputMaybe<Scalars['String']>;
+  positionTitle_not_contains?: InputMaybe<Scalars['String']>;
+  positionTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  skillsUsed_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  skillsUsed_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  skillsUsed_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  skillsUsed_exists?: InputMaybe<Scalars['Boolean']>;
+  slug?: InputMaybe<Scalars['String']>;
+  slug_contains?: InputMaybe<Scalars['String']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  slug_not?: InputMaybe<Scalars['String']>;
+  slug_not_contains?: InputMaybe<Scalars['String']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  startDate?: InputMaybe<Scalars['DateTime']>;
+  startDate_exists?: InputMaybe<Scalars['Boolean']>;
+  startDate_gt?: InputMaybe<Scalars['DateTime']>;
+  startDate_gte?: InputMaybe<Scalars['DateTime']>;
+  startDate_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  startDate_lt?: InputMaybe<Scalars['DateTime']>;
+  startDate_lte?: InputMaybe<Scalars['DateTime']>;
+  startDate_not?: InputMaybe<Scalars['DateTime']>;
+  startDate_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  sys?: InputMaybe<SysFilter>;
+  website?: InputMaybe<Scalars['String']>;
+  website_contains?: InputMaybe<Scalars['String']>;
+  website_exists?: InputMaybe<Scalars['Boolean']>;
+  website_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  website_not?: InputMaybe<Scalars['String']>;
+  website_not_contains?: InputMaybe<Scalars['String']>;
+  website_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type PageExperienceLinkingCollections = {
+  __typename?: 'PageExperienceLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type PageExperienceLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum PageExperienceOrder {
+  CompanyNameAsc = 'companyName_ASC',
+  CompanyNameDesc = 'companyName_DESC',
+  EndDateAsc = 'endDate_ASC',
+  EndDateDesc = 'endDate_DESC',
+  InternalTitleAsc = 'internalTitle_ASC',
+  InternalTitleDesc = 'internalTitle_DESC',
+  PositionTitleAsc = 'positionTitle_ASC',
+  PositionTitleDesc = 'positionTitle_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  StartDateAsc = 'startDate_ASC',
+  StartDateDesc = 'startDate_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  WebsiteAsc = 'website_ASC',
+  WebsiteDesc = 'website_DESC'
+}
+
 /** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageLanding) */
 export type PageLanding = Entry & _Node & {
   __typename?: 'PageLanding';
@@ -1864,6 +2086,8 @@ export type Query = {
   navigationMenuCollection?: Maybe<NavigationMenuCollection>;
   pageBlogPost?: Maybe<PageBlogPost>;
   pageBlogPostCollection?: Maybe<PageBlogPostCollection>;
+  pageExperience?: Maybe<PageExperience>;
+  pageExperienceCollection?: Maybe<PageExperienceCollection>;
   pageLanding?: Maybe<PageLanding>;
   pageLandingCollection?: Maybe<PageLandingCollection>;
 };
@@ -2036,6 +2260,23 @@ export type QueryPageBlogPostCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<PageBlogPostFilter>;
+};
+
+
+export type QueryPageExperienceArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryPageExperienceCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageExperienceOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageExperienceFilter>;
 };
 
 
@@ -2334,6 +2575,14 @@ export type AuthorFieldsFragment = { __typename: 'ComponentAuthor', name?: strin
     & ImageFieldsFragment
   ) | null };
 
+export type GetAllExperiencesQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+
+export type GetAllExperiencesQuery = { __typename?: 'Query', pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<{ __typename?: 'PageExperience', slug?: string | null, companyName?: string | null, startDate?: any | null, endDate?: any | null, website?: string | null, content?: string | null, skillsUsed?: Array<string | null> | null, positionTitle?: string | null, sys: { __typename?: 'Sys', id: string }, companyLogo?: { __typename?: 'Asset', url?: string | null } | null, bannerImage?: { __typename?: 'Asset', url?: string | null } | null } | null> } | null };
+
 export type HeroFieldsFragment = { __typename?: 'ComponentHero', internalName?: string | null, heading?: string | null, subHeading?: string | null, heroImage?: (
     { __typename?: 'Asset' }
     & ImageFieldsFragment
@@ -2386,7 +2635,7 @@ export type PageBlogPostFieldsFragment = { __typename: 'PageBlogPost', internalN
   ) | null, content?: { __typename?: 'PageBlogPostContent', json: any, links: { __typename?: 'PageBlogPostContentLinks', entries: { __typename?: 'PageBlogPostContentEntries', block: Array<{ __typename?: 'ComponentAuthor' } | { __typename?: 'ComponentCta' } | { __typename?: 'ComponentHero' } | (
           { __typename?: 'ComponentRichImage' }
           & RichImageFieldsFragment
-        ) | { __typename?: 'ComponentSeo' } | { __typename?: 'NavigationLink' } | { __typename?: 'NavigationMenu' } | { __typename?: 'PageBlogPost' } | { __typename?: 'PageLanding' } | null> } } } | null, relatedBlogPostsCollection?: { __typename?: 'PageBlogPostRelatedBlogPostsCollection', items: Array<(
+        ) | { __typename?: 'ComponentSeo' } | { __typename?: 'NavigationLink' } | { __typename?: 'NavigationMenu' } | { __typename?: 'PageBlogPost' } | { __typename?: 'PageExperience' } | { __typename?: 'PageLanding' } | null> } } } | null, relatedBlogPostsCollection?: { __typename?: 'PageBlogPostRelatedBlogPostsCollection', items: Array<(
       { __typename?: 'PageBlogPost' }
       & ReferencePageBlogPostFieldsFragment
     ) | null> } | null };
@@ -2644,6 +2893,32 @@ export const SitemapPagesFieldsFragmentDoc = gql`
   }
 }
     `;
+export const GetAllExperiencesDocument = gql`
+    query getAllExperiences($locale: String, $preview: Boolean) {
+  pageExperienceCollection(limit: 20, locale: $locale, preview: $preview) {
+    items {
+      sys {
+        id
+      }
+      slug
+      companyName
+      companyLogo {
+        url
+      }
+      bannerImage {
+        url
+      }
+      slug
+      startDate
+      endDate
+      website
+      content
+      skillsUsed
+      positionTitle
+    }
+  }
+}
+    `;
 export const GetHeroDocument = gql`
     query GetHero($preview: Boolean, $locale: String) {
   componentHeroCollection(limit: 1, preview: $preview, locale: $locale) {
@@ -2761,6 +3036,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    getAllExperiences(variables?: GetAllExperiencesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAllExperiencesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAllExperiencesQuery>(GetAllExperiencesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllExperiences', 'query', variables);
+    },
     GetHero(variables?: GetHeroQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetHeroQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetHeroQuery>(GetHeroDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetHero', 'query', variables);
     },
