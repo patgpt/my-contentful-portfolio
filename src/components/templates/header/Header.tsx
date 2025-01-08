@@ -1,13 +1,26 @@
-'use client';
-
+import { draftMode } from 'next/headers';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
 
 import { LanguageSelector } from '@src/components/features/language-selector';
 import ThemeSwitcher from '@src/components/features/theme-switcher/ThemeSwitcher';
+import initTranslations from '@src/i18n';
+import { client, previewClient } from '@src/lib/client';
 
-export const Header = () => {
-  const { t } = useTranslation();
+export const Header = async ({ locale }: { locale: string }) => {
+  const { isEnabled: preview } = draftMode();
+  const { t } = await initTranslations({ locale });
+  const gqlClient = preview ? previewClient : client;
+
+  const contentfulLocale = locale || 'en-US';
+
+  const navigation = await gqlClient.GetNavigationMenu({
+    preview,
+    locale: contentfulLocale,
+    position: 'Header',
+  });
+
+  const menuItems =
+    navigation?.navigationMenuCollection?.items[0]?.navigationMenuCollection?.items || [];
 
   return (
     <div className="navbar fixed left-0 right-0 top-0 z-50 border-b border-base-200 bg-base-100">
@@ -25,20 +38,12 @@ export const Header = () => {
               <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z" />
             </svg>
           </div>
-          <ul
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-            tabIndex={0}
-            className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
-          >
-            <li>
-              <Link href="/about">{t('nav.about')}</Link>
-            </li>
-            <li>
-              <Link href="/projects">{t('nav.projects')}</Link>
-            </li>
-            <li>
-              <Link href="/blog">{t('nav.blog')}</Link>
-            </li>
+          <ul className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
+            {menuItems.map((item, index) => (
+              <li key={`mobile-${index}`}>
+                <Link href={`/${item?.href}`}>{item?.title || t(`nav.${item?.href}`)}</Link>
+              </li>
+            ))}
           </ul>
         </div>
         <Link className="btn btn-ghost text-xl" href="/" title={t('common.homepage')}>
@@ -47,18 +52,13 @@ export const Header = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link href="/about">{t('nav.about')}</Link>
-          </li>
-          <li>
-            <Link href="/projects">{t('nav.projects')}</Link>
-          </li>
-          <li>
-            <Link href="/blog">{t('nav.blog')}</Link>
-          </li>
+          {menuItems.map((item, index) => (
+            <li key={`desktop-${index}`}>
+              <Link href={`/${item?.href}`}>{item?.title || t(`nav.${item?.href}`)}</Link>
+            </li>
+          ))}
         </ul>
       </div>
-
       <div className="navbar-end flex gap-2">
         <ThemeSwitcher />
         <LanguageSelector />

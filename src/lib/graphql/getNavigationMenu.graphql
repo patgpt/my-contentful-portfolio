@@ -1,0 +1,17 @@
+query GetNavigationMenu($locale: String!, $preview: Boolean, $position: String!) {
+  navigationMenuCollection(limit: 1, preview: $preview, where: { position_contains: $position }) {
+    items {
+      internalName
+      position
+      navigationMenuCollection {
+        items {
+          __typename
+          ... on NavigationLink {
+            title(locale: $locale)
+            href
+          }
+        }
+      }
+    }
+  }
+}

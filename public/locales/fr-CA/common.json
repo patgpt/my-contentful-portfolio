@@ -26,5 +26,12 @@
     "github": "GitHub",
     "linkedin": "LinkedIn",
     "twitter": "Twitter"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "experience": "Expérience",
+    "services": "Services",
+    "contact": "Contact"
   }
 }

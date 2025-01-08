@@ -1171,6 +1171,258 @@ export type ImageTransformOptions = {
   width?: InputMaybe<Scalars['Dimension']>;
 };
 
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationLink) */
+export type NavigationLink = Entry & _Node & {
+  __typename?: 'NavigationLink';
+  _id: Scalars['ID'];
+  contentfulMetadata: ContentfulMetadata;
+  href?: Maybe<Scalars['String']>;
+  internalName?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<NavigationLinkLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationLink) */
+export type NavigationLinkHrefArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationLink) */
+export type NavigationLinkInternalNameArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationLink) */
+export type NavigationLinkLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationLink) */
+export type NavigationLinkTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type NavigationLinkCollection = {
+  __typename?: 'NavigationLinkCollection';
+  items: Array<Maybe<NavigationLink>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type NavigationLinkFilter = {
+  AND?: InputMaybe<Array<InputMaybe<NavigationLinkFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<NavigationLinkFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  href?: InputMaybe<Scalars['String']>;
+  href_contains?: InputMaybe<Scalars['String']>;
+  href_exists?: InputMaybe<Scalars['Boolean']>;
+  href_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  href_not?: InputMaybe<Scalars['String']>;
+  href_not_contains?: InputMaybe<Scalars['String']>;
+  href_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type NavigationLinkLinkingCollections = {
+  __typename?: 'NavigationLinkLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  navigationMenuCollection?: Maybe<NavigationMenuCollection>;
+};
+
+
+export type NavigationLinkLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type NavigationLinkLinkingCollectionsNavigationMenuCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<NavigationLinkLinkingCollectionsNavigationMenuCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum NavigationLinkLinkingCollectionsNavigationMenuCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  PositionAsc = 'position_ASC',
+  PositionDesc = 'position_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export enum NavigationLinkOrder {
+  HrefAsc = 'href_ASC',
+  HrefDesc = 'href_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationMenu) */
+export type NavigationMenu = Entry & _Node & {
+  __typename?: 'NavigationMenu';
+  _id: Scalars['ID'];
+  contentfulMetadata: ContentfulMetadata;
+  internalName?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<NavigationMenuLinkingCollections>;
+  navigationMenuCollection?: Maybe<NavigationMenuNavigationMenuCollection>;
+  position?: Maybe<Scalars['String']>;
+  sys: Sys;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationMenu) */
+export type NavigationMenuInternalNameArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationMenu) */
+export type NavigationMenuLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationMenu) */
+export type NavigationMenuNavigationMenuCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<NavigationMenuNavigationMenuCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<NavigationLinkFilter>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationMenu) */
+export type NavigationMenuPositionArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type NavigationMenuCollection = {
+  __typename?: 'NavigationMenuCollection';
+  items: Array<Maybe<NavigationMenu>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type NavigationMenuFilter = {
+  AND?: InputMaybe<Array<InputMaybe<NavigationMenuFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<NavigationMenuFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  navigationMenu?: InputMaybe<CfNavigationLinkNestedFilter>;
+  navigationMenuCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  position?: InputMaybe<Scalars['String']>;
+  position_contains?: InputMaybe<Scalars['String']>;
+  position_exists?: InputMaybe<Scalars['Boolean']>;
+  position_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  position_not?: InputMaybe<Scalars['String']>;
+  position_not_contains?: InputMaybe<Scalars['String']>;
+  position_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type NavigationMenuLinkingCollections = {
+  __typename?: 'NavigationMenuLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type NavigationMenuLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export type NavigationMenuNavigationMenuCollection = {
+  __typename?: 'NavigationMenuNavigationMenuCollection';
+  items: Array<Maybe<NavigationLink>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export enum NavigationMenuNavigationMenuCollectionOrder {
+  HrefAsc = 'href_ASC',
+  HrefDesc = 'href_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export enum NavigationMenuOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  PositionAsc = 'position_ASC',
+  PositionDesc = 'position_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
 /** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPost = Entry & _Node & {
   __typename?: 'PageBlogPost';
@@ -1606,6 +1858,10 @@ export type Query = {
   componentSeo?: Maybe<ComponentSeo>;
   componentSeoCollection?: Maybe<ComponentSeoCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  navigationLink?: Maybe<NavigationLink>;
+  navigationLinkCollection?: Maybe<NavigationLinkCollection>;
+  navigationMenu?: Maybe<NavigationMenu>;
+  navigationMenuCollection?: Maybe<NavigationMenuCollection>;
   pageBlogPost?: Maybe<PageBlogPost>;
   pageBlogPostCollection?: Maybe<PageBlogPostCollection>;
   pageLanding?: Maybe<PageLanding>;
@@ -1729,6 +1985,40 @@ export type QueryEntryCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<EntryFilter>;
+};
+
+
+export type QueryNavigationLinkArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryNavigationLinkCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<NavigationLinkOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<NavigationLinkFilter>;
+};
+
+
+export type QueryNavigationMenuArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryNavigationMenuCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<NavigationMenuOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<NavigationMenuFilter>;
 };
 
 
@@ -1960,6 +2250,34 @@ export type CfComponentSeoNestedFilter = {
   sys?: InputMaybe<SysFilter>;
 };
 
+export type CfNavigationLinkNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfNavigationLinkNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfNavigationLinkNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  href?: InputMaybe<Scalars['String']>;
+  href_contains?: InputMaybe<Scalars['String']>;
+  href_exists?: InputMaybe<Scalars['Boolean']>;
+  href_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  href_not?: InputMaybe<Scalars['String']>;
+  href_not_contains?: InputMaybe<Scalars['String']>;
+  href_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
 export type CfPageBlogPostNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfPageBlogPostNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfPageBlogPostNestedFilter>>>;
@@ -2016,6 +2334,36 @@ export type AuthorFieldsFragment = { __typename: 'ComponentAuthor', name?: strin
     & ImageFieldsFragment
   ) | null };
 
+export type HeroFieldsFragment = { __typename?: 'ComponentHero', internalName?: string | null, heading?: string | null, subHeading?: string | null, heroImage?: (
+    { __typename?: 'Asset' }
+    & ImageFieldsFragment
+  ) | null };
+
+export type CtaFieldsFragment = { __typename?: 'ComponentCta', ctaText?: string | null, ctaLink?: string | null, icon?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null } | null };
+
+export type GetHeroQueryVariables = Exact<{
+  preview?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetHeroQuery = { __typename?: 'Query', componentHeroCollection?: { __typename?: 'ComponentHeroCollection', items: Array<(
+      { __typename?: 'ComponentHero', ctaFieldsCollection?: { __typename?: 'ComponentHeroCtaFieldsCollection', items: Array<(
+          { __typename?: 'ComponentCta' }
+          & CtaFieldsFragment
+        ) | null> } | null }
+      & HeroFieldsFragment
+    ) | null> } | null };
+
+export type GetNavigationMenuQueryVariables = Exact<{
+  locale: Scalars['String'];
+  preview?: InputMaybe<Scalars['Boolean']>;
+  position: Scalars['String'];
+}>;
+
+
+export type GetNavigationMenuQuery = { __typename?: 'Query', navigationMenuCollection?: { __typename?: 'NavigationMenuCollection', items: Array<{ __typename?: 'NavigationMenu', internalName?: string | null, position?: string | null, navigationMenuCollection?: { __typename?: 'NavigationMenuNavigationMenuCollection', items: Array<{ __typename: 'NavigationLink', title?: string | null, href?: string | null } | null> } | null } | null> } | null };
+
 export type ImageFieldsFragment = { __typename: 'Asset', title?: string | null, description?: string | null, width?: number | null, height?: number | null, url?: string | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } };
 
 export type ReferencePageBlogPostFieldsFragment = { __typename: 'PageBlogPost', slug?: string | null, publishedDate?: any | null, title?: string | null, shortDescription?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, author?: (
@@ -2038,7 +2386,7 @@ export type PageBlogPostFieldsFragment = { __typename: 'PageBlogPost', internalN
   ) | null, content?: { __typename?: 'PageBlogPostContent', json: any, links: { __typename?: 'PageBlogPostContentLinks', entries: { __typename?: 'PageBlogPostContentEntries', block: Array<{ __typename?: 'ComponentAuthor' } | { __typename?: 'ComponentCta' } | { __typename?: 'ComponentHero' } | (
           { __typename?: 'ComponentRichImage' }
           & RichImageFieldsFragment
-        ) | { __typename?: 'ComponentSeo' } | { __typename?: 'PageBlogPost' } | { __typename?: 'PageLanding' } | null> } } } | null, relatedBlogPostsCollection?: { __typename?: 'PageBlogPostRelatedBlogPostsCollection', items: Array<(
+        ) | { __typename?: 'ComponentSeo' } | { __typename?: 'NavigationLink' } | { __typename?: 'NavigationMenu' } | { __typename?: 'PageBlogPost' } | { __typename?: 'PageLanding' } | null> } } } | null, relatedBlogPostsCollection?: { __typename?: 'PageBlogPostRelatedBlogPostsCollection', items: Array<(
       { __typename?: 'PageBlogPost' }
       & ReferencePageBlogPostFieldsFragment
     ) | null> } | null };
@@ -2133,6 +2481,27 @@ export const ImageFieldsFragmentDoc = gql`
   height
   url
   contentType
+}
+    `;
+export const HeroFieldsFragmentDoc = gql`
+    fragment HeroFields on ComponentHero {
+  internalName
+  heroImage {
+    ...ImageFields
+  }
+  heading
+  subHeading
+}
+    `;
+export const CtaFieldsFragmentDoc = gql`
+    fragment CTAFields on ComponentCta {
+  icon {
+    title
+    description
+    url
+  }
+  ctaText
+  ctaLink
 }
     `;
 export const SeoFieldsFragmentDoc = gql`
@@ -2275,6 +2644,45 @@ export const SitemapPagesFieldsFragmentDoc = gql`
   }
 }
     `;
+export const GetHeroDocument = gql`
+    query GetHero($preview: Boolean, $locale: String) {
+  componentHeroCollection(limit: 1, preview: $preview, locale: $locale) {
+    items {
+      ...HeroFields
+      ctaFieldsCollection(preview: $preview, locale: $locale, limit: 1) {
+        items {
+          ...CTAFields
+        }
+      }
+    }
+  }
+}
+    ${HeroFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
+${CtaFieldsFragmentDoc}`;
+export const GetNavigationMenuDocument = gql`
+    query GetNavigationMenu($locale: String!, $preview: Boolean, $position: String!) {
+  navigationMenuCollection(
+    limit: 1
+    preview: $preview
+    where: {position_contains: $position}
+  ) {
+    items {
+      internalName
+      position
+      navigationMenuCollection {
+        items {
+          __typename
+          ... on NavigationLink {
+            title(locale: $locale)
+            href
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const PageBlogPostDocument = gql`
     query pageBlogPost($slug: String!, $locale: String, $preview: Boolean) {
   pageBlogPostCollection(
@@ -2353,6 +2761,12 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    GetHero(variables?: GetHeroQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetHeroQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetHeroQuery>(GetHeroDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetHero', 'query', variables);
+    },
+    GetNavigationMenu(variables: GetNavigationMenuQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetNavigationMenuQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetNavigationMenuQuery>(GetNavigationMenuDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetNavigationMenu', 'query', variables);
+    },
     pageBlogPost(variables: PageBlogPostQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageBlogPostQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PageBlogPostQuery>(PageBlogPostDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pageBlogPost', 'query', variables);
     },

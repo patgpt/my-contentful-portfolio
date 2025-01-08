@@ -818,6 +818,177 @@ The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://
 scalar JSON
 
 """
+[See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationLink)
+"""
+type NavigationLink implements Entry & _Node {
+  _id: ID!
+  contentfulMetadata: ContentfulMetadata!
+  href(locale: String): String
+  internalName(locale: String): String
+  linkedFrom(allowedLocales: [String]): NavigationLinkLinkingCollections
+  sys: Sys!
+  title(locale: String): String
+}
+
+type NavigationLinkCollection {
+  items: [NavigationLink]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input NavigationLinkFilter {
+  AND: [NavigationLinkFilter]
+  OR: [NavigationLinkFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  href: String
+  href_contains: String
+  href_exists: Boolean
+  href_in: [String]
+  href_not: String
+  href_not_contains: String
+  href_not_in: [String]
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+type NavigationLinkLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  navigationMenuCollection(limit: Int = 100, locale: String, order: [NavigationLinkLinkingCollectionsNavigationMenuCollectionOrder], preview: Boolean, skip: Int = 0): NavigationMenuCollection
+}
+
+enum NavigationLinkLinkingCollectionsNavigationMenuCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  position_ASC
+  position_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum NavigationLinkOrder {
+  href_ASC
+  href_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/navigationMenu)
+"""
+type NavigationMenu implements Entry & _Node {
+  _id: ID!
+  contentfulMetadata: ContentfulMetadata!
+  internalName(locale: String): String
+  linkedFrom(allowedLocales: [String]): NavigationMenuLinkingCollections
+  navigationMenuCollection(limit: Int = 100, locale: String, order: [NavigationMenuNavigationMenuCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkFilter): NavigationMenuNavigationMenuCollection
+  position(locale: String): String
+  sys: Sys!
+}
+
+type NavigationMenuCollection {
+  items: [NavigationMenu]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input NavigationMenuFilter {
+  AND: [NavigationMenuFilter]
+  OR: [NavigationMenuFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  navigationMenu: cfNavigationLinkNestedFilter
+  navigationMenuCollection_exists: Boolean
+  position: String
+  position_contains: String
+  position_exists: Boolean
+  position_in: [String]
+  position_not: String
+  position_not_contains: String
+  position_not_in: [String]
+  sys: SysFilter
+}
+
+type NavigationMenuLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+type NavigationMenuNavigationMenuCollection {
+  items: [NavigationLink]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum NavigationMenuNavigationMenuCollectionOrder {
+  href_ASC
+  href_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum NavigationMenuOrder {
+  internalName_ASC
+  internalName_DESC
+  position_ASC
+  position_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
 To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost)
 """
 type PageBlogPost implements Entry & _Node {
@@ -1099,6 +1270,10 @@ type Query {
   componentSeo(id: String!, locale: String, preview: Boolean): ComponentSeo
   componentSeoCollection(limit: Int = 100, locale: String, order: [ComponentSeoOrder], preview: Boolean, skip: Int = 0, where: ComponentSeoFilter): ComponentSeoCollection
   entryCollection(limit: Int = 100, locale: String, order: [EntryOrder], preview: Boolean, skip: Int = 0, where: EntryFilter): EntryCollection
+  navigationLink(id: String!, locale: String, preview: Boolean): NavigationLink
+  navigationLinkCollection(limit: Int = 100, locale: String, order: [NavigationLinkOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkFilter): NavigationLinkCollection
+  navigationMenu(id: String!, locale: String, preview: Boolean): NavigationMenu
+  navigationMenuCollection(limit: Int = 100, locale: String, order: [NavigationMenuOrder], preview: Boolean, skip: Int = 0, where: NavigationMenuFilter): NavigationMenuCollection
   pageBlogPost(id: String!, locale: String, preview: Boolean): PageBlogPost
   pageBlogPostCollection(limit: Int = 100, locale: String, order: [PageBlogPostOrder], preview: Boolean, skip: Int = 0, where: PageBlogPostFilter): PageBlogPostCollection
   pageLanding(id: String!, locale: String, preview: Boolean): PageLanding
@@ -1296,6 +1471,34 @@ input cfComponentSeoNestedFilter {
   pageTitle_not_in: [String]
   shareImagesCollection_exists: Boolean
   sys: SysFilter
+}
+
+input cfNavigationLinkNestedFilter {
+  AND: [cfNavigationLinkNestedFilter]
+  OR: [cfNavigationLinkNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  href: String
+  href_contains: String
+  href_exists: Boolean
+  href_in: [String]
+  href_not: String
+  href_not_contains: String
+  href_not_in: [String]
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
 }
 
 input cfPageBlogPostNestedFilter {

@@ -15,7 +15,7 @@ import { cn } from '@src/utils/cn';
 export async function generateMetadata() {
   const metatadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
-  } as Metadata;
+  };
 
   return metatadata;
 }
@@ -47,7 +47,6 @@ export default async function PageLayout({ children, params }: LayoutProps) {
       <head>
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
       </head>
-
       <body>
         <ThemeProvider attribute="class">
           <TranslationsProvider locale={locale} resources={resources}>
@@ -58,7 +57,7 @@ export default async function PageLayout({ children, params }: LayoutProps) {
               targetOrigin={allowedOriginList}
             >
               <main className={cn(urbanist.variable, 'font-sans')}>
-                <Header />
+                <Header locale={locale} />
                 {children}
                 <Footer />
               </main>

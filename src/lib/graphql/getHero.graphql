@@ -1,0 +1,32 @@
+# Fragment for Hero Fields
+fragment HeroFields on ComponentHero {
+  internalName
+  heroImage {
+    ...ImageFields
+  }
+  heading
+  subHeading
+}
+
+# Fragment for CTA Fields
+fragment CTAFields on ComponentCta {
+  icon {
+    title
+    description
+    url
+  }
+  ctaText
+  ctaLink
+}
+query GetHero($preview: Boolean, $locale: String) {
+  componentHeroCollection(limit: 1, preview: $preview, locale: $locale) {
+    items {
+      ...HeroFields
+      ctaFieldsCollection(preview: $preview, locale: $locale, limit: 1) {
+        items {
+          ...CTAFields
+        }
+      }
+    }
+  }
+}
