@@ -21,5 +21,10 @@
   "notFound": {
     "title": "Page not found",
     "description": "This page doesn't seem to exist. <0>Click here</0> to go back the homepage."
+  },
+  "buttons": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter"
   }
 }
