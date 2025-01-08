@@ -21,7 +21,7 @@ export const ArticleImage = ({ image }: ArticleImageProps) => {
               'mt-0 mb-0 ',
               image.fullWidth
                 ? 'md:w-screen md:max-w-[calc(100vw-40px)] md:shrink-0'
-                : 'rounded-2xl border border-gray300 shadow-lg',
+                : 'rounded-2xl border card',
             ),
           }}
           {...image.image}

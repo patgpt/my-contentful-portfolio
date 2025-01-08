@@ -19,7 +19,7 @@ export const ArticleAuthor = ({ article }: ArticleAuthorProps) => {
   return (
     <div className="flex items-center">
       <div
-        className="mr-2 overflow-hidden rounded-full border border-blue500"
+        className="mr-2 overflow-hidden rounded-full border border-primary"
         {...inspectorProps({ fieldId: 'avatar' })}
       >
         {author?.avatar && (
@@ -34,7 +34,10 @@ export const ArticleAuthor = ({ article }: ArticleAuthorProps) => {
           />
         )}
       </div>
-      <span className="text-xs leading-none text-gray600" {...inspectorProps({ fieldId: 'name' })}>
+      <span
+        className="text-xs leading-none text-base-content/60"
+        {...inspectorProps({ fieldId: 'name' })}
+      >
         {author?.name}
       </span>
     </div>

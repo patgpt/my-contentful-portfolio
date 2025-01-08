@@ -9,22 +9,22 @@ export const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="border-t-color mt-10 border-t border-gray200">
-      <Container className="py-8">
-        <h2 className="h4 mb-4">{t('footer.aboutUs')}</h2>
+    <footer className="footer footer-center bg-base-200 p-10 text-base-content">
+      <div className="container mx-auto">
+        <h2 className="text-lg font-bold">{t('footer.aboutUs')}</h2>
         <div className="max-w-4xl">{t('footer.description')}</div>
-        <div className="mt-8">
+        <div className="mt-4">
           {t('footer.powerBy')}{' '}
           <Link
             href="https://www.contentful.com"
             rel="noopener noreferrer"
             target="_blank"
-            className="text-blue500"
+            className="link link-primary"
           >
             Contentful
           </Link>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 };

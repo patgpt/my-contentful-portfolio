@@ -32,20 +32,24 @@ export const ArticleHero = ({
   return (
     <div
       className={twMerge(
-        `flex flex-col overflow-hidden rounded-2xl border border-gray300 shadow-lg`,
-        isReversedLayout ? 'lg:flex-row-reverse' : 'lg:flex-row',
+        'card bg-base-100 shadow-xl lg:card-side',
+        isReversedLayout ? 'lg:flex-row-reverse' : '',
       )}
     >
-      <div className="flex-1 basis-1/2" {...inspectorProps({ fieldId: 'featuredImage' })}>
+      <figure className="flex-1 basis-1/2" {...inspectorProps({ fieldId: 'featuredImage' })}>
         {article.featuredImage && (
           <CtfImage
-            nextImageProps={{ className: 'w-full', priority: true, sizes: undefined }}
+            nextImageProps={{
+              className: 'w-full h-full object-cover',
+              priority: true,
+              sizes: undefined,
+            }}
             {...article.featuredImage}
           />
         )}
-      </div>
+      </figure>
 
-      <div className="relative flex flex-1 basis-1/2 flex-col justify-center py-6 px-4 lg:px-16 lg:py-12 xl:px-24">
+      <div className="card-body relative flex-1 basis-1/2 justify-center">
         <div className="mb-2 flex flex-wrap items-center">
           <ArticleAuthor article={article} />
           {isFeatured && (
@@ -60,7 +64,7 @@ export const ArticleHero = ({
           )}
           <div
             className={twMerge(
-              'ml-auto hidden pl-2 text-xs text-gray600',
+              'ml-auto hidden pl-2 text-xs text-base-content/60',
               isReversedLayout ? 'lg:block' : '',
             )}
             {...inspectorProps({ fieldId: 'publishedDate' })}
@@ -75,7 +79,7 @@ export const ArticleHero = ({
           </p>
         )}
         <div
-          className={twMerge('mt-2 text-xs text-gray600', isReversedLayout ? 'lg:hidden' : '')}
+          className={twMerge('text-gray600 mt-2 text-xs', isReversedLayout ? 'lg:hidden' : '')}
           {...inspectorProps({ fieldId: 'publishedDate' })}
         >
           <FormatDate date={publishedDate} />

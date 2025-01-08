@@ -2,6 +2,7 @@ import { dir } from 'i18next';
 import type { Metadata, Viewport } from 'next';
 import { Urbanist } from 'next/font/google';
 import { draftMode } from 'next/headers';
+import { ThemeProvider } from 'next-themes';
 
 import { ContentfulPreviewProvider } from '@src/components/features/contentful';
 import TranslationsProvider from '@src/components/shared/i18n/TranslationProvider';
@@ -9,6 +10,7 @@ import { Footer } from '@src/components/templates/footer';
 import { Header } from '@src/components/templates/header';
 import initTranslations from '@src/i18n';
 import { locales } from '@src/i18n/config';
+import { cn } from '@src/utils/cn';
 
 export async function generateMetadata() {
   const metatadata: Metadata = {
@@ -47,21 +49,23 @@ export default async function PageLayout({ children, params }: LayoutProps) {
       </head>
 
       <body>
-        <TranslationsProvider locale={locale} resources={resources}>
-          <ContentfulPreviewProvider
-            locale={locale}
-            enableInspectorMode={preview}
-            enableLiveUpdates={preview}
-            targetOrigin={allowedOriginList}
-          >
-            <main className={`${urbanist.variable} font-sans`}>
-              <Header />
-              {children}
-              <Footer />
-            </main>
-            <div id="portal" className={`${urbanist.variable} font-sans`} />
-          </ContentfulPreviewProvider>
-        </TranslationsProvider>
+        <ThemeProvider attribute="class">
+          <TranslationsProvider locale={locale} resources={resources}>
+            <ContentfulPreviewProvider
+              locale={locale}
+              enableInspectorMode={preview}
+              enableLiveUpdates={preview}
+              targetOrigin={allowedOriginList}
+            >
+              <main className={cn(urbanist.variable, 'font-sans')}>
+                <Header />
+                {children}
+                <Footer />
+              </main>
+              <div id="portal" className={`${urbanist.variable} font-sans`} />
+            </ContentfulPreviewProvider>
+          </TranslationsProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -29,6 +29,7 @@ export const LanguageSelectorMobile = ({ localeName, onChange, displayName }) =>
   return (
     <>
       <button
+        className="btn btn-circle btn-ghost"
         title={t('common.languageDrawer')}
         onClick={() => setShowDrawer(currentState => !currentState)}
         aria-expanded={showDrawer}
@@ -43,8 +44,8 @@ export const LanguageSelectorMobile = ({ localeName, onChange, displayName }) =>
             role="presentation"
             tabIndex={-1}
             className={twMerge(
-              'fixed left-0 top-0 h-full w-full bg-colorBlack/[0.4] transition-opacity duration-150',
-              showDrawer ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
+              'fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-200',
+              showDrawer ? 'visible opacity-100' : 'invisible opacity-0',
             )}
             onClick={() => setShowDrawer(false)}
           />
@@ -53,30 +54,31 @@ export const LanguageSelectorMobile = ({ localeName, onChange, displayName }) =>
             aria-modal="true"
             aria-hidden={!showDrawer}
             className={twMerge(
-              `fixed right-0 top-0 z-40 h-full w-[80vw] bg-colorWhite px-5 py-8 duration-300 ease-in-out `,
+              'drawer drawer-end fixed right-0 top-0 h-full w-80 bg-base-100 p-4',
               showDrawer ? 'translate-x-0' : 'translate-x-full',
             )}
           >
-            <div className="flex items-center">
-              <h2 className="text-xl font-semibold">{t('common.regionalSettings')}</h2>
-
-              <button className="ml-auto pl-2" onClick={() => setShowDrawer(false)}>
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold">{t('common.regionalSettings')}</h2>
+              <button className="btn btn-circle btn-ghost" onClick={() => setShowDrawer(false)}>
                 <CloseIcon width="18px" height="18px" variant="secondary" />
               </button>
             </div>
 
-            <p className="mt-8 text-base font-semibold text-colorBlack"> {t('common.language')}</p>
-            <select
-              className="mt-2 block w-full rounded-md border border-gray300 px-2 py-2 text-sm"
-              defaultValue={currentLocale}
-              onChange={onChange}
-            >
-              {locales?.map(availableLocale => (
-                <option key={availableLocale} value={availableLocale}>
-                  {displayName(availableLocale).of(localeName(availableLocale))}
-                </option>
-              ))}
-            </select>
+            <div className="form-control mt-8">
+              <label className="label font-semibold">{t('common.language')}</label>
+              <select
+                className="select select-bordered w-full"
+                defaultValue={currentLocale}
+                onChange={onChange}
+              >
+                {locales?.map(availableLocale => (
+                  <option key={availableLocale} value={availableLocale}>
+                    {displayName(availableLocale).of(localeName(availableLocale))}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </FocusLock>
       </Portal>

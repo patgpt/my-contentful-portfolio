@@ -8,12 +8,16 @@ import { LanguageSelectorDesktop } from '@src/components/features/language-selec
 import { LanguageSelectorMobile } from '@src/components/features/language-selector/LanguageSelectorMobile';
 import i18nConfig, { locales } from '@src/i18n/config';
 
-const localeName = locale => locale.split('-')[0];
+const localeName = (locale: string) => locale.split('-')[0];
 
-const displayName = locale =>
-  new Intl.DisplayNames([locale], {
-    type: 'language',
-  });
+const displayName = (locale: string) => ({
+  of: (name: string): string => {
+    const formatter = new Intl.DisplayNames([locale], {
+      type: 'language',
+    });
+    return formatter.of(name) ?? name;
+  },
+});
 
 const isChangeEvent = (event: SyntheticEvent): event is React.ChangeEvent<HTMLSelectElement> => {
   return event.type === 'change';

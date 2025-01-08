@@ -23,31 +23,26 @@ export const ArticleTile = ({ article, className }: ArticleTileProps) => {
 
   return (
     <Link className="flex flex-col" href={`/${slug}`}>
-      <div
-        className={twMerge(
-          'flex flex-1 flex-col overflow-hidden rounded-2xl border border-gray300 shadow-lg',
-          className,
-        )}
-      >
+      <div className={twMerge('card bg-base-100 shadow-xl', className)}>
         {featuredImage && (
-          <div {...inspectorProps({ fieldId: 'featuredImage' })}>
+          <figure {...inspectorProps({ fieldId: 'featuredImage' })}>
             <CtfImage
-              nextImageProps={{ className: 'object-cover aspect-[16/10] w-full' }}
+              nextImageProps={{ className: 'w-full aspect-[16/10] object-cover' }}
               {...featuredImage}
             />
-          </div>
+          </figure>
         )}
-        <div className="flex flex-1 flex-col py-3 px-4 md:px-5 md:py-4 lg:px-7 lg:py-5">
+        <div className="card-body">
           {title && (
-            <p className="h3 mb-2 text-gray800 md:mb-3" {...inspectorProps({ fieldId: 'title' })}>
+            <h2 className="card-title" {...inspectorProps({ fieldId: 'title' })}>
               {title}
-            </p>
+            </h2>
           )}
 
-          <div className="mt-auto flex items-center">
+          <div className="card-actions mt-auto items-center justify-between">
             <ArticleAuthor article={article} />
             <div
-              className={twMerge('ml-auto pl-2 text-xs text-gray600')}
+              className="text-xs text-base-content/60"
               {...inspectorProps({ fieldId: 'publishedDate' })}
             >
               <FormatDate date={publishedDate} />
