@@ -14,8 +14,9 @@ export const Header = () => {
     <header className="py-5">
       <nav>
         <Container className="flex items-center justify-between">
-          <Link href="/" title={t('common.homepage')}>
-            <BlogLogo />
+          <Link className="text-3xl" as="h2" href="/" title={t('common.homepage')}>
+            {/* <BlogLogo /> */}
+            Patrick Kelly
           </Link>
           <LanguageSelector />
         </Container>
