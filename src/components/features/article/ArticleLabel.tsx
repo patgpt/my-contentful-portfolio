@@ -1,20 +1,21 @@
-import { HTMLProps, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-interface ArticleLabelProps extends HTMLProps<HTMLSpanElement> {
-  children: ReactNode;
+export interface ArticleLabelProps extends React.HTMLAttributes<HTMLDivElement> {
+  children?: ReactNode;
+  className?: string;
 }
 
-export const ArticleLabel = ({ children, className, ...props }: ArticleLabelProps) => {
+export const ArticleLabel = ({ children = '', className, ...props }: ArticleLabelProps) => {
   return (
-    <span
+    <div
       className={twMerge(
-        'rounded bg-purple200 px-2 py-1 text-2xs font-semibold uppercase leading-none tracking-widest text-purple600',
+        'bg-accent inline-block rounded-full px-3 py-1 text-sm font-medium',
         className,
       )}
       {...props}
     >
       {children}
-    </span>
+    </div>
   );
 };
