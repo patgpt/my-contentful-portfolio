@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
-const ButtonRow: React.FC = () => {
+const SocialButtonRow: React.FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -32,4 +32,4 @@ const ButtonRow: React.FC = () => {
   );
 };
 
-export default ButtonRow;
+export default SocialButtonRow;

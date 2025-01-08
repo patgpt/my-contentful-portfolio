@@ -171,6 +171,8 @@ export type AssetFilter = {
 export type AssetLinkingCollections = {
   __typename?: 'AssetLinkingCollections';
   componentAuthorCollection?: Maybe<ComponentAuthorCollection>;
+  componentCtaCollection?: Maybe<ComponentCtaCollection>;
+  componentHeroCollection?: Maybe<ComponentHeroCollection>;
   componentRichImageCollection?: Maybe<ComponentRichImageCollection>;
   componentSeoCollection?: Maybe<ComponentSeoCollection>;
   entryCollection?: Maybe<EntryCollection>;
@@ -179,6 +181,22 @@ export type AssetLinkingCollections = {
 
 
 export type AssetLinkingCollectionsComponentAuthorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AssetLinkingCollectionsComponentCtaCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AssetLinkingCollectionsComponentHeroCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -240,7 +258,7 @@ export enum AssetOrder {
   WidthDesc = 'width_DESC'
 }
 
-/** To have author-related properties [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentAuthor) */
+/** To have author-related properties [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentAuthor) */
 export type ComponentAuthor = Entry & _Node & {
   __typename?: 'ComponentAuthor';
   _id: Scalars['ID'];
@@ -253,26 +271,26 @@ export type ComponentAuthor = Entry & _Node & {
 };
 
 
-/** To have author-related properties [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentAuthor) */
+/** To have author-related properties [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentAuthor) */
 export type ComponentAuthorAvatarArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
 };
 
 
-/** To have author-related properties [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentAuthor) */
+/** To have author-related properties [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentAuthor) */
 export type ComponentAuthorInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To have author-related properties [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentAuthor) */
+/** To have author-related properties [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentAuthor) */
 export type ComponentAuthorLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
-/** To have author-related properties [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentAuthor) */
+/** To have author-related properties [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentAuthor) */
 export type ComponentAuthorNameArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
@@ -364,7 +382,318 @@ export enum ComponentAuthorOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentRichImage) */
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentCta) */
+export type ComponentCta = Entry & _Node & {
+  __typename?: 'ComponentCta';
+  _id: Scalars['ID'];
+  contentfulMetadata: ContentfulMetadata;
+  ctaLink?: Maybe<Scalars['String']>;
+  ctaText?: Maybe<Scalars['String']>;
+  icon?: Maybe<Asset>;
+  internalName?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<ComponentCtaLinkingCollections>;
+  sys: Sys;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentCta) */
+export type ComponentCtaCtaLinkArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentCta) */
+export type ComponentCtaCtaTextArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentCta) */
+export type ComponentCtaIconArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentCta) */
+export type ComponentCtaInternalNameArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentCta) */
+export type ComponentCtaLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ComponentCtaCollection = {
+  __typename?: 'ComponentCtaCollection';
+  items: Array<Maybe<ComponentCta>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type ComponentCtaFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ComponentCtaFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ComponentCtaFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  ctaLink?: InputMaybe<Scalars['String']>;
+  ctaLink_contains?: InputMaybe<Scalars['String']>;
+  ctaLink_exists?: InputMaybe<Scalars['Boolean']>;
+  ctaLink_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  ctaLink_not?: InputMaybe<Scalars['String']>;
+  ctaLink_not_contains?: InputMaybe<Scalars['String']>;
+  ctaLink_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  ctaText?: InputMaybe<Scalars['String']>;
+  ctaText_contains?: InputMaybe<Scalars['String']>;
+  ctaText_exists?: InputMaybe<Scalars['Boolean']>;
+  ctaText_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  ctaText_not?: InputMaybe<Scalars['String']>;
+  ctaText_not_contains?: InputMaybe<Scalars['String']>;
+  ctaText_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type ComponentCtaLinkingCollections = {
+  __typename?: 'ComponentCtaLinkingCollections';
+  componentHeroCollection?: Maybe<ComponentHeroCollection>;
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type ComponentCtaLinkingCollectionsComponentHeroCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentCtaLinkingCollectionsComponentHeroCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type ComponentCtaLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum ComponentCtaLinkingCollectionsComponentHeroCollectionOrder {
+  HeadingAsc = 'heading_ASC',
+  HeadingDesc = 'heading_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SubHeadingAsc = 'subHeading_ASC',
+  SubHeadingDesc = 'subHeading_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export enum ComponentCtaOrder {
+  CtaLinkAsc = 'ctaLink_ASC',
+  CtaLinkDesc = 'ctaLink_DESC',
+  CtaTextAsc = 'ctaText_ASC',
+  CtaTextDesc = 'ctaText_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentHero) */
+export type ComponentHero = Entry & _Node & {
+  __typename?: 'ComponentHero';
+  _id: Scalars['ID'];
+  contentfulMetadata: ContentfulMetadata;
+  ctaFieldsCollection?: Maybe<ComponentHeroCtaFieldsCollection>;
+  heading?: Maybe<Scalars['String']>;
+  heroImage?: Maybe<Asset>;
+  internalName?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<ComponentHeroLinkingCollections>;
+  subHeading?: Maybe<Scalars['String']>;
+  sys: Sys;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentHero) */
+export type ComponentHeroCtaFieldsCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentHeroCtaFieldsCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ComponentCtaFilter>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentHero) */
+export type ComponentHeroHeadingArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentHero) */
+export type ComponentHeroHeroImageArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentHero) */
+export type ComponentHeroInternalNameArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentHero) */
+export type ComponentHeroLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentHero) */
+export type ComponentHeroSubHeadingArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type ComponentHeroCollection = {
+  __typename?: 'ComponentHeroCollection';
+  items: Array<Maybe<ComponentHero>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type ComponentHeroCtaFieldsCollection = {
+  __typename?: 'ComponentHeroCtaFieldsCollection';
+  items: Array<Maybe<ComponentCta>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export enum ComponentHeroCtaFieldsCollectionOrder {
+  CtaLinkAsc = 'ctaLink_ASC',
+  CtaLinkDesc = 'ctaLink_DESC',
+  CtaTextAsc = 'ctaText_ASC',
+  CtaTextDesc = 'ctaText_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export type ComponentHeroFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ComponentHeroFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ComponentHeroFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  ctaFields?: InputMaybe<CfComponentCtaNestedFilter>;
+  ctaFieldsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  heading?: InputMaybe<Scalars['String']>;
+  heading_contains?: InputMaybe<Scalars['String']>;
+  heading_exists?: InputMaybe<Scalars['Boolean']>;
+  heading_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  heading_not?: InputMaybe<Scalars['String']>;
+  heading_not_contains?: InputMaybe<Scalars['String']>;
+  heading_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  heroImage_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subHeading?: InputMaybe<Scalars['String']>;
+  subHeading_contains?: InputMaybe<Scalars['String']>;
+  subHeading_exists?: InputMaybe<Scalars['Boolean']>;
+  subHeading_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subHeading_not?: InputMaybe<Scalars['String']>;
+  subHeading_not_contains?: InputMaybe<Scalars['String']>;
+  subHeading_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type ComponentHeroLinkingCollections = {
+  __typename?: 'ComponentHeroLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  pageLandingCollection?: Maybe<PageLandingCollection>;
+};
+
+
+export type ComponentHeroLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type ComponentHeroLinkingCollectionsPageLandingCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentHeroLinkingCollectionsPageLandingCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum ComponentHeroLinkingCollectionsPageLandingCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export enum ComponentHeroOrder {
+  HeadingAsc = 'heading_ASC',
+  HeadingDesc = 'heading_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SubHeadingAsc = 'subHeading_ASC',
+  SubHeadingDesc = 'subHeading_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentRichImage) */
 export type ComponentRichImage = Entry & _Node & {
   __typename?: 'ComponentRichImage';
   _id: Scalars['ID'];
@@ -378,32 +707,32 @@ export type ComponentRichImage = Entry & _Node & {
 };
 
 
-/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentRichImage) */
+/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentRichImage) */
 export type ComponentRichImageCaptionArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentRichImage) */
+/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentRichImage) */
 export type ComponentRichImageFullWidthArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentRichImage) */
+/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentRichImage) */
 export type ComponentRichImageImageArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
 };
 
 
-/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentRichImage) */
+/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentRichImage) */
 export type ComponentRichImageInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentRichImage) */
+/** To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentRichImage) */
 export type ComponentRichImageLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -471,7 +800,7 @@ export enum ComponentRichImageOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentSeo) */
+/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentSeo) */
 export type ComponentSeo = Entry & _Node & {
   __typename?: 'ComponentSeo';
   _id: Scalars['ID'];
@@ -488,49 +817,49 @@ export type ComponentSeo = Entry & _Node & {
 };
 
 
-/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentSeo) */
+/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentSeo) */
 export type ComponentSeoCanonicalUrlArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentSeo) */
+/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentSeo) */
 export type ComponentSeoInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentSeo) */
+/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentSeo) */
 export type ComponentSeoLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
-/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentSeo) */
+/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentSeo) */
 export type ComponentSeoNofollowArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentSeo) */
+/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentSeo) */
 export type ComponentSeoNoindexArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentSeo) */
+/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentSeo) */
 export type ComponentSeoPageDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentSeo) */
+/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentSeo) */
 export type ComponentSeoPageTitleArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentSeo) */
+/** To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentSeo) */
 export type ComponentSeoShareImagesCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
@@ -676,10 +1005,26 @@ export enum ComponentSeoOrder {
 
 export type ContentfulMetadata = {
   __typename?: 'ContentfulMetadata';
+  concepts: Array<Maybe<TaxonomyConcept>>;
   tags: Array<Maybe<ContentfulTag>>;
 };
 
+export type ContentfulMetadataConceptsDescendantsFilter = {
+  id_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  id_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  id_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ContentfulMetadataConceptsFilter = {
+  descendants?: InputMaybe<ContentfulMetadataConceptsDescendantsFilter>;
+  id_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  id_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  id_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
 export type ContentfulMetadataFilter = {
+  concepts?: InputMaybe<ContentfulMetadataConceptsFilter>;
+  concepts_exists?: InputMaybe<Scalars['Boolean']>;
   tags?: InputMaybe<ContentfulMetadataTagsFilter>;
   tags_exists?: InputMaybe<Scalars['Boolean']>;
 };
@@ -826,7 +1171,7 @@ export type ImageTransformOptions = {
   width?: InputMaybe<Scalars['Dimension']>;
 };
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPost = Entry & _Node & {
   __typename?: 'PageBlogPost';
   _id: Scalars['ID'];
@@ -846,7 +1191,7 @@ export type PageBlogPost = Entry & _Node & {
 };
 
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPostAuthorArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -854,38 +1199,38 @@ export type PageBlogPostAuthorArgs = {
 };
 
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPostContentArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPostFeaturedImageArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
 };
 
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPostInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPostLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPostPublishedDateArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPostRelatedBlogPostsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
@@ -896,7 +1241,7 @@ export type PageBlogPostRelatedBlogPostsCollectionArgs = {
 };
 
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPostSeoFieldsArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -904,19 +1249,19 @@ export type PageBlogPostSeoFieldsArgs = {
 };
 
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPostShortDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPostSlugArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost) */
+/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost) */
 export type PageBlogPostTitleArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
@@ -1142,12 +1487,13 @@ export enum PageBlogPostRelatedBlogPostsCollectionOrder {
   TitleDesc = 'title_DESC'
 }
 
-/** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageLanding) */
+/** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageLanding) */
 export type PageLanding = Entry & _Node & {
   __typename?: 'PageLanding';
   _id: Scalars['ID'];
   contentfulMetadata: ContentfulMetadata;
   featuredBlogPost?: Maybe<PageBlogPost>;
+  hero?: Maybe<ComponentHero>;
   internalName?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<PageLandingLinkingCollections>;
   seoFields?: Maybe<ComponentSeo>;
@@ -1155,7 +1501,7 @@ export type PageLanding = Entry & _Node & {
 };
 
 
-/** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageLanding) */
+/** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageLanding) */
 export type PageLandingFeaturedBlogPostArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -1163,19 +1509,27 @@ export type PageLandingFeaturedBlogPostArgs = {
 };
 
 
-/** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageLanding) */
+/** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageLanding) */
+export type PageLandingHeroArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<ComponentHeroFilter>;
+};
+
+
+/** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageLanding) */
 export type PageLandingInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
 
-/** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageLanding) */
+/** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageLanding) */
 export type PageLandingLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
-/** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageLanding) */
+/** To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageLanding) */
 export type PageLandingSeoFieldsArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -1196,6 +1550,8 @@ export type PageLandingFilter = {
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   featuredBlogPost?: InputMaybe<CfPageBlogPostNestedFilter>;
   featuredBlogPost_exists?: InputMaybe<Scalars['Boolean']>;
+  hero?: InputMaybe<CfComponentHeroNestedFilter>;
+  hero_exists?: InputMaybe<Scalars['Boolean']>;
   internalName?: InputMaybe<Scalars['String']>;
   internalName_contains?: InputMaybe<Scalars['String']>;
   internalName_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1241,6 +1597,10 @@ export type Query = {
   assetCollection?: Maybe<AssetCollection>;
   componentAuthor?: Maybe<ComponentAuthor>;
   componentAuthorCollection?: Maybe<ComponentAuthorCollection>;
+  componentCta?: Maybe<ComponentCta>;
+  componentCtaCollection?: Maybe<ComponentCtaCollection>;
+  componentHero?: Maybe<ComponentHero>;
+  componentHeroCollection?: Maybe<ComponentHeroCollection>;
   componentRichImage?: Maybe<ComponentRichImage>;
   componentRichImageCollection?: Maybe<ComponentRichImageCollection>;
   componentSeo?: Maybe<ComponentSeo>;
@@ -1291,6 +1651,40 @@ export type QueryComponentAuthorCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<ComponentAuthorFilter>;
+};
+
+
+export type QueryComponentCtaArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryComponentCtaCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentCtaOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ComponentCtaFilter>;
+};
+
+
+export type QueryComponentHeroArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryComponentHeroCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentHeroOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ComponentHeroFilter>;
 };
 
 
@@ -1430,6 +1824,15 @@ export type SysFilter = {
   publishedVersion_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 };
 
+/**
+ * Represents a tag entity for finding and organizing content easily.
+ *         Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-concepts
+ */
+export type TaxonomyConcept = {
+  __typename?: 'TaxonomyConcept';
+  id?: Maybe<Scalars['String']>;
+};
+
 export type _Node = {
   _id: Scalars['ID'];
 };
@@ -1453,6 +1856,65 @@ export type CfComponentAuthorNestedFilter = {
   name_not?: InputMaybe<Scalars['String']>;
   name_not_contains?: InputMaybe<Scalars['String']>;
   name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type CfComponentCtaNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfComponentCtaNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfComponentCtaNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  ctaLink?: InputMaybe<Scalars['String']>;
+  ctaLink_contains?: InputMaybe<Scalars['String']>;
+  ctaLink_exists?: InputMaybe<Scalars['Boolean']>;
+  ctaLink_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  ctaLink_not?: InputMaybe<Scalars['String']>;
+  ctaLink_not_contains?: InputMaybe<Scalars['String']>;
+  ctaLink_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  ctaText?: InputMaybe<Scalars['String']>;
+  ctaText_contains?: InputMaybe<Scalars['String']>;
+  ctaText_exists?: InputMaybe<Scalars['Boolean']>;
+  ctaText_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  ctaText_not?: InputMaybe<Scalars['String']>;
+  ctaText_not_contains?: InputMaybe<Scalars['String']>;
+  ctaText_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  icon_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type CfComponentHeroNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfComponentHeroNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfComponentHeroNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  ctaFieldsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  heading?: InputMaybe<Scalars['String']>;
+  heading_contains?: InputMaybe<Scalars['String']>;
+  heading_exists?: InputMaybe<Scalars['Boolean']>;
+  heading_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  heading_not?: InputMaybe<Scalars['String']>;
+  heading_not_contains?: InputMaybe<Scalars['String']>;
+  heading_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  heroImage_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subHeading?: InputMaybe<Scalars['String']>;
+  subHeading_contains?: InputMaybe<Scalars['String']>;
+  subHeading_exists?: InputMaybe<Scalars['Boolean']>;
+  subHeading_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subHeading_not?: InputMaybe<Scalars['String']>;
+  subHeading_not_contains?: InputMaybe<Scalars['String']>;
+  subHeading_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
 };
 
@@ -1573,7 +2035,7 @@ export type PageBlogPostFieldsFragment = { __typename: 'PageBlogPost', internalN
   ) | null, featuredImage?: (
     { __typename?: 'Asset' }
     & ImageFieldsFragment
-  ) | null, content?: { __typename?: 'PageBlogPostContent', json: any, links: { __typename?: 'PageBlogPostContentLinks', entries: { __typename?: 'PageBlogPostContentEntries', block: Array<{ __typename?: 'ComponentAuthor' } | (
+  ) | null, content?: { __typename?: 'PageBlogPostContent', json: any, links: { __typename?: 'PageBlogPostContentLinks', entries: { __typename?: 'PageBlogPostContentEntries', block: Array<{ __typename?: 'ComponentAuthor' } | { __typename?: 'ComponentCta' } | { __typename?: 'ComponentHero' } | (
           { __typename?: 'ComponentRichImage' }
           & RichImageFieldsFragment
         ) | { __typename?: 'ComponentSeo' } | { __typename?: 'PageBlogPost' } | { __typename?: 'PageLanding' } | null> } } } | null, relatedBlogPostsCollection?: { __typename?: 'PageBlogPostRelatedBlogPostsCollection', items: Array<(
@@ -1610,7 +2072,7 @@ export type PageBlogPostCollectionQuery = { __typename?: 'Query', pageBlogPostCo
 export type PageLandingFieldsFragment = { __typename: 'PageLanding', internalName?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, seoFields?: (
     { __typename?: 'ComponentSeo' }
     & SeoFieldsFragment
-  ) | null, featuredBlogPost?: (
+  ) | null, hero?: { __typename?: 'ComponentHero', heroImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null } | null } | null, featuredBlogPost?: (
     { __typename?: 'PageBlogPost' }
     & ReferencePageBlogPostFieldsFragment
   ) | null };
@@ -1781,6 +2243,13 @@ export const PageLandingFieldsFragmentDoc = gql`
   internalName
   seoFields {
     ...SeoFields
+  }
+  hero {
+    heroImage {
+      title
+      description
+      url
+    }
   }
   featuredBlogPost {
     ...ReferencePageBlogPostFields

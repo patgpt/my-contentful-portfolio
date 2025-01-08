@@ -93,6 +93,8 @@ input AssetFilter {
 
 type AssetLinkingCollections {
   componentAuthorCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentAuthorCollection
+  componentCtaCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentCtaCollection
+  componentHeroCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentHeroCollection
   componentRichImageCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentRichImageCollection
   componentSeoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentSeoCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
@@ -123,7 +125,7 @@ enum AssetOrder {
 }
 
 """
-To have author-related properties [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentAuthor)
+To have author-related properties [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentAuthor)
 """
 type ComponentAuthor implements Entry & _Node {
   _id: ID!
@@ -204,7 +206,208 @@ enum ComponentAuthorOrder {
 }
 
 """
-To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentRichImage)
+[See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentCta)
+"""
+type ComponentCta implements Entry & _Node {
+  _id: ID!
+  contentfulMetadata: ContentfulMetadata!
+  ctaLink(locale: String): String
+  ctaText(locale: String): String
+  icon(locale: String, preview: Boolean): Asset
+  internalName(locale: String): String
+  linkedFrom(allowedLocales: [String]): ComponentCtaLinkingCollections
+  sys: Sys!
+}
+
+type ComponentCtaCollection {
+  items: [ComponentCta]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input ComponentCtaFilter {
+  AND: [ComponentCtaFilter]
+  OR: [ComponentCtaFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  ctaLink: String
+  ctaLink_contains: String
+  ctaLink_exists: Boolean
+  ctaLink_in: [String]
+  ctaLink_not: String
+  ctaLink_not_contains: String
+  ctaLink_not_in: [String]
+  ctaText: String
+  ctaText_contains: String
+  ctaText_exists: Boolean
+  ctaText_in: [String]
+  ctaText_not: String
+  ctaText_not_contains: String
+  ctaText_not_in: [String]
+  icon_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  sys: SysFilter
+}
+
+type ComponentCtaLinkingCollections {
+  componentHeroCollection(limit: Int = 100, locale: String, order: [ComponentCtaLinkingCollectionsComponentHeroCollectionOrder], preview: Boolean, skip: Int = 0): ComponentHeroCollection
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum ComponentCtaLinkingCollectionsComponentHeroCollectionOrder {
+  heading_ASC
+  heading_DESC
+  internalName_ASC
+  internalName_DESC
+  subHeading_ASC
+  subHeading_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum ComponentCtaOrder {
+  ctaLink_ASC
+  ctaLink_DESC
+  ctaText_ASC
+  ctaText_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentHero)
+"""
+type ComponentHero implements Entry & _Node {
+  _id: ID!
+  contentfulMetadata: ContentfulMetadata!
+  ctaFieldsCollection(limit: Int = 100, locale: String, order: [ComponentHeroCtaFieldsCollectionOrder], preview: Boolean, skip: Int = 0, where: ComponentCtaFilter): ComponentHeroCtaFieldsCollection
+  heading(locale: String): String
+  heroImage(locale: String, preview: Boolean): Asset
+  internalName(locale: String): String
+  linkedFrom(allowedLocales: [String]): ComponentHeroLinkingCollections
+  subHeading(locale: String): String
+  sys: Sys!
+}
+
+type ComponentHeroCollection {
+  items: [ComponentHero]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+type ComponentHeroCtaFieldsCollection {
+  items: [ComponentCta]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum ComponentHeroCtaFieldsCollectionOrder {
+  ctaLink_ASC
+  ctaLink_DESC
+  ctaText_ASC
+  ctaText_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input ComponentHeroFilter {
+  AND: [ComponentHeroFilter]
+  OR: [ComponentHeroFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  ctaFields: cfComponentCtaNestedFilter
+  ctaFieldsCollection_exists: Boolean
+  heading: String
+  heading_contains: String
+  heading_exists: Boolean
+  heading_in: [String]
+  heading_not: String
+  heading_not_contains: String
+  heading_not_in: [String]
+  heroImage_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  subHeading: String
+  subHeading_contains: String
+  subHeading_exists: Boolean
+  subHeading_in: [String]
+  subHeading_not: String
+  subHeading_not_contains: String
+  subHeading_not_in: [String]
+  sys: SysFilter
+}
+
+type ComponentHeroLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [ComponentHeroLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+}
+
+enum ComponentHeroLinkingCollectionsPageLandingCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum ComponentHeroOrder {
+  heading_ASC
+  heading_DESC
+  internalName_ASC
+  internalName_DESC
+  subHeading_ASC
+  subHeading_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentRichImage)
 """
 type ComponentRichImage implements Entry & _Node {
   _id: ID!
@@ -271,7 +474,7 @@ enum ComponentRichImageOrder {
 }
 
 """
-To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentSeo)
+To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/componentSeo)
 """
 type ComponentSeo implements Entry & _Node {
   _id: ID!
@@ -396,10 +599,26 @@ enum ComponentSeoOrder {
 }
 
 type ContentfulMetadata {
+  concepts: [TaxonomyConcept]!
   tags: [ContentfulTag]!
 }
 
+input ContentfulMetadataConceptsDescendantsFilter {
+  id_contains_all: [String]
+  id_contains_none: [String]
+  id_contains_some: [String]
+}
+
+input ContentfulMetadataConceptsFilter {
+  descendants: ContentfulMetadataConceptsDescendantsFilter
+  id_contains_all: [String]
+  id_contains_none: [String]
+  id_contains_some: [String]
+}
+
 input ContentfulMetadataFilter {
+  concepts: ContentfulMetadataConceptsFilter
+  concepts_exists: Boolean
   tags: ContentfulMetadataTagsFilter
   tags_exists: Boolean
 }
@@ -599,7 +818,7 @@ The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://
 scalar JSON
 
 """
-To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost)
+To create individual blog posts [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageBlogPost)
 """
 type PageBlogPost implements Entry & _Node {
   _id: ID!
@@ -803,12 +1022,13 @@ enum PageBlogPostRelatedBlogPostsCollectionOrder {
 }
 
 """
-To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageLanding)
+To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageLanding)
 """
 type PageLanding implements Entry & _Node {
   _id: ID!
   contentfulMetadata: ContentfulMetadata!
   featuredBlogPost(locale: String, preview: Boolean, where: PageBlogPostFilter): PageBlogPost
+  hero(locale: String, preview: Boolean, where: ComponentHeroFilter): ComponentHero
   internalName(locale: String): String
   linkedFrom(allowedLocales: [String]): PageLandingLinkingCollections
   seoFields(locale: String, preview: Boolean, where: ComponentSeoFilter): ComponentSeo
@@ -828,6 +1048,8 @@ input PageLandingFilter {
   contentfulMetadata: ContentfulMetadataFilter
   featuredBlogPost: cfPageBlogPostNestedFilter
   featuredBlogPost_exists: Boolean
+  hero: cfComponentHeroNestedFilter
+  hero_exists: Boolean
   internalName: String
   internalName_contains: String
   internalName_exists: Boolean
@@ -868,6 +1090,10 @@ type Query {
   assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
   componentAuthor(id: String!, locale: String, preview: Boolean): ComponentAuthor
   componentAuthorCollection(limit: Int = 100, locale: String, order: [ComponentAuthorOrder], preview: Boolean, skip: Int = 0, where: ComponentAuthorFilter): ComponentAuthorCollection
+  componentCta(id: String!, locale: String, preview: Boolean): ComponentCta
+  componentCtaCollection(limit: Int = 100, locale: String, order: [ComponentCtaOrder], preview: Boolean, skip: Int = 0, where: ComponentCtaFilter): ComponentCtaCollection
+  componentHero(id: String!, locale: String, preview: Boolean): ComponentHero
+  componentHeroCollection(limit: Int = 100, locale: String, order: [ComponentHeroOrder], preview: Boolean, skip: Int = 0, where: ComponentHeroFilter): ComponentHeroCollection
   componentRichImage(id: String!, locale: String, preview: Boolean): ComponentRichImage
   componentRichImageCollection(limit: Int = 100, locale: String, order: [ComponentRichImageOrder], preview: Boolean, skip: Int = 0, where: ComponentRichImageFilter): ComponentRichImageCollection
   componentSeo(id: String!, locale: String, preview: Boolean): ComponentSeo
@@ -937,6 +1163,14 @@ input SysFilter {
   publishedVersion_not_in: [Float]
 }
 
+"""
+Represents a tag entity for finding and organizing content easily.
+        Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-concepts
+"""
+type TaxonomyConcept {
+  id: String
+}
+
 interface _Node {
   _id: ID!
 }
@@ -960,6 +1194,65 @@ input cfComponentAuthorNestedFilter {
   name_not: String
   name_not_contains: String
   name_not_in: [String]
+  sys: SysFilter
+}
+
+input cfComponentCtaNestedFilter {
+  AND: [cfComponentCtaNestedFilter]
+  OR: [cfComponentCtaNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  ctaLink: String
+  ctaLink_contains: String
+  ctaLink_exists: Boolean
+  ctaLink_in: [String]
+  ctaLink_not: String
+  ctaLink_not_contains: String
+  ctaLink_not_in: [String]
+  ctaText: String
+  ctaText_contains: String
+  ctaText_exists: Boolean
+  ctaText_in: [String]
+  ctaText_not: String
+  ctaText_not_contains: String
+  ctaText_not_in: [String]
+  icon_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  sys: SysFilter
+}
+
+input cfComponentHeroNestedFilter {
+  AND: [cfComponentHeroNestedFilter]
+  OR: [cfComponentHeroNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  ctaFieldsCollection_exists: Boolean
+  heading: String
+  heading_contains: String
+  heading_exists: Boolean
+  heading_in: [String]
+  heading_not: String
+  heading_not_contains: String
+  heading_not_in: [String]
+  heroImage_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  subHeading: String
+  subHeading_contains: String
+  subHeading_exists: Boolean
+  subHeading_in: [String]
+  subHeading_not: String
+  subHeading_not_contains: String
+  subHeading_not_in: [String]
   sys: SysFilter
 }
 
