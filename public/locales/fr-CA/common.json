@@ -1,0 +1,24 @@
+{
+  "article": {
+    "relatedArticles": "Articles connexes",
+    "featured": "En vedette"
+  },
+  "landingPage": {
+    "latestArticles": "Derniers articles"
+  },
+  "common": {
+    "homepage": "Page d'accueil",
+    "regionalSettings": "Paramètres régionaux",
+    "language": "Langue",
+    "languageDrawer": "Basculer le tiroir des langues"
+  },
+  "footer": {
+    "aboutUs": "À propos de nous",
+    "description": "Notre entreprise se spécialise dans le développement de technologies avancées pour une variété de secteurs. Nous utilisons des techniques et des algorithmes de pointe pour créer des systèmes intelligents qui aident les entreprises à automatiser des tâches, améliorer l'efficacité et favoriser l'innovation.",
+    "powerBy": "Alimenté par"
+  },
+  "notFound": {
+    "title": "Page non trouvée",
+    "description": "Il semble que cette page n'existe pas. <0>Cliquez ici</0> pour revenir à la page d'accueil."
+  }
+}
