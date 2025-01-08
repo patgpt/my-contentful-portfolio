@@ -1,24 +1,24 @@
-## Security Policy
+# Security Policy
 
-Security at Contentful
+## Security of the Template
 
-Security being just important to us is a huge understatement. Security is a top priority at Contentful, and we live it in our day-to-day activities.
+Security is a top priority for this template. We take every step possible to ensure the integrity and safety of the code and any dependencies included in this repository.
 
-If you believe you have found a security vulnerability in any Contentful-owned repository, please report it to us as described below.
+If you believe you have found a security vulnerability in this repository or template, please report it using the process described below.
 
 ## Supported Versions
 
-Refer to individual repositories for supported versions.
+Refer to the repository's README or other documentation for supported versions.
 
 ## Reporting a Vulnerability
 
-Contentful engages with the community via our Responsible Disclosure Program, also known as our Bug Bounty Program. Our community plays an important role in helping us stay bug-free and secure.
+We engage with the community through a Responsible Disclosure Program, also known as our Bug Bounty Program. The community plays an important role in helping us stay secure and free of bugs.
 
-Found a vulnerability? Would you like to report a bug or something interesting that you found? The best way to reach out to us is via the submission form at the end of the [page](https://www.contentful.com/security/).
+Found a vulnerability or discovered something interesting? The best way to reach out is via the submission form or by opening an issue in the repository.
 
-Please include the requested information listed below (as much as you can provide) to help us better understand the nature and scope of the possible issue:
+Please include as much of the following information as possible to help us understand the nature and scope of the issue:
 
-- Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
+- Type of issue (e.g., buffer overflow, SQL injection, cross-site scripting, etc.)
 - Full paths of source file(s) related to the manifestation of the issue
 - The location of the affected source code (tag/branch/commit or direct URL)
 - Any special configuration required to reproduce the issue
@@ -28,4 +28,4 @@ Please include the requested information listed below (as much as you can provid
 
 This information will help us triage your report more quickly.
 
-Report security vulnerabilities in third-party modules to the person or team maintaining the module.
+For security vulnerabilities found in third-party modules, please report them to the respective maintainer.
