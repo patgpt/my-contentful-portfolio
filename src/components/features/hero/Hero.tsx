@@ -28,21 +28,21 @@ async function getHeroData(locale: string, preview: boolean) {
 }
 
 // Separate UI component
-function HeroContent({ hero, t }: { hero: HeroData; t: (key: string) => string }) {
-  const { url, description } = hero.heroImage || {};
+function HeroContent({ hero }: { hero: HeroData }) {
+  const { url } = hero.heroImage || {};
 
   return (
-    <div className="hero min-h-screen bg-gradient-to-tr from-primary/20 to-secondary/20 pt-16">
+    <div className="hero min-h-screen text-balance bg-gradient-to-tr from-primary/20 to-secondary/20 pt-16">
       <div className="hero-content flex-col items-center justify-center p-4">
         <div className="flex flex-col items-center justify-center text-center">
           <div className="avatar mb-6">
             <div className="w-64 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
-              {url && description && (
+              {url && (
                 <Image
                   width={300}
                   height={300}
                   src={url}
-                  alt={description}
+                  alt=""
                   priority
                   sizes="(max-width: 768px) 100vw, 300px"
                   quality={90}
@@ -64,7 +64,7 @@ export default async function Hero({ locale }: LandingPageHeroProps) {
   const { isEnabled: preview } = draftMode();
   const { t } = await initTranslations({ locale });
 
-  return <HeroContent hero={await getHeroData(locale, preview)} t={t} />;
+  return <HeroContent hero={await getHeroData(locale, preview)} />;
 }
 
 export { Hero };
