@@ -7,7 +7,7 @@ import { ContentfulPreviewProvider } from '@src/components/features/contentful';
 import TranslationsProvider from '@src/components/shared/i18n/TranslationProvider';
 import { Footer } from '@src/components/templates/footer';
 import { Header } from '@src/components/templates/header';
-import { urbanist } from '@src/config/fonts';
+import { urbanist } from '@src/app/fonts';
 import initTranslations from '@src/i18n';
 import { locales } from '@src/i18n/config';
 import { cn } from '@src/utils/cn';
