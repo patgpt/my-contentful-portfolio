@@ -1,6 +1,5 @@
 import { dir } from 'i18next';
 import type { Metadata, Viewport } from 'next';
-import { Urbanist } from 'next/font/google';
 import { draftMode } from 'next/headers';
 import { ThemeProvider } from 'next-themes';
 
@@ -8,6 +7,7 @@ import { ContentfulPreviewProvider } from '@src/components/features/contentful';
 import TranslationsProvider from '@src/components/shared/i18n/TranslationProvider';
 import { Footer } from '@src/components/templates/footer';
 import { Header } from '@src/components/templates/header';
+import { urbanist } from '@src/config/fonts';
 import initTranslations from '@src/i18n';
 import { locales } from '@src/i18n/config';
 import { cn } from '@src/utils/cn';
@@ -27,8 +27,6 @@ export const viewport: Viewport = {
 export async function generateStaticParams(): Promise<LayoutProps['params'][]> {
   return locales.map(locale => ({ locale }));
 }
-
-const urbanist = Urbanist({ subsets: ['latin'], variable: '--font-urbanist' });
 
 const allowedOriginList = ['https://app.contentful.com', 'https://app.eu.contentful.com'];
 
@@ -56,7 +54,7 @@ export default async function PageLayout({ children, params }: LayoutProps) {
               enableLiveUpdates={preview}
               targetOrigin={allowedOriginList}
             >
-              <main className={cn(urbanist.variable, 'min-h-screen font-sans')}>
+              <main className={cn(urbanist.variable, 'min-h-screens pt-10 font-sans')}>
                 <Header locale={locale} />
                 {children}
                 <Footer />

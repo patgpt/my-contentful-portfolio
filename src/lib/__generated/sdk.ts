@@ -1755,10 +1755,10 @@ export type PageExperience = Entry & _Node & {
   bannerImage?: Maybe<Asset>;
   companyLogo?: Maybe<Asset>;
   companyName?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['String']>;
   contentfulMetadata: ContentfulMetadata;
   endDate?: Maybe<Scalars['DateTime']>;
   internalTitle?: Maybe<Scalars['String']>;
+  jobDescription?: Maybe<PageExperienceJobDescription>;
   linkedFrom?: Maybe<PageExperienceLinkingCollections>;
   positionTitle?: Maybe<Scalars['String']>;
   skillsUsed?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -1790,12 +1790,6 @@ export type PageExperienceCompanyNameArgs = {
 
 
 /** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
-export type PageExperienceContentArgs = {
-  locale?: InputMaybe<Scalars['String']>;
-};
-
-
-/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
 export type PageExperienceEndDateArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
@@ -1803,6 +1797,12 @@ export type PageExperienceEndDateArgs = {
 
 /** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
 export type PageExperienceInternalTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Job Description [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageExperience) */
+export type PageExperienceJobDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
@@ -1862,13 +1862,6 @@ export type PageExperienceFilter = {
   companyName_not?: InputMaybe<Scalars['String']>;
   companyName_not_contains?: InputMaybe<Scalars['String']>;
   companyName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  content?: InputMaybe<Scalars['String']>;
-  content_contains?: InputMaybe<Scalars['String']>;
-  content_exists?: InputMaybe<Scalars['Boolean']>;
-  content_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  content_not?: InputMaybe<Scalars['String']>;
-  content_not_contains?: InputMaybe<Scalars['String']>;
-  content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   endDate?: InputMaybe<Scalars['DateTime']>;
   endDate_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1886,6 +1879,9 @@ export type PageExperienceFilter = {
   internalTitle_not?: InputMaybe<Scalars['String']>;
   internalTitle_not_contains?: InputMaybe<Scalars['String']>;
   internalTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  jobDescription_contains?: InputMaybe<Scalars['String']>;
+  jobDescription_exists?: InputMaybe<Scalars['Boolean']>;
+  jobDescription_not_contains?: InputMaybe<Scalars['String']>;
   positionTitle?: InputMaybe<Scalars['String']>;
   positionTitle_contains?: InputMaybe<Scalars['String']>;
   positionTitle_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1921,6 +1917,54 @@ export type PageExperienceFilter = {
   website_not?: InputMaybe<Scalars['String']>;
   website_not_contains?: InputMaybe<Scalars['String']>;
   website_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type PageExperienceJobDescription = {
+  __typename?: 'PageExperienceJobDescription';
+  json: Scalars['JSON'];
+  links: PageExperienceJobDescriptionLinks;
+};
+
+export type PageExperienceJobDescriptionAssets = {
+  __typename?: 'PageExperienceJobDescriptionAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+};
+
+export type PageExperienceJobDescriptionEntries = {
+  __typename?: 'PageExperienceJobDescriptionEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+};
+
+export type PageExperienceJobDescriptionLinks = {
+  __typename?: 'PageExperienceJobDescriptionLinks';
+  assets: PageExperienceJobDescriptionAssets;
+  entries: PageExperienceJobDescriptionEntries;
+  resources: PageExperienceJobDescriptionResources;
+};
+
+export type PageExperienceJobDescriptionResources = {
+  __typename?: 'PageExperienceJobDescriptionResources';
+  block: Array<PageExperienceJobDescriptionResourcesBlock>;
+  hyperlink: Array<PageExperienceJobDescriptionResourcesHyperlink>;
+  inline: Array<PageExperienceJobDescriptionResourcesInline>;
+};
+
+export type PageExperienceJobDescriptionResourcesBlock = ResourceLink & {
+  __typename?: 'PageExperienceJobDescriptionResourcesBlock';
+  sys: ResourceSys;
+};
+
+export type PageExperienceJobDescriptionResourcesHyperlink = ResourceLink & {
+  __typename?: 'PageExperienceJobDescriptionResourcesHyperlink';
+  sys: ResourceSys;
+};
+
+export type PageExperienceJobDescriptionResourcesInline = ResourceLink & {
+  __typename?: 'PageExperienceJobDescriptionResourcesInline';
+  sys: ResourceSys;
 };
 
 export type PageExperienceLinkingCollections = {
@@ -2581,7 +2625,16 @@ export type GetAllExperiencesQueryVariables = Exact<{
 }>;
 
 
-export type GetAllExperiencesQuery = { __typename?: 'Query', pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<{ __typename?: 'PageExperience', slug?: string | null, companyName?: string | null, startDate?: any | null, endDate?: any | null, website?: string | null, content?: string | null, skillsUsed?: Array<string | null> | null, positionTitle?: string | null, sys: { __typename?: 'Sys', id: string }, companyLogo?: { __typename?: 'Asset', url?: string | null } | null, bannerImage?: { __typename?: 'Asset', url?: string | null } | null } | null> } | null };
+export type GetAllExperiencesQuery = { __typename?: 'Query', pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<{ __typename?: 'PageExperience', slug?: string | null, companyName?: string | null, startDate?: any | null, endDate?: any | null, website?: string | null, skillsUsed?: Array<string | null> | null, positionTitle?: string | null, sys: { __typename?: 'Sys', id: string }, companyLogo?: { __typename?: 'Asset', url?: string | null } | null, bannerImage?: { __typename?: 'Asset', url?: string | null } | null, jobDescription?: { __typename?: 'PageExperienceJobDescription', json: any } | null } | null> } | null };
+
+export type GetExperienceBySlugQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  slug?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetExperienceBySlugQuery = { __typename?: 'Query', pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<{ __typename?: 'PageExperience', slug?: string | null, companyName?: string | null, startDate?: any | null, endDate?: any | null, website?: string | null, skillsUsed?: Array<string | null> | null, positionTitle?: string | null, sys: { __typename?: 'Sys', id: string }, companyLogo?: { __typename?: 'Asset', url?: string | null } | null, bannerImage?: { __typename?: 'Asset', url?: string | null } | null, jobDescription?: { __typename?: 'PageExperienceJobDescription', json: any } | null } | null> } | null };
 
 export type HeroFieldsFragment = { __typename?: 'ComponentHero', internalName?: string | null, heading?: string | null, subHeading?: string | null, heroImage?: (
     { __typename?: 'Asset' }
@@ -2912,9 +2965,44 @@ export const GetAllExperiencesDocument = gql`
       startDate
       endDate
       website
-      content
       skillsUsed
       positionTitle
+      jobDescription {
+        json
+      }
+    }
+  }
+}
+    `;
+export const GetExperienceBySlugDocument = gql`
+    query getExperienceBySlug($locale: String, $preview: Boolean, $slug: String) {
+  pageExperienceCollection(
+    limit: 1
+    locale: $locale
+    preview: $preview
+    where: {slug_contains: $slug}
+  ) {
+    items {
+      sys {
+        id
+      }
+      slug
+      companyName
+      companyLogo {
+        url
+      }
+      bannerImage {
+        url
+      }
+      slug
+      startDate
+      endDate
+      website
+      skillsUsed
+      positionTitle
+      jobDescription {
+        json
+      }
     }
   }
 }
@@ -3038,6 +3126,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     getAllExperiences(variables?: GetAllExperiencesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAllExperiencesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllExperiencesQuery>(GetAllExperiencesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllExperiences', 'query', variables);
+    },
+    getExperienceBySlug(variables?: GetExperienceBySlugQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetExperienceBySlugQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetExperienceBySlugQuery>(GetExperienceBySlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getExperienceBySlug', 'query', variables);
     },
     GetHero(variables?: GetHeroQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetHeroQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetHeroQuery>(GetHeroDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetHero', 'query', variables);

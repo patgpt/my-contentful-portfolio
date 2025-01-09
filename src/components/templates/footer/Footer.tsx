@@ -1,28 +1,43 @@
-'use client';
-
-import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
-
 export const Footer = () => {
-  const { t } = useTranslation();
-
   return (
-    <footer className="footer footer-center bg-base-200 p-10 text-base-content">
-      <div className="container mx-auto">
-        <h2 className="text-lg font-bold">{t('footer.aboutUs')}</h2>
-        <div className="max-w-4xl">{t('footer.description')}</div>
-        <div className="mt-4">
-          {t('footer.powerBy')}{' '}
-          <Link
-            href="https://www.contentful.com"
-            rel="noopener noreferrer"
-            target="_blank"
-            className="link link-primary"
-          >
-            Contentful
-          </Link>
-        </div>
-      </div>
+    <footer className="footer bg-base-200 p-10 text-base-content">
+      <nav>
+        <h6 className="footer-title">Services</h6>
+        <a className="link-hover link">Branding</a>
+        <a className="link-hover link">Design</a>
+        <a className="link-hover link">Marketing</a>
+        <a className="link-hover link">Advertisement</a>
+      </nav>
+      <nav>
+        <h6 className="footer-title">Company</h6>
+        <a className="link-hover link">About us</a>
+        <a className="link-hover link">Contact</a>
+        <a className="link-hover link">Jobs</a>
+        <a className="link-hover link">Press kit</a>
+      </nav>
+      <nav>
+        <h6 className="footer-title">Legal</h6>
+        <a className="link-hover link">Terms of use</a>
+        <a className="link-hover link">Privacy policy</a>
+        <a className="link-hover link">Cookie policy</a>
+      </nav>
+      <form>
+        <h6 className="footer-title">Newsletter</h6>
+        <fieldset className="form-control w-80">
+          <label htmlFor="newsletter-email" className="label">
+            <span className="label-text">Enter your email address</span>
+          </label>
+          <div className="join">
+            <input
+              id="newsletter-email"
+              type="text"
+              placeholder="username@site.com"
+              className="input join-item input-bordered"
+            />
+            <button className="btn btn-primary join-item">Subscribe</button>
+          </div>
+        </fieldset>
+      </form>
     </footer>
   );
 };

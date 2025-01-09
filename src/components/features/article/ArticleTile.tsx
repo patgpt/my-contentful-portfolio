@@ -22,8 +22,8 @@ export const ArticleTile = ({ article, className }: ArticleTileProps) => {
   const inspectorProps = useContentfulInspectorMode({ entryId: article.sys.id });
 
   return (
-    <Link className="flex flex-col" href={`/${slug}`}>
-      <div className={twMerge('card bg-base-100 shadow-xl', className)}>
+    <Link className="flex h-full flex-col no-underline" href={`/${slug}`}>
+      <div className={twMerge('card h-full bg-base-100 shadow-xl', className)}>
         {featuredImage && (
           <figure {...inspectorProps({ fieldId: 'featuredImage' })}>
             <CtfImage
@@ -32,14 +32,14 @@ export const ArticleTile = ({ article, className }: ArticleTileProps) => {
             />
           </figure>
         )}
-        <div className="card-body">
+        <div className="card-body flex flex-col justify-between">
           {title && (
-            <h2 className="card-title" {...inspectorProps({ fieldId: 'title' })}>
+            <h2 className="card-title line-clamp-2" {...inspectorProps({ fieldId: 'title' })}>
               {title}
             </h2>
           )}
 
-          <div className="card-actions mt-auto items-center justify-between">
+          <div className="card-actions mt-4 items-center justify-between">
             <ArticleAuthor article={article} />
             <div
               className="text-xs text-base-content/60"

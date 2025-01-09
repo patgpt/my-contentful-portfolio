@@ -1201,10 +1201,10 @@ type PageExperience implements Entry & _Node {
   bannerImage(locale: String, preview: Boolean): Asset
   companyLogo(locale: String, preview: Boolean): Asset
   companyName(locale: String): String
-  content(locale: String): String
   contentfulMetadata: ContentfulMetadata!
   endDate(locale: String): DateTime
   internalTitle(locale: String): String
+  jobDescription(locale: String): PageExperienceJobDescription
   linkedFrom(allowedLocales: [String]): PageExperienceLinkingCollections
   positionTitle(locale: String): String
   skillsUsed(locale: String): [String]
@@ -1233,13 +1233,6 @@ input PageExperienceFilter {
   companyName_not: String
   companyName_not_contains: String
   companyName_not_in: [String]
-  content: String
-  content_contains: String
-  content_exists: Boolean
-  content_in: [String]
-  content_not: String
-  content_not_contains: String
-  content_not_in: [String]
   contentfulMetadata: ContentfulMetadataFilter
   endDate: DateTime
   endDate_exists: Boolean
@@ -1257,6 +1250,9 @@ input PageExperienceFilter {
   internalTitle_not: String
   internalTitle_not_contains: String
   internalTitle_not_in: [String]
+  jobDescription_contains: String
+  jobDescription_exists: Boolean
+  jobDescription_not_contains: String
   positionTitle: String
   positionTitle_contains: String
   positionTitle_exists: Boolean
@@ -1292,6 +1288,46 @@ input PageExperienceFilter {
   website_not: String
   website_not_contains: String
   website_not_in: [String]
+}
+
+type PageExperienceJobDescription {
+  json: JSON!
+  links: PageExperienceJobDescriptionLinks!
+}
+
+type PageExperienceJobDescriptionAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type PageExperienceJobDescriptionEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type PageExperienceJobDescriptionLinks {
+  assets: PageExperienceJobDescriptionAssets!
+  entries: PageExperienceJobDescriptionEntries!
+  resources: PageExperienceJobDescriptionResources!
+}
+
+type PageExperienceJobDescriptionResources {
+  block: [PageExperienceJobDescriptionResourcesBlock!]!
+  hyperlink: [PageExperienceJobDescriptionResourcesHyperlink!]!
+  inline: [PageExperienceJobDescriptionResourcesInline!]!
+}
+
+type PageExperienceJobDescriptionResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageExperienceJobDescriptionResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageExperienceJobDescriptionResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 type PageExperienceLinkingCollections {

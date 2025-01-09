@@ -18,10 +18,7 @@ export const ArticleAuthor = ({ article }: ArticleAuthorProps) => {
 
   return (
     <div className="flex items-center">
-      <div
-        className="mr-2 overflow-hidden rounded-full border border-primary"
-        {...inspectorProps({ fieldId: 'avatar' })}
-      >
+      <div className="avatar mr-2" {...inspectorProps({ fieldId: 'avatar' })}>
         {author?.avatar && (
           <CtfImage
             nextImageProps={{
@@ -29,6 +26,7 @@ export const ArticleAuthor = ({ article }: ArticleAuthorProps) => {
               height: 28,
               sizes: undefined,
               placeholder: undefined,
+              className: 'rounded-full border border-primary',
             }}
             {...author.avatar}
           />

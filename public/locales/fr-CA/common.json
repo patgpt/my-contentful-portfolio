@@ -6,6 +6,10 @@
   "landingPage": {
     "latestArticles": "Derniers articles"
   },
+  "blog": {
+    "title": "Blog",
+    "description": "Bienvenue sur mon blog! Ici, vous trouverez les dernières nouvelles, mises à jour et réflexions de notre équipe. Nous couvrirons un large éventail de sujets, alors assurez-vous de revenir régulièrement pour voir les nouveaux articles."
+  },
   "common": {
     "homepage": "Page d'accueil",
     "regionalSettings": "Paramètres régionaux",
