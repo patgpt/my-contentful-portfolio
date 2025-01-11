@@ -3,31 +3,5 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply text-sm md:text-sm bg-base-200 text-base-content;
-  }
-
-  .h1,
-  h1 {
-    @apply text-xl md:text-4xl font-semibold leading-tighter;
-  }
-
-  .h2,
-  h2 {
-    @apply text-xl md:text-3xl font-semibold leading-tight;
-  }
-
-  .h3,
-  h3 {
-    @apply text-base md:text-xl font-semibold leading-relaxed;
-  }
-
-  .h4,
-  h4 {
-    @apply text-xs md:text-base font-semibold leading-normal;
-  }
-
-  p {
-    @apply text-base-content/80 tracking-snug font-normal leading-snug md:leading-normal;
-  }
+  /* Add your base styles here */
 }

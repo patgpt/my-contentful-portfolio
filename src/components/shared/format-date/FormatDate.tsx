@@ -1,8 +1,6 @@
 'use client';
 
-import { useCurrentLocale } from 'next-i18n-router/client';
-
-import i18nConfig from '@src/i18n/config';
+import { routing } from '@src/i18n/routing';
 
 interface FormatDateProps {
   date: number | Date | undefined;
@@ -18,7 +16,7 @@ export const formatDateFunc = ({ date, locale }: FormatDateProps) => {
 };
 
 export const FormatDate = (props: FormatDateProps) => {
-  const locale = useCurrentLocale(i18nConfig);
+  const locale = routing.defaultLocale;
 
   if (!locale) return null;
 

@@ -15,7 +15,11 @@
     "regionalSettings": "Paramètres régionaux",
     "language": "Langue",
     "languageDrawer": "Basculer le tiroir des langues",
-    "theme": "Thème"
+    "theme": "Thème",
+    "locales": {
+      "english": "English",
+      "french": "French"
+    }
   },
   "footer": {
     "aboutUs": "À propos de nous",

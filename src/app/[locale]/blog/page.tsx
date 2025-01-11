@@ -1,12 +1,9 @@
 import { draftMode } from 'next/headers';
-import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { ArticleAuthor, ArticleTileGrid } from '@src/components/features/article';
+import { ArticleTileGrid } from '@src/components/features/article';
 import { Container } from '@src/components/shared/container';
-import initTranslations from '@src/i18n';
-import type { PageBlogPostCollection } from '@src/lib/__generated/sdk';
+
 import { client, previewClient } from '@src/lib/client';
 
 interface BlogListPageProps {
@@ -18,13 +15,11 @@ interface BlogListPageProps {
 async function BlogListPage(props: BlogListPageProps) {
   const params = await props.params;
 
-  const {
-    locale
-  } = params;
+  const { locale } = params;
 
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
-  const { t } = await initTranslations({ locale });
+
   const allBlogPosts = await gqlClient.pageBlogPostCollection({ locale, limit: 100 });
   const posts = allBlogPosts.pageBlogPostCollection;
   if (!posts?.items) {

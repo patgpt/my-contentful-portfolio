@@ -6,8 +6,8 @@
     "node": ">=20.0.0",
     "npm": "Please use Bun"
   },
+  
   "scripts": {
-    "prepare": "husky install",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -16,14 +16,6 @@
     "analyze": "ANALYZE=true next build",
     "graphql-codegen:generate": "graphql-codegen -r dotenv/config --config codegen.ts",
     "graphql-codegen:watch": "graphql-codegen --watch -r dotenv/config --config codegen.ts"
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "eslint --quiet --fix"
-    ],
-    "src/**/*.{json,js,ts,jsx,tsx}": [
-      "prettier --write"
-    ]
   },
   "license": "MIT",
   "dependencies": {
@@ -40,6 +32,7 @@
     "next": "15.1.4",
     "next-compose-plugins": "^2.2.1",
     "next-i18n-router": "^5.5.1",
+    "next-intl": "^3.26.3",
     "next-themes": "^0.4.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
@@ -72,10 +65,8 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.3",
     "eslint-plugin-react-hooks": "^5.1.0",
-    "husky": "^9.1.7",
     "i18next": "^24.2.1",
     "i18next-http-backend": "^3.0.1",
-    "lint-staged": "^15.3.0",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",

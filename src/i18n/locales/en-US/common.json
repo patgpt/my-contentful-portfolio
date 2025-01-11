@@ -15,7 +15,11 @@
     "homepage": "Homepage",
     "language": "Language",
     "languageDrawer": "Toggle language drawer",
-    "theme": "Theme"
+    "theme": "Theme",
+    "locales": {
+      "english": "English",
+      "french": "French"
+    }
   },
   "footer": {
     "aboutUs": "about us",
@@ -24,7 +28,7 @@
   },
   "notFound": {
     "title": "Page not found",
-    "description": "This page doesn't seem to exist. <0>Click here</0> to go back the homepage."
+    "description": "This page doesn't seem to exist."
   },
   "buttons": {
     "github": "GitHub",

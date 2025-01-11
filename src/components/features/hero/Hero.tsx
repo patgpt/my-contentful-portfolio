@@ -3,13 +3,11 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import SocialButtonRow from '@src/components/SocialButtonRow';
-import initTranslations from '@src/i18n';
-import type { GetHeroQuery } from '@src/lib/__generated/sdk';
+
 import { client, previewClient } from '@src/lib/client';
+import type { HeroFieldsFragment } from '@src/lib/__generated/sdk';
 
 // Move interfaces to separate types file
-interface HeroData
-  extends NonNullable<NonNullable<GetHeroQuery['componentHeroCollection']>['items'][0]> {}
 
 interface LandingPageHeroProps {
   locale: string;
@@ -28,7 +26,7 @@ async function getHeroData(locale: string, preview: boolean) {
 }
 
 // Separate UI component
-function HeroContent({ hero }: { hero: HeroData }) {
+function HeroContent({ hero }: { hero: HeroFieldsFragment }) {
   const { url } = hero.heroImage || {};
 
   return (
@@ -62,7 +60,7 @@ function HeroContent({ hero }: { hero: HeroData }) {
 
 export default async function Hero({ locale }: LandingPageHeroProps) {
   const { isEnabled: preview } = await draftMode();
-  const { t } = await initTranslations({ locale });
+
 
   return <HeroContent hero={await getHeroData(locale, preview)} />;
 }

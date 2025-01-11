@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { FaGlobe } from 'react-icons/fa';
 
 import { CtfRichText } from '@src/components/features/contentful';
-import initTranslations from '@src/i18n';
 import type { PageExperience } from '@src/lib/__generated/sdk';
 import { client, previewClient } from '@src/lib/client';
 import { formatDate } from '@src/utils/date';
@@ -41,16 +40,12 @@ interface ExperienceDetailPageProps {
 async function ExperienceDetailPage(props: ExperienceDetailPageProps) {
   const params = await props.params;
 
-  const {
-    locale,
-    slug
-  } = params;
+  const { locale, slug } = params;
 
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
   const experience = await gqlClient.getExperienceBySlug({ locale, preview, slug });
   const data = experience.pageExperienceCollection?.items[0] as PageExperience | undefined;
-  const { t } = await initTranslations({ locale });
   if (!data) {
     return <div className="container mx-auto">Experience not found</div>;
   }
@@ -95,8 +90,7 @@ async function ExperienceDetailPage(props: ExperienceDetailPageProps) {
                 {data.skillsUsed.map(skill => (
                   <span
                     key={skill}
-                    className="badge badge-primary p-4 transition-shadow hover:shadow-lg"
-                  >
+                    className="badge badge-primary p-4 transition-shadow hover:shadow-lg">
                     {skill}
                   </span>
                 ))}
@@ -108,8 +102,7 @@ async function ExperienceDetailPage(props: ExperienceDetailPageProps) {
                 href={data.website}
                 className="btn btn-ghost gap-2 hover:bg-base-200"
                 target="_blank"
-                rel="noopener noreferrer"
-              >
+                rel="noopener noreferrer">
                 <FaGlobe />
                 <span>Visit Website</span>
               </Link>

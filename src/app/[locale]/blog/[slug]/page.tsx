@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { ArticleContent, ArticleHero, ArticleTileGrid } from '@src/components/features/article';
 import { Container } from '@src/components/shared/container';
-import initTranslations from '@src/i18n';
+
 import { client, previewClient } from '@src/lib/client';
 
 export async function generateStaticParams({
@@ -38,14 +38,10 @@ interface BlogPageProps {
 export default async function Page(props: BlogPageProps) {
   const params = await props.params;
 
-  const {
-    locale,
-    slug
-  } = params;
+  const { locale, slug } = params;
 
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
-  const { t } = await initTranslations({ locale });
   const { pageBlogPostCollection } = await gqlClient.pageBlogPost({ locale, slug, preview });
   const { pageLandingCollection } = await gqlClient.pageLanding({ locale, preview });
   const landingPage = pageLandingCollection?.items[0];

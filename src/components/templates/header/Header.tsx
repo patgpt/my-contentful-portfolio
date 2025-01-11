@@ -1,21 +1,20 @@
 import { draftMode } from 'next/headers';
-import Link from 'next/link';
 
-import { LanguageSelector } from '@src/components/features/language-selector';
 import ThemeSwitcher from '@src/components/features/theme-switcher/ThemeSwitcher';
-import initTranslations from '@src/i18n';
+
 import { client, previewClient } from '@src/lib/client';
+
+import { Link } from '@src/i18n/routing';
+import LanguageSelector from '@src/components/features/language-selector';
 
 export const Header = async ({ locale }: { locale: string }) => {
   const { isEnabled: preview } = await draftMode();
-  const { t } = await initTranslations({ locale });
-  const gqlClient = preview ? previewClient : client;
 
-  const contentfulLocale = locale || 'en-US';
+  const gqlClient = preview ? previewClient : client;
 
   const navigation = await gqlClient.GetNavigationMenu({
     preview,
-    locale: contentfulLocale,
+    locale: locale,
     position: 'Header',
   });
 
@@ -33,20 +32,19 @@ export const Header = async ({ locale }: { locale: string }) => {
               height="12px"
               className="inline-block h-2 w-2 fill-current opacity-60"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 2048 2048"
-            >
+              viewBox="0 0 2048 2048">
               <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z" />
             </svg>
           </div>
           <ul className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
             {menuItems.map((item, index) => (
               <li key={`mobile-${index}`}>
-                <Link href={`/${item?.href}`}>{item?.title || t(`nav.${item?.href}`)}</Link>
+                <Link href={`/${item?.href}`}>{item?.title}</Link>
               </li>
             ))}
           </ul>
         </div>
-        <Link className="btn btn-ghost text-xl" href="/" title={t('common.homepage')}>
+        <Link className="btn btn-ghost text-xl" href="/">
           Patrick Kelly
         </Link>
       </div>
@@ -54,7 +52,7 @@ export const Header = async ({ locale }: { locale: string }) => {
         <ul className="menu menu-horizontal px-1">
           {menuItems.map((item, index) => (
             <li key={`desktop-${index}`}>
-              <Link href={`/${item?.href}`}>{item?.title || t(`nav.${item?.href}`)}</Link>
+              <Link href={`/${item?.href}`}>{item?.title}</Link>
             </li>
           ))}
         </ul>
