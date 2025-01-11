@@ -61,7 +61,7 @@ function HeroContent({ hero }: { hero: HeroData }) {
 }
 
 export default async function Hero({ locale }: LandingPageHeroProps) {
-  const { isEnabled: preview } = draftMode();
+  const { isEnabled: preview } = await draftMode();
   const { t } = await initTranslations({ locale });
 
   return <HeroContent hero={await getHeroData(locale, preview)} />;

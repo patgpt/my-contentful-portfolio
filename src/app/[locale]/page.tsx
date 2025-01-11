@@ -13,13 +13,14 @@ import { PageBlogPostOrder } from '@src/lib/__generated/sdk';
 import { client, previewClient } from '@src/lib/client';
 
 interface LandingPageProps {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
-export async function generateMetadata({ params }: LandingPageProps): Promise<Metadata> {
-  const { isEnabled: preview } = draftMode();
+export async function generateMetadata(props: LandingPageProps): Promise<Metadata> {
+  const params = await props.params;
+  const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
   const landingPageData = await gqlClient.pageLanding({ locale: params.locale, preview });
   const page = landingPageData.pageLandingCollection?.items[0];
@@ -55,8 +56,14 @@ export async function generateMetadata({ params }: LandingPageProps): Promise<Me
   return metadata;
 }
 
-export default async function Page({ params: { locale } }: LandingPageProps) {
-  const { isEnabled: preview } = draftMode();
+export default async function Page(props: LandingPageProps) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
+  const { isEnabled: preview } = await draftMode();
   const { t, resources } = await initTranslations({ locale });
   const gqlClient = preview ? previewClient : client;
 

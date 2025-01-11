@@ -32,11 +32,17 @@ const allowedOriginList = ['https://app.contentful.com', 'https://app.eu.content
 
 interface LayoutProps {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
-export default async function PageLayout({ children, params }: LayoutProps) {
-  const { isEnabled: preview } = draftMode();
+export default async function PageLayout(props: LayoutProps) {
+  const params = await props.params;
+
+  const {
+    children
+  } = props;
+
+  const { isEnabled: preview } = await draftMode();
   const { locale } = params;
   const { resources } = await initTranslations({ locale });
 

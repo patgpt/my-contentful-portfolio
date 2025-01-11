@@ -10,13 +10,19 @@ import type { PageBlogPostCollection } from '@src/lib/__generated/sdk';
 import { client, previewClient } from '@src/lib/client';
 
 interface BlogListPageProps {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
-async function BlogListPage({ params: { locale } }: BlogListPageProps) {
-  const { isEnabled: preview } = draftMode();
+async function BlogListPage(props: BlogListPageProps) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
+  const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
   const { t } = await initTranslations({ locale });
   const allBlogPosts = await gqlClient.pageBlogPostCollection({ locale, limit: 100 });

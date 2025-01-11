@@ -7,7 +7,7 @@ import initTranslations from '@src/i18n';
 import { client, previewClient } from '@src/lib/client';
 
 export const Header = async ({ locale }: { locale: string }) => {
-  const { isEnabled: preview } = draftMode();
+  const { isEnabled: preview } = await draftMode();
   const { t } = await initTranslations({ locale });
   const gqlClient = preview ? previewClient : client;
 

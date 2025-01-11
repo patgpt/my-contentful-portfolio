@@ -32,14 +32,21 @@ export async function generateStaticParams({
 }
 
 interface ExperienceDetailPageProps {
-  params: {
+  params: Promise<{
     locale: string;
     slug: string;
-  };
+  }>;
 }
 
-async function ExperienceDetailPage({ params: { locale, slug } }: ExperienceDetailPageProps) {
-  const { isEnabled: preview } = draftMode();
+async function ExperienceDetailPage(props: ExperienceDetailPageProps) {
+  const params = await props.params;
+
+  const {
+    locale,
+    slug
+  } = params;
+
+  const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
   const experience = await gqlClient.getExperienceBySlug({ locale, preview, slug });
   const data = experience.pageExperienceCollection?.items[0] as PageExperience | undefined;

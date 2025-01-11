@@ -4,14 +4,20 @@ import { ExperienceTimeline } from '@src/components/features/experience/Experien
 import { client, previewClient } from '@src/lib/client';
 
 interface ExperiencePageProps {
-  params: {
+  params: Promise<{
     locale: string;
     slug: string;
-  };
+  }>;
 }
 
-async function ExperiencePage({ params: { locale } }: ExperiencePageProps) {
-  const { isEnabled: preview } = draftMode();
+async function ExperiencePage(props: ExperiencePageProps) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
+  const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
   const allExperiences = await gqlClient.getAllExperiences({ locale, preview });
   const experienceList = allExperiences.pageExperienceCollection?.items || [];

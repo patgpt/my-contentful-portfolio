@@ -6,15 +6,25 @@ import { FaGlobe, FaBriefcase, FaGraduationCap, FaAward } from 'react-icons/fa';
 
 import { CtfRichText } from '@src/components/features/contentful';
 import { formatDate } from '@src/utils/date';
+import type { PageExperience, Maybe } from '@src/lib/__generated/sdk';
 
 interface TimelineItemProps {
-  experience: any;
+  experience: PageExperience & {
+    type?: 'work' | 'education' | 'award';
+  };
   isLast: boolean;
   index: number;
   key: number;
 }
 
-const ExperienceCard = ({ experience, isExpanded, setIsExpanded, isEven }: any) => (
+interface ExperienceCardProps {
+  experience: TimelineItemProps['experience'];
+  isExpanded: boolean;
+  setIsExpanded: (value: boolean) => void;
+  isEven: boolean;
+}
+
+const ExperienceCard = ({ experience, isExpanded, setIsExpanded, isEven }: ExperienceCardProps) => (
   <motion.div
     className="w-full rounded-box bg-base-100 p-6 shadow-lg transition-all duration-300 hover:shadow-xl md:w-[400px]"
     whileHover={{ y: -5 }}
@@ -68,17 +78,19 @@ const ExperienceCard = ({ experience, isExpanded, setIsExpanded, isEven }: any) 
 
     {/* Skills tags */}
     <motion.div className="mt-4 flex flex-wrap gap-2" layout>
-      {experience?.skillsUsed?.map((skill: string) => (
-        <motion.span
-          key={skill}
-          layout
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="badge badge-primary badge-outline whitespace-nowrap"
-        >
-          {skill}
-        </motion.span>
-      ))}
+      {experience?.skillsUsed?.map((skill: Maybe<string>) =>
+        skill && (
+          <motion.span
+            key={skill}
+            layout
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="badge badge-primary badge-outline whitespace-nowrap"
+          >
+            {skill}
+          </motion.span>
+        )
+      )}
     </motion.div>
 
     {/* Action buttons */}

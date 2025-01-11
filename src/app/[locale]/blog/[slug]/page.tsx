@@ -29,14 +29,21 @@ export async function generateStaticParams({
 }
 
 interface BlogPageProps {
-  params: {
+  params: Promise<{
     locale: string;
     slug: string;
-  };
+  }>;
 }
 
-export default async function Page({ params: { locale, slug } }: BlogPageProps) {
-  const { isEnabled: preview } = draftMode();
+export default async function Page(props: BlogPageProps) {
+  const params = await props.params;
+
+  const {
+    locale,
+    slug
+  } = params;
+
+  const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
   const { t } = await initTranslations({ locale });
   const { pageBlogPostCollection } = await gqlClient.pageBlogPost({ locale, slug, preview });
