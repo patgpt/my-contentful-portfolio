@@ -13,6 +13,7 @@ import { cn } from '@src/utils/cn';
 import { getLocale, getMessages, setRequestLocale } from 'next-intl/server';
 import type { ReactNode } from 'react';
 import { routing } from '@src/i18n/routing';
+import { console } from 'inspector';
 
 export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
@@ -33,18 +34,19 @@ const allowedOriginList = ['https://app.contentful.com', 'https://app.eu.content
 
 interface LayoutProps {
   children: ReactNode;
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
-export default async function PageLayout({ children }: LayoutProps) {
+export default async function PageLayout({ children, params }: LayoutProps) {
   const { isEnabled: preview } = await draftMode();
 
   const messages = await getMessages();
-  const locale = await getLocale();
+  const locale = (await params).locale;
+  console.log(locale, 'PageLayout');
   // Enable static rendering
   setRequestLocale(locale);
-  console.log('LAYOUT LOCALE', locale);
+
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
@@ -52,9 +54,9 @@ export default async function PageLayout({ children }: LayoutProps) {
       </head>
       <body className="min-h-screen bg-base-100 text-base-content">
         <ThemeProvider attribute="class">
-          <NextIntlClientProvider messages={messages}>
+          <NextIntlClientProvider locale={locale} messages={messages}>
             <ContentfulPreviewProvider
-              locale={locale}
+              locale={locale || (await getLocale())}
               enableInspectorMode={preview}
               enableLiveUpdates={preview}
               targetOrigin={allowedOriginList}>

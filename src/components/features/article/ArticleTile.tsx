@@ -12,9 +12,9 @@ import { ArticleAuthor } from '@src/components/features/article/ArticleAuthor';
 import { CtfImage } from '@src/components/features/contentful';
 import { FormatDate } from '@src/components/shared/format-date';
 import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
-import { Link } from '@src/i18n/routing';
 
 import { useLocale } from 'next-intl';
+import { Link } from '@src/i18n/routing';
 
 interface ArticleTileProps extends HTMLProps<HTMLDivElement> {
   article: PageBlogPostFieldsFragment;

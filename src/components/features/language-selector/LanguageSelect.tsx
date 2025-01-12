@@ -3,9 +3,8 @@
 import clsx from 'clsx';
 import { useTransition } from 'react';
 import { FaGlobe, FaCheck } from 'react-icons/fa6';
-
-import { useRouter } from '@src/i18n/routing';
-import { usePathname } from '@src/i18n/routing';
+import { useRouter, usePathname } from '@src/i18n/routing';
+import { useParams } from 'next/navigation';
 
 const LANGUAGE_NAMES = {
   'en-US': 'English',
@@ -16,13 +15,12 @@ export default function LocaleSwitcherSelect() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const pathname = usePathname();
-
-  // Get active locale from pathname
-  const activeLocale = pathname.startsWith('/fr-CA') ? 'fr-CA' : 'en-US';
+  const params = useParams();
+  const activeLocale = params.locale as string;
 
   function onSelectLocale(nextLocale: string) {
     startTransition(() => {
-      router.replace('/', { locale: nextLocale });
+      router.replace(pathname, { locale: nextLocale });
     });
   }
 
