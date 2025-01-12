@@ -4,6 +4,7 @@
     "featured": "featured"
   },
   "landingPage": {
+    "featuredArticle": "Featured Article",
     "latestArticles": "Latest articles"
   },
   "blog": {
@@ -13,7 +14,7 @@
   "common": {
     "regionalSettings": "Regional Settings",
     "homepage": "Homepage",
-    "language": "Language",
+    "language": "English",
     "languageDrawer": "Toggle language drawer",
     "theme": "Theme",
     "locales": {

@@ -5,11 +5,14 @@ import ThemeSwitcher from '@src/components/features/theme-switcher/ThemeSwitcher
 import { client, previewClient } from '@src/lib/client';
 
 import { Link } from '@src/i18n/routing';
-import LanguageSelector from '@src/components/features/language-selector';
+import { getLocale } from 'next-intl/server';
+import LanguageSelect from '@src/components/features/language-selector/LanguageSelect';
 
-export const Header = async ({ locale }: { locale: string }) => {
+export const Header = async () => {
+  const locale = await getLocale();
   const { isEnabled: preview } = await draftMode();
 
+  console.log('HEADER LOCALE', locale);
   const gqlClient = preview ? previewClient : client;
 
   const navigation = await gqlClient.GetNavigationMenu({
@@ -39,7 +42,9 @@ export const Header = async ({ locale }: { locale: string }) => {
           <ul className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
             {menuItems.map((item, index) => (
               <li key={`mobile-${index}`}>
-                <Link href={`/${item?.href}`}>{item?.title}</Link>
+                <Link locale={locale} href={`/${item?.href}`}>
+                  {item?.title}
+                </Link>
               </li>
             ))}
           </ul>
@@ -52,14 +57,16 @@ export const Header = async ({ locale }: { locale: string }) => {
         <ul className="menu menu-horizontal px-1">
           {menuItems.map((item, index) => (
             <li key={`desktop-${index}`}>
-              <Link href={`/${item?.href}`}>{item?.title}</Link>
+              <Link locale={locale} href={`/${item?.href}`}>
+                {item?.title}
+              </Link>
             </li>
           ))}
         </ul>
       </div>
       <div className="navbar-end flex gap-2">
         <ThemeSwitcher />
-        <LanguageSelector />
+        <LanguageSelect />
       </div>
     </div>
   );

@@ -4,7 +4,8 @@
     "featured": "En vedette"
   },
   "landingPage": {
-    "latestArticles": "Derniers articles"
+    "latestArticles": "Derniers articles",
+    "featuredArticle": "Article en vedette"
   },
   "blog": {
     "title": "Blog",
@@ -13,8 +14,8 @@
   "common": {
     "homepage": "Page d'accueil",
     "regionalSettings": "Paramètres régionaux",
-    "language": "Langue",
-    "languageDrawer": "Basculer le tiroir des langues",
+    "language": "Francais",
+    "languageDrawer": "Basculer le stiroir des langues",
     "theme": "Thème",
     "locales": {
       "english": "English",

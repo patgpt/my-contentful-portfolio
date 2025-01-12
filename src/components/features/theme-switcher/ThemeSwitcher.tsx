@@ -1,11 +1,11 @@
 'use client';
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { FiSun, FiMoon } from 'react-icons/fi';
+ import { FiSun, FiMoon } from 'react-icons/fi';
 
 function ThemeSwitcher() {
   const [theme, setTheme] = useState('light');
-  const { t } = useTranslation();
+  const t = useTranslations("common");
   useEffect(() => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     if (currentTheme) setTheme(currentTheme);
@@ -19,7 +19,7 @@ function ThemeSwitcher() {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-sm font-medium">{t('common.theme')}</span>
+      <span className="text-sm font-medium">{t('theme')}</span>
       <label className="swap swap-rotate">
         <input
           type="checkbox"

@@ -5,12 +5,11 @@ import { ArticleContent, ArticleHero, ArticleTileGrid } from '@src/components/fe
 import { Container } from '@src/components/shared/container';
 
 import { client, previewClient } from '@src/lib/client';
+import { getLocale, getTranslations } from 'next-intl/server';
+import type { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
 
-export async function generateStaticParams({
-  params: { locale },
-}: {
-  params: { locale: string };
-}): Promise<BlogPageProps['params'][]> {
+export async function generateStaticParams(): Promise<BlogPageProps['params'][]> {
+  const locale = await getLocale();
   const gqlClient = client;
   const { pageBlogPostCollection } = await gqlClient.pageBlogPostCollection({ locale, limit: 100 });
 
@@ -19,26 +18,26 @@ export async function generateStaticParams({
   }
 
   return pageBlogPostCollection.items
-    .filter((blogPost): blogPost is NonNullable<typeof blogPost> => Boolean(blogPost?.slug))
-    .map(blogPost => {
-      return {
-        locale,
-        slug: blogPost.slug!,
-      };
-    });
+    .filter(
+      (blogPost): blogPost is PageBlogPostFieldsFragment & { slug: string } =>
+        blogPost !== null && typeof blogPost?.slug === 'string',
+    )
+    .map(blogPost => ({
+      locale,
+      slug: blogPost.slug,
+    }));
 }
 
 interface BlogPageProps {
-  params: Promise<{
+  params: {
     locale: string;
     slug: string;
-  }>;
+  };
 }
 
 export default async function Page(props: BlogPageProps) {
-  const params = await props.params;
-
-  const { locale, slug } = params;
+  const t = await getTranslations('article');
+  const { locale, slug } = props.params;
 
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
@@ -65,7 +64,7 @@ export default async function Page(props: BlogPageProps) {
       </Container>
       {relatedPosts && (
         <Container className="mt-8 max-w-5xl">
-          <h2 className="mb-4 md:mb-6">{t('article.relatedArticles')}</h2>
+          <h2 className="mb-4 md:mb-6">{t('relatedArticles')}</h2>
           <ArticleTileGrid className="md:grid-cols-2" articles={relatedPosts} />
         </Container>
       )}

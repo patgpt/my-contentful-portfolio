@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { draftMode } from 'next/headers';
-import { NextIntlClientProvider, useLocale } from 'next-intl';
-
+import { NextIntlClientProvider } from 'next-intl';
+import './globals.css';
 import { urbanist } from '@src/app/fonts';
 import { ContentfulPreviewProvider } from '@src/components/features/contentful';
 import { Footer } from '@src/components/templates/footer';
@@ -10,9 +10,13 @@ import { Header } from '@src/components/templates/header';
 
 import { cn } from '@src/utils/cn';
 
-import { getLocale, getMessages } from 'next-intl/server';
+import { getLocale, getMessages, setRequestLocale } from 'next-intl/server';
 import type { ReactNode } from 'react';
+import { routing } from '@src/i18n/routing';
 
+export function generateStaticParams() {
+  return routing.locales.map(locale => ({ locale }));
+}
 export async function generateMetadata() {
   const metatadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
@@ -36,10 +40,11 @@ interface LayoutProps {
 export default async function PageLayout({ children }: LayoutProps) {
   const { isEnabled: preview } = await draftMode();
 
- 
   const messages = await getMessages();
   const locale = await getLocale();
-  console.log(locale, 'LAYOUT');
+  // Enable static rendering
+  setRequestLocale(locale);
+  console.log('LAYOUT LOCALE', locale);
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
@@ -54,7 +59,7 @@ export default async function PageLayout({ children }: LayoutProps) {
               enableLiveUpdates={preview}
               targetOrigin={allowedOriginList}>
               <main className={cn(urbanist.variable, 'min-h-screens pt-10 font-sans')}>
-                <Header locale={locale} />
+                <Header />
                 {children}
                 <Footer />
               </main>

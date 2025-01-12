@@ -5,21 +5,14 @@ import { ArticleTileGrid } from '@src/components/features/article';
 import { Container } from '@src/components/shared/container';
 
 import { client, previewClient } from '@src/lib/client';
+import { getTranslations } from 'next-intl/server';
 
-interface BlogListPageProps {
-  params: Promise<{
-    locale: string;
-  }>;
-}
-
-async function BlogListPage(props: BlogListPageProps) {
-  const params = await props.params;
-
+async function BlogListPage({ params }) {
   const { locale } = params;
-
+  console.log(locale, 'BlogListPage');
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
-
+  const t = await getTranslations('blog');
   const allBlogPosts = await gqlClient.pageBlogPostCollection({ locale, limit: 100 });
   const posts = allBlogPosts.pageBlogPostCollection;
   if (!posts?.items) {
@@ -28,9 +21,9 @@ async function BlogListPage(props: BlogListPageProps) {
 
   return (
     <Container className="prose prose-xl my-8 mt-20 max-w-7xl no-underline">
-      <h2>{t('blog.title')}</h2>
+      <h2>{t('title')}</h2>
       <div className="mb-8">
-        <p className="text-lg">{t('blog.description')}</p>
+        <p className="text-lg">{t('description')}</p>
       </div>
       <ArticleTileGrid articles={posts.items} />
     </Container>
