@@ -88,7 +88,6 @@ const RelatedPosts = async ({ relatedPosts }: { relatedPosts: PageBlogPostFields
   );
 };
 export default async function Page({ params }: BlogPageProps) {
-  const t = await getTranslations('article');
   const { locale, slug } = params;
 
   const { isEnabled: preview } = await draftMode();
