@@ -3,26 +3,25 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import SocialButtonRow from '@src/components/SocialButtonRow';
-
 import { client, previewClient } from '@src/lib/client';
 import type { HeroFieldsFragment } from '@src/lib/__generated/sdk';
 
-// Move interfaces to separate types file
+// Separate data fetching logic with error handling
+async function getHeroData(locale: string, preview: boolean): Promise<HeroFieldsFragment> {
+  try {
+    const gqlClient = preview ? previewClient : client;
+    const data = await gqlClient.GetHero({ locale, preview });
 
-interface LandingPageHeroProps {
-  locale: string;
-}
+    if (!data.componentHeroCollection?.items[0]) {
+      throw new Error('Hero data not found');
+    }
 
-// Separate data fetching logic
-async function getHeroData(locale: string, preview: boolean) {
-  const gqlClient = preview ? previewClient : client;
-  const data = await gqlClient.GetHero({ locale, preview });
-
-  if (!data.componentHeroCollection?.items[0]) {
-    return notFound();
+    return data.componentHeroCollection.items[0];
+  } catch (error) {
+    console.error('Failed to fetch hero data:', error);
+    console.error(`Locale: ${locale}, Preview: ${preview}`);
+    notFound();
   }
-
-  return data.componentHeroCollection.items[0];
 }
 
 // Separate UI component
@@ -40,7 +39,7 @@ function HeroContent({ hero }: { hero: HeroFieldsFragment }) {
                   width={300}
                   height={300}
                   src={url}
-                  alt=""
+                  alt="Hero Image"
                   priority
                   sizes="(max-width: 768px) 100vw, 300px"
                   quality={90}
@@ -58,11 +57,18 @@ function HeroContent({ hero }: { hero: HeroFieldsFragment }) {
   );
 }
 
-export default async function Hero({ locale }: LandingPageHeroProps) {
+type HeroProps = HeroFieldsFragment & { locale: string };
+
+export default async function Hero({ locale }: HeroProps) {
   const { isEnabled: preview } = await draftMode();
 
-
-  return <HeroContent hero={await getHeroData(locale, preview)} />;
+  try {
+    const heroData = await getHeroData(locale, preview);
+    return <HeroContent hero={heroData} />;
+  } catch (error) {
+    console.error('Error rendering hero component:', error);
+    notFound();
+  }
 }
 
 export { Hero };
