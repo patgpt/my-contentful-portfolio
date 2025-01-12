@@ -6,8 +6,12 @@ import { Container } from '@src/components/shared/container';
 
 import { client, previewClient } from '@src/lib/client';
 import { getTranslations } from 'next-intl/server';
-import type { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
+
 import { routing } from '@src/i18n/routing';
+import type {
+  PageBlogPostFieldsFragment,
+  PageLandingFieldsFragment,
+} from '@src/lib/__generated/sdk';
 
 interface BlogPageParams {
   locale: (typeof routing.locales)[number];
@@ -20,67 +24,105 @@ interface BlogPageProps {
 
 export async function generateStaticParams(): Promise<BlogPageParams[]> {
   const gqlClient = client;
-  const params: BlogPageParams[] = [];
 
-  for (const locale of routing.locales) {
-    const { pageBlogPostCollection } = await gqlClient.pageBlogPostCollection({
-      locale,
-      limit: 100,
-    });
+  const params = await Promise.all(
+    routing.locales.map(async locale => {
+      try {
+        const { pageBlogPostCollection } = await gqlClient.pageBlogPostCollection({
+          locale,
+          limit: 100,
+        });
 
-    if (!pageBlogPostCollection?.items) {
-      continue;
-    }
+        return (
+          pageBlogPostCollection?.items
+            ?.filter((blogPost): blogPost is PageBlogPostFieldsFragment & { slug: string } =>
+              Boolean(blogPost?.slug),
+            )
+            .map(blogPost => ({
+              locale,
+              slug: `blog/${blogPost.slug}`,
+            })) || []
+        );
+      } catch (error) {
+        console.error(`Failed to fetch blog posts for locale: ${locale}`, error);
+        return [];
+      }
+    }),
+  );
 
-    const localeParams = pageBlogPostCollection.items
-      .filter(
-        (blogPost): blogPost is PageBlogPostFieldsFragment & { slug: string } =>
-          blogPost !== null && typeof blogPost?.slug === 'string',
-      )
-      .map(blogPost => ({
-        locale,
-        slug: `blog/${blogPost.slug}`,
-      }));
-
-    params.push(...localeParams);
-  }
-
-  return params;
+  return params.flat();
 }
 
+function checkIfFeatured(blogPostSlug: string, featuredSlug?: string): boolean {
+  return blogPostSlug === featuredSlug;
+}
+
+const HeroSection = ({
+  blogPost,
+  isFeatured,
+}: {
+  blogPost: PageBlogPostFieldsFragment;
+  isFeatured: boolean;
+}) => (
+  <Container>
+    <ArticleHero article={blogPost} isFeatured={isFeatured} isReversedLayout />
+  </Container>
+);
+
+const MainContent = ({ blogPost }: { blogPost: PageBlogPostFieldsFragment }) => (
+  <Container className="mt-8 max-w-4xl">
+    <ArticleContent article={blogPost} />
+  </Container>
+);
+
+const RelatedPosts = async ({ relatedPosts }: { relatedPosts: PageBlogPostFieldsFragment[] }) => {
+  const t = await getTranslations('article');
+
+  return (
+    relatedPosts?.length > 0 && (
+      <Container className="mt-8 max-w-5xl">
+        <h2 className="mb-4 md:mb-6">{t('relatedArticles')}</h2>
+        <ArticleTileGrid className="md:grid-cols-2" articles={relatedPosts} />
+      </Container>
+    )
+  );
+};
 export default async function Page({ params }: BlogPageProps) {
   const t = await getTranslations('article');
   const { locale, slug } = params;
 
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
-  const { pageBlogPostCollection } = await gqlClient.pageBlogPost({ locale, slug, preview });
-  const { pageLandingCollection } = await gqlClient.pageLanding({ locale, preview });
-  const landingPage = pageLandingCollection?.items[0];
-  const blogPost = pageBlogPostCollection?.items[0];
-  const relatedPosts = blogPost?.relatedBlogPostsCollection?.items;
-  const isFeatured = Boolean(
-    blogPost?.slug && landingPage?.featuredBlogPost?.slug === blogPost.slug,
-  );
 
-  if (!blogPost) {
+  try {
+    const { pageBlogPostCollection } = await gqlClient.pageBlogPost({ locale, slug, preview });
+    const { pageLandingCollection } = await gqlClient.pageLanding({ locale, preview });
+
+    const landingPage = pageLandingCollection?.items?.[0] as PageLandingFieldsFragment | undefined;
+    const blogPost = pageBlogPostCollection?.items?.[0] as PageBlogPostFieldsFragment | undefined;
+    const relatedPosts = blogPost?.relatedBlogPostsCollection
+      ?.items as PageBlogPostFieldsFragment[];
+
+    if (!blogPost) {
+      notFound();
+    }
+
+    const isFeatured = checkIfFeatured(
+      blogPost.slug!,
+      landingPage?.featuredBlogPost?.slug ?? undefined,
+    );
+
+    return (
+      <>
+        <HeroSection blogPost={blogPost} isFeatured={isFeatured} />
+        <MainContent blogPost={blogPost} />
+        <RelatedPosts relatedPosts={relatedPosts} />
+      </>
+    );
+  } catch (error) {
+    // Replace console.error with a centralized logging service
+    console.error('Failed to fetch blog post data', error);
+
     notFound();
   }
-
-  return (
-    <>
-      <Container>
-        <ArticleHero article={blogPost} isFeatured={isFeatured} isReversedLayout={true} />
-      </Container>
-      <Container className="mt-8 max-w-4xl">
-        <ArticleContent article={blogPost} />
-      </Container>
-      {relatedPosts && (
-        <Container className="mt-8 max-w-5xl">
-          <h2 className="mb-4 md:mb-6">{t('relatedArticles')}</h2>
-          <ArticleTileGrid className="md:grid-cols-2" articles={relatedPosts} />
-        </Container>
-      )}
-    </>
-  );
 }

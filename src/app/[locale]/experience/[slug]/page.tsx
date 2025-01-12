@@ -2,15 +2,18 @@ import { draftMode } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaGlobe } from 'react-icons/fa';
+import { setRequestLocale } from 'next-intl/server';
 
 import { CtfRichText } from '@src/components/features/contentful';
 import type { PageExperience } from '@src/lib/__generated/sdk';
 import { client, previewClient } from '@src/lib/client';
 import { formatDate } from '@src/utils/date';
-import { getLocale } from 'next-intl/server';
+import { routing } from '@src/i18n/routing';
+
+type Locale = (typeof routing.locales)[number];
 
 interface ExperiencePageParams {
-  locale: string;
+  locale: Locale;
   slug: string;
 }
 
@@ -19,24 +22,32 @@ interface ExperienceDetailPageProps {
 }
 
 export async function generateStaticParams(): Promise<ExperiencePageParams[]> {
-  const locale = await getLocale();
+  const defaultLocale = routing.defaultLocale;
   const gqlClient = client;
-  const { pageExperienceCollection } = await gqlClient.getAllExperiences({ locale });
+  const { pageExperienceCollection } = await gqlClient.getAllExperiences({ locale: defaultLocale });
 
   if (!pageExperienceCollection?.items) {
-    throw new Error('No experience page found');
+    return [];
   }
 
-  return pageExperienceCollection.items
-    .filter((experience): experience is NonNullable<typeof experience> => Boolean(experience?.slug))
-    .map(experience => ({
-      locale,
-      slug: experience.slug!,
-    }));
+  const paths: ExperiencePageParams[] = [];
+  for (const locale of routing.locales) {
+    for (const experience of pageExperienceCollection.items) {
+      if (experience?.slug) {
+        paths.push({
+          locale: locale as Locale,
+          slug: experience.slug,
+        });
+      }
+    }
+  }
+
+  return paths;
 }
 
 async function ExperienceDetailPage({ params }: ExperienceDetailPageProps) {
-  const { locale, slug } = params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
 
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
