@@ -5,27 +5,38 @@ import { ArticleContent, ArticleHero, ArticleTileGrid } from '@src/components/fe
 import { Container } from '@src/components/shared/container';
 
 import { client, previewClient } from '@src/lib/client';
-import { getLocale, getTranslations } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import type { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
+import { routing } from '@src/i18n/routing';
 
 export async function generateStaticParams(): Promise<BlogPageProps['params'][]> {
-  const locale = await getLocale();
   const gqlClient = client;
-  const { pageBlogPostCollection } = await gqlClient.pageBlogPostCollection({ locale, limit: 100 });
+  const params: BlogPageProps['params'][] = [];
 
-  if (!pageBlogPostCollection?.items) {
-    throw new Error('No blog posts found');
+  for (const locale of routing.locales) {
+    const { pageBlogPostCollection } = await gqlClient.pageBlogPostCollection({
+      locale,
+      limit: 100,
+    });
+
+    if (!pageBlogPostCollection?.items) {
+      continue;
+    }
+
+    const localeParams = pageBlogPostCollection.items
+      .filter(
+        (blogPost): blogPost is PageBlogPostFieldsFragment & { slug: string } =>
+          blogPost !== null && typeof blogPost?.slug === 'string',
+      )
+      .map(blogPost => ({
+        locale,
+        slug: `blog/${blogPost.slug}`,
+      }));
+
+    params.push(...localeParams);
   }
 
-  return pageBlogPostCollection.items
-    .filter(
-      (blogPost): blogPost is PageBlogPostFieldsFragment & { slug: string } =>
-        blogPost !== null && typeof blogPost?.slug === 'string',
-    )
-    .map(blogPost => ({
-      locale,
-      slug: blogPost.slug,
-    }));
+  return params;
 }
 
 interface BlogPageProps {

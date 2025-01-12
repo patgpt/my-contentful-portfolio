@@ -7,6 +7,10 @@ import { Container } from '@src/components/shared/container';
 import { client, previewClient } from '@src/lib/client';
 import { getTranslations } from 'next-intl/server';
 
+
+
+
+
 async function BlogListPage({ params }) {
   const { locale } = params;
   console.log(locale, 'BlogListPage');

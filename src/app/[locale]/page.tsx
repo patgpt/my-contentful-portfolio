@@ -14,7 +14,7 @@ import { client, previewClient } from '@src/lib/client';
 
 // i18n imports
 import { Link, routing } from '@src/i18n/routing';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 interface PageParams {
   params: {
@@ -22,9 +22,10 @@ interface PageParams {
   };
 }
 
-async function generatePageMetadata(locale: string, preview: boolean): Promise<Metadata> {
-  const gqlClient = preview ? previewClient : client;
-  const landingPageData = await gqlClient.pageLanding({ locale, preview });
+async function generatePageMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const gqlClient = client;
+  const landingPageData = await gqlClient.pageLanding({ locale, preview: false });
   const page = landingPageData.pageLandingCollection?.items[0];
 
   const defaultMetadata: Metadata = {
@@ -50,14 +51,12 @@ async function generatePageMetadata(locale: string, preview: boolean): Promise<M
   };
 }
 
-export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
-  const { isEnabled: preview } = await draftMode();
-  return generatePageMetadata(params.locale, preview);
+export async function generateMetadata(): Promise<Metadata> {
+  return generatePageMetadata();
 }
 
 export default async function Page({ params }: PageParams) {
-  const { locale } = params;
-  setRequestLocale(locale);
+  const locale = await getLocale();
   const t = await getTranslations();
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;

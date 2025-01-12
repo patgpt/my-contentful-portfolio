@@ -22,7 +22,7 @@ export const ArticleTile = ({ article, className }: ArticleTileProps) => {
   const inspectorProps = useContentfulInspectorMode({ entryId: article.sys.id });
 
   return (
-    <Link className="flex h-full flex-col no-underline" href={`/${slug}`}>
+    <Link className="flex h-full flex-col no-underline" href={`blog/${slug}`}>
       <div className={twMerge('card h-full bg-base-100 shadow-xl', className)}>
         {featuredImage && (
           <figure {...inspectorProps({ fieldId: 'featuredImage' })}>
@@ -43,8 +43,7 @@ export const ArticleTile = ({ article, className }: ArticleTileProps) => {
             <ArticleAuthor article={article} />
             <div
               className="text-xs text-base-content/60"
-              {...inspectorProps({ fieldId: 'publishedDate' })}
-            >
+              {...inspectorProps({ fieldId: 'publishedDate' })}>
               <FormatDate date={publishedDate} />
             </div>
           </div>
