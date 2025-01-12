@@ -26,7 +26,7 @@ export async function generateMetadata() {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#ffffff',
+  themeColor: 'rebeccapurple',
 };
 
 const allowedOriginList = ['https://app.contentful.com', 'https://app.eu.contentful.com'];
