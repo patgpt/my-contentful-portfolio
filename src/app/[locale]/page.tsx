@@ -56,8 +56,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page({ params }: PageParams) {
-  console.log(params.locale, 'PAGE');
-  const locale = await getLocale();
+  const { locale } = params;
   const t = await getTranslations();
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
