@@ -7,12 +7,19 @@ import { CtfRichText } from '@src/components/features/contentful';
 import type { PageExperience } from '@src/lib/__generated/sdk';
 import { client, previewClient } from '@src/lib/client';
 import { formatDate } from '@src/utils/date';
+import { getLocale } from 'next-intl/server';
 
-export async function generateStaticParams({
-  params: { locale },
-}: {
-  params: { locale: string };
-}): Promise<ExperienceDetailPageProps['params'][]> {
+interface ExperiencePageParams {
+  locale: string;
+  slug: string;
+}
+
+interface ExperienceDetailPageProps {
+  params: ExperiencePageParams;
+}
+
+export async function generateStaticParams(): Promise<ExperiencePageParams[]> {
+  const locale = await getLocale();
   const gqlClient = client;
   const { pageExperienceCollection } = await gqlClient.getAllExperiences({ locale });
 
@@ -22,24 +29,13 @@ export async function generateStaticParams({
 
   return pageExperienceCollection.items
     .filter((experience): experience is NonNullable<typeof experience> => Boolean(experience?.slug))
-    .map(experience => {
-      return {
-        locale,
-        slug: experience.slug!,
-      };
-    });
+    .map(experience => ({
+      locale,
+      slug: experience.slug!,
+    }));
 }
 
-interface ExperienceDetailPageProps {
-  params: Promise<{
-    locale: string;
-    slug: string;
-  }>;
-}
-
-async function ExperienceDetailPage(props: ExperienceDetailPageProps) {
-  const params = await props.params;
-
+async function ExperienceDetailPage({ params }: ExperienceDetailPageProps) {
   const { locale, slug } = params;
 
   const { isEnabled: preview } = await draftMode();

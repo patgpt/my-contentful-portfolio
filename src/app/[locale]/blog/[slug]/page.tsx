@@ -9,9 +9,18 @@ import { getTranslations } from 'next-intl/server';
 import type { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
 import { routing } from '@src/i18n/routing';
 
-export async function generateStaticParams(): Promise<BlogPageProps['params'][]> {
+interface BlogPageParams {
+  locale: (typeof routing.locales)[number];
+  slug: string;
+}
+
+interface BlogPageProps {
+  params: BlogPageParams;
+}
+
+export async function generateStaticParams(): Promise<BlogPageParams[]> {
   const gqlClient = client;
-  const params: BlogPageProps['params'][] = [];
+  const params: BlogPageParams[] = [];
 
   for (const locale of routing.locales) {
     const { pageBlogPostCollection } = await gqlClient.pageBlogPostCollection({
@@ -39,16 +48,9 @@ export async function generateStaticParams(): Promise<BlogPageProps['params'][]>
   return params;
 }
 
-interface BlogPageProps {
-  params: {
-    locale: string;
-    slug: string;
-  };
-}
-
-export default async function Page(props: BlogPageProps) {
+export default async function Page({ params }: BlogPageProps) {
   const t = await getTranslations('article');
-  const { locale, slug } = props.params;
+  const { locale, slug } = params;
 
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
