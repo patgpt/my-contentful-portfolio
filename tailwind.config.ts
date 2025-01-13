@@ -9,7 +9,9 @@ export default {
     extend: {
 
       fontFamily: {
-        sans: ['var(--font-urbanist)', ...fontFamily.sans],
+        sans: ['var(--font-sans)', ...fontFamily.sans],
+        serif: ['var(--font-serif)', ...fontFamily.serif],
+        display: ['var(--font-display)'],
       },
     },
   },
@@ -18,5 +20,3 @@ export default {
     themes: ["light", "dark"],
   },
 } satisfies Config
-
-

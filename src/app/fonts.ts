@@ -1,3 +1,11 @@
-import { Urbanist } from 'next/font/google';
+import type { NextFontWithVariable } from 'next/dist/compiled/@next/font';
+import { Noto_Sans, Noto_Serif, Quicksand } from 'next/font/google';
 
-export const urbanist = Urbanist({ subsets: ['latin'], variable: '--font-urbanist' });
+const fontSerif = Noto_Serif({ subsets: ['latin'], variable: '--font-serif' });
+const fontSans = Noto_Sans({ subsets: ['latin'], variable: '--font-sans' });
+const fontDisplay = Quicksand({ subsets: ['latin'], variable: '--font-display' });
+export const fonts: {
+  fontDisplay: NextFontWithVariable;
+  fontSans: NextFontWithVariable;
+  fontSerif: NextFontWithVariable;
+} = { fontDisplay, fontSans, fontSerif };

@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { draftMode } from 'next/headers';
 import { NextIntlClientProvider } from 'next-intl';
-import { urbanist } from '@src/app/fonts';
 import { ContentfulPreviewProvider } from '@src/components/features/contentful';
 import { Footer } from '@src/components/templates/footer';
 import { Header } from '@src/components/templates/header';
@@ -13,6 +12,7 @@ import { getLocale, getMessages, setRequestLocale } from 'next-intl/server';
 import type { ReactNode } from 'react';
 import { routing } from '@src/i18n/routing';
 import { console } from 'inspector';
+import { fonts } from '@src/app/fonts';
 
 export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
@@ -59,12 +59,17 @@ export default async function PageLayout({ children, params }: LayoutProps) {
               enableInspectorMode={preview}
               enableLiveUpdates={preview}
               targetOrigin={allowedOriginList}>
-              <main className={cn(urbanist.variable, 'min-h-screens pt-10 font-sans')}>
+              <main
+                className={cn(
+                  fonts.fontDisplay.variable,
+                  fonts.fontSans.variable,
+                  fonts.fontSerif.variable,
+                  'min-h-screens pt-10 font-sans',
+                )}>
                 <Header params={params} />
                 {children}
                 <Footer />
               </main>
-              <div id="portal" className={cn(urbanist.variable, 'font-sans')} />
             </ContentfulPreviewProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
