@@ -4,7 +4,7 @@ import {
   useContentfulInspectorMode,
   useContentfulLiveUpdates,
 } from '@contentful/live-preview/react';
-import Link from 'next/link';
+
 import { HTMLProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 
@@ -13,6 +13,9 @@ import { CtfImage } from '@src/components/features/contentful';
 import { FormatDate } from '@src/components/shared/format-date';
 import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
 
+import { useLocale } from 'next-intl';
+import { Link } from '@src/i18n/routing';
+
 interface ArticleTileProps extends HTMLProps<HTMLDivElement> {
   article: PageBlogPostFieldsFragment;
 }
@@ -20,9 +23,9 @@ interface ArticleTileProps extends HTMLProps<HTMLDivElement> {
 export const ArticleTile = ({ article, className }: ArticleTileProps) => {
   const { featuredImage, publishedDate, slug, title } = useContentfulLiveUpdates(article);
   const inspectorProps = useContentfulInspectorMode({ entryId: article.sys.id });
-
+  const locale = useLocale();
   return (
-    <Link className="flex h-full flex-col no-underline" href={`blog/${slug}`}>
+    <Link locale={locale} className="flex h-full flex-col no-underline" href={`blog/${slug}`}>
       <div className={twMerge('card h-full bg-base-100 shadow-xl', className)}>
         {featuredImage && (
           <figure {...inspectorProps({ fieldId: 'featuredImage' })}>

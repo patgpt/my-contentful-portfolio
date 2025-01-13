@@ -1,21 +1,22 @@
-import { NextRequest, NextResponse } from 'next/server';
-import createMiddleware from 'next-intl/middleware';
 import { routing } from '@src/i18n/routing';
+import createMiddleware from 'next-intl/middleware';
+import { NextRequest } from 'next/server';
 
-const handleI18nRouting = createMiddleware(routing);
+export default async function middleware(request: NextRequest) {
+  //  const defaultLocale = request.headers.get('x-your-custom-locale') || 'en';
 
-export default function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const handleI18nRouting = createMiddleware({
+    locales: routing.locales,
+    defaultLocale: routing.defaultLocale,
+  });
+  const response = handleI18nRouting(request);
 
-  const shouldHandle =
-    pathname === '/' ||
-    new RegExp(`^/(${routing.locales.join('|')})(/.*)?$`).test(pathname);
+  // response.headers.set('x-your-custom-locale', defaultLocale);
 
-  if (!shouldHandle) return NextResponse.next();
-
-  return handleI18nRouting(request);
+  return response;
 }
 
 export const config = {
-  matcher: ['/', '/(fr-CA|en-US)/:path*', '/((?!api|_next|.*\\.).*)'],
+  // Match only internationalized pathnames
+  matcher: ['/', '/(fr|en)/:path*'],
 };

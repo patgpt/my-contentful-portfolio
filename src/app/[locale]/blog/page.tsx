@@ -7,12 +7,8 @@ import { Container } from '@src/components/shared/container';
 import { client, previewClient } from '@src/lib/client';
 import { getTranslations } from 'next-intl/server';
 
-
-
-
-
-async function BlogListPage({ params }) {
-  const { locale } = params;
+async function BlogListPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   console.log(locale, 'BlogListPage');
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
