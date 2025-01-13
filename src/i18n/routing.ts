@@ -5,7 +5,15 @@ export const routing = defineRouting({
   // A list of all locales that are supported
   locales: ['en-US', 'fr-CA'],
   localeDetection: true,
-  // Used when no locale matches
+  localePrefix: 'always',
+  // pathnames: {
+  //   // If all locales use the same pathname, a single
+  //   // external path can be used for all locales
+  //   '/': '/',
+  //   '/about': '/about',
+  //   '/experience': '/experience',
+  //   '/blog': '/blog',
+  // },
   defaultLocale: 'en-US',
 });
 

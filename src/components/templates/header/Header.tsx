@@ -5,10 +5,15 @@ import { Link } from '@src/i18n/routing';
 
 import LanguageSelect from '@src/components/features/language-selector/LanguageSelect';
 import NavigationLink from '@src/components/templates/header/NavigationLink';
-import { getLocale } from 'next-intl/server';
 
-export const Header = async () => {
-  const locale = await getLocale();
+export const Header = async ({
+  params,
+}: {
+  params: Promise<{
+    locale: string;
+  }>;
+}) => {
+  const locale = (await params).locale;
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
   const navigation = await gqlClient.GetNavigationMenu({
