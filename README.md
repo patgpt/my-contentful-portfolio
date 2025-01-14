@@ -14,7 +14,7 @@
    [![GraphQL](https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)](https://graphql.org)
    [![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)](https://eslint.org)
    [![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black)](https://prettier.io)
-   [![X (Twitter)](https://img.shields.io/badge/X-AGIManifesto-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/AGIManifesto)
+   [![X (Twitter)](https://img.shields.io/badge/AGIManifesto-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/AGIManifesto)
 
    [![Build Status](https://img.shields.io/github/workflow/status/patgpt/contentful-portfolio-template/CI)](https://github.com/patgpt/contentful-portfolio-template/actions)
    [![Playwright Tests](https://img.shields.io/github/actions/workflow/status/patgpt/my-contentful-portfolio/playwright.yml?label=e2e-tests)](https://github.com/patgpt/my-contentful-portfolio/actions/workflows/playwright.yml)
