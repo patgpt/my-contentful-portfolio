@@ -33,6 +33,51 @@ export const routing = defineRouting({
 
   /** Default locale when no specific locale is detected or specified */
   defaultLocale: 'en-US',
+  // The `pathnames` object holds pairs of internal and
+  // external paths. Based on the locale, the external
+  // paths are rewritten to the shared, internal ones.
+  pathnames: {
+    // Root path
+    '/': '/',
+
+    // Blog pages
+    '/blog': {
+      'en-US': '/blog',
+      'fr-CA': '/blogue',
+    },
+    '/blog/[slug]': {
+      'en-US': '/blog/[slug]',
+      'fr-CA': '/blogue/[slug]',
+    },
+
+    // About page
+    '/about': {
+      'en-US': '/about',
+      'fr-CA': '/a-propos',
+    },
+
+    // Experience pages
+    '/experience': {
+      'en-US': '/experience',
+      'fr-CA': '/experience',
+    },
+    '/experience/[slug]': {
+      'en-US': '/experience/[slug]',
+      'fr-CA': '/experience/[slug]',
+    },
+
+    // Contact page
+    '/contact': {
+      'en-US': '/contact',
+      'fr-CA': '/contact',
+    },
+
+    // Services page
+    '/services': {
+      'en-US': '/services',
+      'fr-CA': '/services',
+    },
+  },
 });
 
 /** Type representing supported locales */
