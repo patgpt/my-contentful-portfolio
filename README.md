@@ -17,6 +17,7 @@
    [![X (Twitter)](https://img.shields.io/badge/X-AGIManifesto-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/AGIManifesto)
 
    [![Build Status](https://img.shields.io/github/workflow/status/patgpt/contentful-portfolio-template/CI)](https://github.com/patgpt/contentful-portfolio-template/actions)
+   [![Playwright Tests](https://github.com/agimanifesto/my-contentful-portfolio/actions/workflows/playwright.yml/badge.svg)](https://github.com/agimanifesto/my-contentful-portfolio/actions/workflows/playwright.yml)
 
    ## What is Contentful?
 
