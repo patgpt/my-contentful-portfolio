@@ -17,7 +17,7 @@
    [![X (Twitter)](https://img.shields.io/badge/X-AGIManifesto-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/AGIManifesto)
 
    [![Build Status](https://img.shields.io/github/workflow/status/patgpt/contentful-portfolio-template/CI)](https://github.com/patgpt/contentful-portfolio-template/actions)
-   [![Playwright Tests](https://github.com/agimanifesto/my-contentful-portfolio/actions/workflows/playwright.yml/badge.svg)](https://github.com/agimanifesto/my-contentful-portfolio/actions/workflows/playwright.yml)
+   [![Playwright Tests](https://img.shields.io/github/actions/workflow/status/patgpt/my-contentful-portfolio/playwright.yml?label=e2e-tests)](https://github.com/patgpt/my-contentful-portfolio/actions/workflows/playwright.yml)
 
    ## What is Contentful?
 
@@ -25,12 +25,12 @@
 
    ## Features
 
-   - Composable content through flexible content modeling.
-   - Localization ready.
-   - SEO ready.
-   - Incremental Static Regeneration with Next.js.
-   - Type-safe GraphQL API with `graphql-codegen`.
-   - Enhanced Developer Experience with TypeScript.
+- Composable content through flexible content modeling.
+- Localization ready.
+- SEO ready.
+- Incremental Static Regeneration with Next.js.
+- Type-safe GraphQL API with `graphql-codegen`.
+- Enhanced Developer Experience with TypeScript.
 
    ## Getting Started
 
@@ -52,8 +52,8 @@
 
    ## Development
 
-   - Commit hooks are enforced using [Husky](https://github.com/typicode/husky).
-   - Type-safe GraphQL API with [graphql-codegen](https://www.the-guild.dev/graphql/codegen).
+- Commit hooks are enforced using [Husky](https://github.com/typicode/husky).
+- Type-safe GraphQL API with [graphql-codegen](https://www.the-guild.dev/graphql/codegen).
 
    ## Deployment
 
