@@ -1,1 +1,2 @@
-src/**/__generated
+src/lib/__generated/
+node_modules/
