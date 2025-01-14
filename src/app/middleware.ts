@@ -1,22 +1,42 @@
 import { routing } from '@src/i18n/routing';
-import createMiddleware from 'next-intl/middleware';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default async function middleware(request: NextRequest) {
-  //  const defaultLocale = request.headers.get('x-your-custom-locale') || 'en';
+export default function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
 
-  const handleI18nRouting = createMiddleware({
-    locales: routing.locales,
-    defaultLocale: routing.defaultLocale,
-  });
-  const response = handleI18nRouting(request);
+  // If the pathname already includes a locale, proceed normally
+  const isLocalePath = routing.locales.some(locale => pathname.startsWith(`/${locale}`));
+  if (isLocalePath) {
+    return NextResponse.next();
+  }
 
-  // response.headers.set('x-your-custom-locale', defaultLocale);
+  // Detect user's preferred language from the "Accept-Language" header
+  const acceptLanguage = request.headers.get('accept-language');
+  const preferredLocale = acceptLanguage?.split(',')[0] || routing.defaultLocale;
 
-  return response;
+  // Validate the preferred locale or fall back to the default
+  const localeToUse = routing.locales.includes(preferredLocale as (typeof routing.locales)[number])
+    ? preferredLocale
+    : routing.defaultLocale;
+
+  // Redirect froam "/" to the appropriate locale
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL(`/${localeToUse}`, request.url));
+  }
+
+  // Default behavior for unmatched paths
+  return NextResponse.next();
 }
 
 export const config = {
-  // Match only internationalized pathnames
-  matcher: ['/', '/(fr|en)/:path*'],
+  matcher: [
+    '/',
+    // Skip all paths that should not be internationalized
+    '/((?!_next|.*/opengraph-image|.*\\..*).*)',
+    // match locale prefixed paths
+    '/:locale(en-US|fr-CA)?/:path*',
+    // Enable redirects that add missing locales
+    // (e.g. `/pathnames` -> `/en/pathnames`)
+    '/((?!_next|_vercel|.*\\..*).*)',
+  ],
 };
