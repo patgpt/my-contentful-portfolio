@@ -36,6 +36,7 @@ export default function LocaleSwitcherSelect() {
         {Object.entries(LANGUAGE_NAMES).map(([locale, name]) => (
           <li key={locale}>
             <button
+              name="Language Select"
               onClick={() => onSelectLocale(locale)}
               className={clsx(
                 'flex items-center justify-between',
