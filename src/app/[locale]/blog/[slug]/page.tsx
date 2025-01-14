@@ -13,11 +13,7 @@ import type {
   PageLandingFieldsFragment,
 } from '@src/lib/__generated/sdk';
 
-interface BlogPageParams {
-  params: Promise<{ locale: string; slug: string }>;
-}
-
-export async function generateStaticParams(): Promise<BlogPageParams[]> {
+export async function generateStaticParams() {
   const gqlClient = client;
 
   const params = await Promise.all(
@@ -82,7 +78,11 @@ const RelatedPosts = async ({ relatedPosts }: { relatedPosts: PageBlogPostFields
     )
   );
 };
-export default async function Page({ params }: BlogPageProps) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}) {
   const { locale, slug } = await params;
 
   const { isEnabled: preview } = await draftMode();

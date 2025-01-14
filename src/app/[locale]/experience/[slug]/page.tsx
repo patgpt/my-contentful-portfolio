@@ -10,15 +10,13 @@ import { client, previewClient } from '@src/lib/client';
 import { formatDate } from '@src/utils/date';
 import { routing } from '@src/i18n/routing';
 
-type Locale = (typeof routing.locales)[number];
-
 interface ExperiencePageParams {
-  locale: Locale;
+  locale: string;
   slug: string;
 }
 
 interface ExperienceDetailPageProps {
-  params: ExperiencePageParams;
+  params: Promise<ExperiencePageParams>;
 }
 
 export async function generateStaticParams(): Promise<ExperiencePageParams[]> {
@@ -35,7 +33,7 @@ export async function generateStaticParams(): Promise<ExperiencePageParams[]> {
     for (const experience of pageExperienceCollection.items) {
       if (experience?.slug) {
         paths.push({
-          locale: locale as Locale,
+          locale: locale,
           slug: experience.slug,
         });
       }
@@ -45,8 +43,8 @@ export async function generateStaticParams(): Promise<ExperiencePageParams[]> {
   return paths;
 }
 
-async function ExperienceDetailPage({ params }: ExperienceDetailPageProps) {
-  const { locale, slug } = await params;
+async function ExperienceDetailPage({ params: paramsPromise }: ExperienceDetailPageProps) {
+  const { locale, slug } = await paramsPromise;
   setRequestLocale(locale);
 
   const { isEnabled: preview } = await draftMode();
