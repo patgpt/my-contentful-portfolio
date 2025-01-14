@@ -13,8 +13,8 @@ import { CtfImage } from '@src/components/features/contentful';
 import { FormatDate } from '@src/components/shared/format-date';
 import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
 
-import { useLocale } from 'next-intl';
 import { Link } from '@src/i18n/routing';
+import { useLocale } from 'next-intl';
 
 interface ArticleTileProps extends HTMLProps<HTMLDivElement> {
   article: PageBlogPostFieldsFragment;
@@ -25,7 +25,7 @@ export const ArticleTile = ({ article, className }: ArticleTileProps) => {
   const inspectorProps = useContentfulInspectorMode({ entryId: article.sys.id });
   const locale = useLocale();
   return (
-    <Link locale={locale} className="flex h-full flex-col no-underline" href={`blog/${slug}`}>
+    <Link locale={locale} className="flex h-full flex-col no-underline" href={`/blog/${slug}`}>
       <div className={twMerge('card h-full bg-base-100 shadow-xl', className)}>
         {featuredImage && (
           <figure {...inspectorProps({ fieldId: 'featuredImage' })}>

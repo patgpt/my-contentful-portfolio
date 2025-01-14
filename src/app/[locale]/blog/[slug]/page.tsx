@@ -14,12 +14,7 @@ import type {
 } from '@src/lib/__generated/sdk';
 
 interface BlogPageParams {
-  locale: (typeof routing.locales)[number];
-  slug: string;
-}
-
-interface BlogPageProps {
-  params: BlogPageParams;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateStaticParams(): Promise<BlogPageParams[]> {
@@ -88,7 +83,7 @@ const RelatedPosts = async ({ relatedPosts }: { relatedPosts: PageBlogPostFields
   );
 };
 export default async function Page({ params }: BlogPageProps) {
-  const { locale, slug } = params;
+  const { locale, slug } = await params;
 
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;

@@ -49,7 +49,13 @@ export async function generateMetadata(): Promise<Metadata> {
   return generatePageMetadata();
 }
 
-export default async function Page({ params }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{
+    locale: string;
+  }>;
+}) {
   const locale = (await params).locale;
 
   const t = await getTranslations('landingPage');
@@ -80,7 +86,7 @@ export default async function Page({ params }) {
         <Hero locale={locale} />
         <Container className="my-8 md:mb-10 lg:mb-16">
           <h2 className="mb-4 md:mb-6">{t('featuredArticle')}</h2>
-          <Link locale={locale} className="my-8" href={`blog/${page.featuredBlogPost.slug}`}>
+          <Link className="my-8" href={`${locale}/blog/${page.featuredBlogPost.slug}`}>
             <ArticleHero article={page.featuredBlogPost} />
           </Link>
           <ArticleTileGrid className="my-md:grid-cols-2 lg:grid-cols-3" articles={posts} />
