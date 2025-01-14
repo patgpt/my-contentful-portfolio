@@ -14,7 +14,7 @@ export interface ContentfulRichTextInterface {
           block: Array<EmbeddedEntryType>;
         };
       }
-    | any;
+    | never;
 }
 
 export const EmbeddedEntry = (entry: EmbeddedEntryType) => {
