@@ -1,10 +1,11 @@
 import { CtfRichText } from '@src/components/features/contentful/CtfRichText';
-import { Link } from '@src/i18n/routing';
+
 import type { PageExperience, Asset, PageExperienceJobDescription } from '@src/lib/__generated/sdk';
 import { formatDate } from '@src/utils/date';
 import { motion } from 'framer-motion';
 import { FaGlobe } from 'react-icons/fa6';
 import Image from 'next/image';
+import { Link } from '@src/i18n/routing';
 
 // Card Header Component
 const ExperienceCardHeader = ({ experience }: { experience: PageExperience }) => (
