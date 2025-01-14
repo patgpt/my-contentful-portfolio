@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
-
-const root = `http://localhost:3000/en-US`;
+import dotenv from 'dotenv';
+dotenv.config();
+const root = process.env.NEXT_BASE_URL || 'http://localhost:3000';
 
 test('has title', async ({ page }) => {
   await page.goto(root);

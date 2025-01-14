@@ -1,9 +1,11 @@
+import { configDotenv } from 'dotenv';
 import { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin();
-
+configDotenv();
 const config: NextConfig = {
+  // basePath: process.env.NEXT_PUBLIC_BASE_PATH! || '/',
   redirects: async () => [
     {
       source: '/',
