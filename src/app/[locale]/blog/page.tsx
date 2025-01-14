@@ -8,8 +8,7 @@ import { client, previewClient } from '@src/lib/client';
 import { getTranslations } from 'next-intl/server';
 
 async function BlogListPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  console.log(locale, 'BlogListPage');
+ const locale = (await params).locale;
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
   const t = await getTranslations('blog');
