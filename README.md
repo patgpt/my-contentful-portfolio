@@ -1,5 +1,7 @@
 # Contentful Portfolio Template
 
+A ready-to-use developer portfolio template built with Next.js and Contentful, designed for easy customization and deployment.
+
 A Developer Portfolio Starter Template powered by Next.js & Contentful. Pre-designed with optimized & adjustable pages, components, and data management.
 
 ![Portfolio Template](portfolio-template.jpg 'Portfolio Template')
@@ -53,10 +55,7 @@ The Portfolio Template should be running on `http://localhost:3000`.
 
 ## Deployment
 
-You can deploy this template to your hosting provider of choice. Pre-configured buttons are available for Vercel and Netlify:
-
-| Vercel | Netlify |
-| ------ | ------- |
+You can easily deploy this template to Vercel:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fpatgpt%2Fcontentful-portfolio-template&env=CONTENTFUL_SPACE_ID,CONTENTFUL_ACCESS_TOKEN,CONTENTFUL_PREVIEW_ACCESS_TOKEN&envDescription=API%20Keys%20needed%20for%20the%20application&envLink=https%3A%2F%2Fgithub.com%2Fpatgpt%2Fcontentful-portfolio-template%23environment-variables)
 
