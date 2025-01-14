@@ -1,6 +1,7 @@
 // TimelineItems.tsx
 import type { PageExperience } from '@src/lib/__generated/sdk';
 import { TimelineItem } from './TimelineItem';
+
 interface TimelineItemsProps {
   experiences: PageExperience[];
 }

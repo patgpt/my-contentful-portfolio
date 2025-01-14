@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, Document } from '@contentful/rich-text-types';
 
 import { ArticleImage } from '@src/components/features/article';
 import { ComponentRichImage } from '@src/lib/__generated/sdk';
 
-export type EmbeddedEntryType = ComponentRichImage | null;
+// Update EmbeddedEntryType to be more flexible
+export type EmbeddedEntryType = ComponentRichImage;
 
 export interface ContentfulRichTextInterface {
   json: Document;
@@ -13,12 +15,15 @@ export interface ContentfulRichTextInterface {
         entries: {
           block: Array<EmbeddedEntryType>;
         };
+
       }
     | any;
 }
 
 export const EmbeddedEntry = (entry: EmbeddedEntryType) => {
-  switch (entry?.__typename) {
+  if (!entry) return null;
+
+  switch (entry.__typename) {
     case 'ComponentRichImage':
       return <ArticleImage image={entry} />;
     default:

@@ -8,24 +8,30 @@ import type { PageExperience } from '@src/lib/__generated/sdk';
 import { formatDate } from '@src/utils/date';
 
 interface TimelineItemProps {
-  experience: PageExperience & { type?: string | undefined };
+  experience: PageExperience & { type?: string };
   isLast: boolean;
   index: number;
 }
 
-const getTimelineIcon = (type: string | undefined) => {
-  const icons = {
+type IconType = {
+  work: typeof FaBriefcase;
+  education: typeof FaGraduationCap;
+  award: typeof FaAward;
+};
+
+const getTimelineIcon = (type?: string) => {
+  const icons: IconType = {
     work: FaBriefcase,
     education: FaGraduationCap,
     award: FaAward,
   };
-  return icons[type!] || FaBriefcase;
+  return icons[type as keyof IconType] || FaBriefcase;
 };
 
 export const TimelineItem = ({ experience, isLast, index }: TimelineItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isEven = index % 2 === 0;
-  const Icon = getTimelineIcon(experience?.type);
+  const Icon = getTimelineIcon(experience.type);
 
   return (
     <motion.li
@@ -50,8 +56,8 @@ export const TimelineItem = ({ experience, isLast, index }: TimelineItemProps) =
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="rounded-full bg-base-200 px-4 py-1 text-sm text-base-content/70">
-          {formatDate(experience?.startDate)} -{' '}
-          {experience?.endDate ? formatDate(experience?.endDate) : 'Present'}
+          {formatDate(experience.startDate)} -{' '}
+          {experience.endDate ? formatDate(experience.endDate) : 'Present'}
         </motion.span>
       </div>
       <div className={`col-span-1 md:${!isEven && 'opacity-0'}`}>
@@ -76,7 +82,7 @@ export const TimelineItem = ({ experience, isLast, index }: TimelineItemProps) =
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="rounded-full bg-base-200 px-4 py-1 text-2xl text-base-content/70">
-              {formatDate(experience?.startDate)}
+              {formatDate(experience.startDate)}
             </motion.span>
           </div>
         )}
@@ -113,7 +119,7 @@ export const TimelineItem = ({ experience, isLast, index }: TimelineItemProps) =
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="rounded-full bg-base-200 px-4 py-1 text-2xl text-base-content/70">
-              {formatDate(experience?.startDate)}
+              {formatDate(experience.startDate)}
             </motion.span>
           </div>
         )}

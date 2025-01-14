@@ -1,7 +1,7 @@
+// ExperienceTimelineHeader.tsx
 'use client';
 import { motion } from 'framer-motion';
 
-// ExperienceTimelineHeader.tsx
 export const ExperienceTimelineHeader = () => (
   <motion.h1
     initial={{ opacity: 0, y: -20 }}

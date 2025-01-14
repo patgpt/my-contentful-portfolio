@@ -1,4 +1,5 @@
 import { draftMode } from 'next/headers';
+import type { PageExperience } from '@src/lib/__generated/sdk';
 
 import { ExperienceTimeline } from '@src/components/features/experience/ExperienceTimeline';
 import { client, previewClient } from '@src/lib/client';
@@ -8,6 +9,7 @@ interface ExperiencePageProps {
     locale: string;
     slug: string;
   }>;
+
 }
 
 async function ExperiencePage(props: ExperiencePageProps) {
@@ -20,7 +22,9 @@ async function ExperiencePage(props: ExperiencePageProps) {
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
   const allExperiences = await gqlClient.getAllExperiences({ locale, preview });
-  const experienceList = allExperiences.pageExperienceCollection?.items || [];
+  const experienceList = (allExperiences.pageExperienceCollection?.items.filter(
+    (item): item is PageExperience => item !== null
+  ) || []) as PageExperience[];
 
   return (
     <main className="relative min-h-screen w-full overflow-hidden bg-base-100">
