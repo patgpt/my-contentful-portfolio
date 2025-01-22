@@ -1,14 +1,14 @@
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { ArticleTileGrid } from '@src/components/features/article';
-import { Container } from '@src/components/shared/container';
+import { ArticleTileGrid } from '@/components/features/article';
+import { Container } from '@/components/shared/container';
 
-import { client, previewClient } from '@src/lib/client';
+import { client, previewClient } from '@/lib/client';
 import { getTranslations } from 'next-intl/server';
 
 async function BlogListPage({ params }: { params: Promise<{ locale: string }> }) {
- const locale = (await params).locale;
+  const locale = (await params).locale;
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
   const t = await getTranslations('blog');

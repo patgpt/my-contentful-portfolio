@@ -1,8 +1,8 @@
 import { draftMode } from 'next/headers';
-import type { PageExperience } from '@src/lib/__generated/sdk';
+import type { PageExperience } from '@s/lib/__generated/sdk';
 
-import { ExperienceTimeline } from '@src/components/features/experience/ExperienceTimeline';
-import { client, previewClient } from '@src/lib/client';
+import { ExperienceTimeline } from '@s/components/features/experience/ExperienceTimeline';
+import { client, previewClient } from '@s/lib/client';
 
 interface ExperiencePageProps {
   params: Promise<{

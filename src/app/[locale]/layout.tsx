@@ -2,17 +2,17 @@ import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { draftMode } from 'next/headers';
 import { NextIntlClientProvider } from 'next-intl';
-import { ContentfulPreviewProvider } from '@src/components/features/contentful';
-import { Footer } from '@src/components/templates/footer';
-import { Header } from '@src/components/templates/header';
+import { ContentfulPreviewProvider } from '@/components/features/contentful';
+import { Footer } from '@/components/templates/footer';
+import { Header } from '@/components/templates/header';
 
-import { cn } from '@src/utils/cn';
+import { cn } from '@/utils/cn';
 
 import { getLocale, getMessages, setRequestLocale } from 'next-intl/server';
 import type { ReactNode } from 'react';
-import { routing } from '@src/i18n/routing';
+import { routing } from '@/i18n/routing';
 import { console } from 'inspector';
-import { fonts } from '@src/app/fonts';
+import { fonts } from '@/app/fonts';
 
 export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
@@ -51,7 +51,7 @@ export default async function PageLayout({ children, params }: LayoutProps) {
       <head>
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
       </head>
-      <body className="min-h-screen bg-base-100 text-base-content">
+      <body className="bg-base-100 text-base-content min-h-screen">
         <ThemeProvider attribute="class">
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ContentfulPreviewProvider

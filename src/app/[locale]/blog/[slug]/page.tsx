@@ -1,17 +1,14 @@
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { ArticleContent, ArticleHero, ArticleTileGrid } from '@src/components/features/article';
-import { Container } from '@src/components/shared/container';
+import { ArticleContent, ArticleHero, ArticleTileGrid } from '@/components/features/article';
+import { Container } from '@/components/shared/container';
 
-import { client, previewClient } from '@src/lib/client';
+import { client, previewClient } from '@/lib/client';
 import { getTranslations } from 'next-intl/server';
 
-import { routing } from '@src/i18n/routing';
-import type {
-  PageBlogPostFieldsFragment,
-  PageLandingFieldsFragment,
-} from '@src/lib/__generated/sdk';
+import { routing } from '@/i18n/routing';
+import type { PageBlogPostFieldsFragment, PageLandingFieldsFragment } from '@/lib/__generated/sdk';
 
 export async function generateStaticParams() {
   const gqlClient = client;
