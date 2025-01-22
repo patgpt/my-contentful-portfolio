@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { draftMode } from 'next/headers';
-import { NextIntlClientProvider } from 'next-intl';
 import { ContentfulPreviewProvider } from '@/components/features/contentful';
 import { Footer } from '@/components/templates/footer';
 import { Header } from '@/components/templates/header';
@@ -13,6 +12,7 @@ import type { ReactNode } from 'react';
 import { routing } from '@/i18n/routing';
 import { console } from 'inspector';
 import { fonts } from '@/app/fonts';
+import { NextIntlClientProvider } from 'next-intl';
 
 export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));

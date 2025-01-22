@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { FaGlobe } from 'react-icons/fa';
 import { setRequestLocale } from 'next-intl/server';
 
-import { CtfRichText } from '@src/components/features/contentful';
-import type { PageExperience } from '@src/lib/__generated/sdk';
-import { client, previewClient } from '@src/lib/client';
-import { formatDate } from '@src/utils/date';
-import { routing } from '@src/i18n/routing';
+import { CtfRichText } from '@/components/features/contentful';
+import type { PageExperience } from '@/lib/__generated/sdk';
+import { client, previewClient } from '@/lib/client';
+import { formatDate } from '@/utils/date';
+import { routing } from '@/i18n/routing';
 
 interface ExperiencePageParams {
   locale: string;
@@ -77,10 +77,10 @@ async function ExperienceDetailPage({ params: paramsPromise }: ExperienceDetailP
               />
             )}
             <h1 className="mb-2">{data.companyName}</h1>
-            <h2 className="mt-0 text-xl font-semibold text-base-content/70">
+            <h2 className="text-base-content/70 mt-0 text-xl font-semibold">
               {data.positionTitle}
             </h2>
-            <p className="text-base text-base-content/60">
+            <p className="text-base-content/60 text-base">
               {formatDate(data.startDate)} - {formatDate(data.endDate)}
             </p>
           </header>
@@ -105,7 +105,7 @@ async function ExperienceDetailPage({ params: paramsPromise }: ExperienceDetailP
             {data.website && (
               <Link
                 href={data.website}
-                className="btn btn-ghost gap-2 hover:bg-base-200"
+                className="btn btn-ghost hover:bg-base-200 gap-2"
                 target="_blank"
                 rel="noopener noreferrer">
                 <FaGlobe />

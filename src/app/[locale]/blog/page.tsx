@@ -11,6 +11,7 @@ async function BlogListPage({ params }: { params: Promise<{ locale: string }> })
   const locale = (await params).locale;
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
+  // @ts-expect-error - Suppressing type error for namespace updating to v4 of next-intl in the future
   const t = await getTranslations('blog');
   const allBlogPosts = await gqlClient.pageBlogPostCollection({ locale, limit: 100 });
   const posts = allBlogPosts.pageBlogPostCollection;
