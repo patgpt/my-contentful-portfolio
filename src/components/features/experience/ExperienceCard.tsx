@@ -1,11 +1,11 @@
-import { CtfRichText } from '@src/components/features/contentful/CtfRichText';
+import { CtfRichText } from '@/components/features/contentful/CtfRichText';
 
-import type { PageExperience, Asset, PageExperienceJobDescription } from '@src/lib/__generated/sdk';
-import { formatDate } from '@src/utils/date';
+import type { PageExperience, Asset, PageExperienceJobDescription } from '@/lib/__generated/sdk';
+import { formatDate } from '@/utils/date';
 import { motion } from 'framer-motion';
 import { FaGlobe } from 'react-icons/fa6';
 import Image from 'next/image';
-import { Link } from '@src/i18n/routing';
+import { Link } from '@/i18n/routing';
 
 // Card Header Component
 const ExperienceCardHeader = ({ experience }: { experience: PageExperience }) => (
@@ -21,11 +21,11 @@ const ExperienceCardHeader = ({ experience }: { experience: PageExperience }) =>
       </div>
     )}
     <div className="flex-1">
-      <h2 className="text-xl font-bold transition-colors group-hover:text-primary">
+      <h2 className="group-hover:text-primary text-xl font-bold transition-colors">
         {experience?.positionTitle}
       </h2>
-      <h3 className="text-lg text-base-content/80">{experience?.companyName}</h3>
-      <div className="text-sm text-base-content/60 md:hidden">
+      <h3 className="text-base-content/80 text-lg">{experience?.companyName}</h3>
+      <div className="text-base-content/60 text-sm md:hidden">
         {formatDate(experience?.startDate)} -{' '}
         {experience?.endDate ? formatDate(experience?.endDate) : 'Present'}
       </div>
@@ -47,15 +47,15 @@ const ExperienceCardBody = ({
     className="relative"
     animate={{ height: isExpanded ? 'auto' : '120px' }}
     transition={{ duration: 0.3 }}>
-    <div className={`prose-sm mt-4 text-sm text-base-content/80 ${!isExpanded && 'line-clamp-3'}`}>
+    <div className={`prose-sm text-base-content/80 mt-4 text-sm ${!isExpanded && 'line-clamp-3'}`}>
       <CtfRichText json={(experience.jobDescription as PageExperienceJobDescription).json} />
     </div>
     {!isExpanded && (
-      <div className="left-0py-4 absolute bottom-0 h-16 w-full bg-linear-to-t from-base-100 to-transparent" />
+      <div className="left-0py-4 from-base-100 absolute bottom-0 h-16 w-full bg-linear-to-t to-transparent" />
     )}
     <button
       onClick={() => setIsExpanded(!isExpanded)}
-      className="my-2 text-sm font-medium text-primary hover:underline">
+      className="text-primary my-2 text-sm font-medium hover:underline">
       {isExpanded ? '← Show less' : 'Read more →'}
     </button>
   </motion.div>
@@ -63,7 +63,7 @@ const ExperienceCardBody = ({
 
 // Card Footer Component
 const ExperienceCardFooter = ({ experience }: { experience: PageExperience }) => (
-  <div className="mt-4 flex items-center justify-between gap-4 border-t border-base-200 pt-4">
+  <div className="border-base-200 mt-4 flex items-center justify-between gap-4 border-t pt-4">
     {experience?.website && (
       <Link
         href={experience.website}
@@ -94,7 +94,7 @@ const ExperienceCard = ({
   isEven: boolean;
 }) => (
   <motion.div
-    className="w-full rounded-box bg-base-100 p-6 shadow-lg transition-all duration-300 hover:shadow-xl md:w-[400px]"
+    className="rounded-box bg-base-100 w-full p-6 shadow-lg transition-all duration-300 hover:shadow-xl md:w-[400px]"
     whileHover={{ y: -5 }}
     initial={{ opacity: 0, x: isEven ? -50 : 50 }}
     whileInView={{ opacity: 1, x: 0 }}

@@ -7,11 +7,11 @@ import {
 
 import { twMerge } from 'tailwind-merge';
 
-import { ArticleAuthor } from '@src/components/features/article/ArticleAuthor';
-import { ArticleLabel } from '@src/components/features/article/ArticleLabel';
-import { CtfImage } from '@src/components/features/contentful';
-import { FormatDate } from '@src/components/shared/format-date';
-import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
+import { ArticleAuthor } from '@/components/features/article/ArticleAuthor';
+import { ArticleLabel } from '@/components/features/article/ArticleLabel';
+import { CtfImage } from '@/components/features/contentful';
+import { FormatDate } from '@/components/shared/format-date';
+import { PageBlogPostFieldsFragment } from '@/lib/__generated/sdk';
 import { useTranslations } from 'next-intl';
 
 interface ArticleHeroProps {
@@ -33,7 +33,7 @@ export const ArticleHero = ({
   return (
     <div
       className={twMerge(
-        'card my-8 bg-base-100 shadow-xl lg:card-side',
+        'card bg-base-100 lg:card-side my-8 shadow-xl',
         isReversedLayout ? 'lg:flex-row-reverse' : '',
       )}>
       <figure className="flex-1 basis-1/2" {...inspectorProps({ fieldId: 'featuredImage' })}>
@@ -63,7 +63,7 @@ export const ArticleHero = ({
           )}
           <div
             className={twMerge(
-              'ml-auto hidden pl-2 text-xs text-base-content/60',
+              'text-base-content/60 ml-auto hidden pl-2 text-xs',
               isReversedLayout ? 'lg:block' : '',
             )}
             {...inspectorProps({ fieldId: 'publishedDate' })}>

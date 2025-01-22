@@ -2,8 +2,8 @@ import { HTMLProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 import React from 'react';
 
-import { ArticleTile } from '@src/components/features/article/ArticleTile';
-import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
+import { ArticleTile } from '@/components/features/article/ArticleTile';
+import { PageBlogPostFieldsFragment } from '@/lib/__generated/sdk';
 
 interface ArticleTileGridProps extends HTMLProps<HTMLDivElement> {
   articles?: Array<PageBlogPostFieldsFragment | null>;

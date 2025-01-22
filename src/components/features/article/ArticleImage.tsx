@@ -3,8 +3,8 @@
 import { useContentfulInspectorMode } from '@contentful/live-preview/react';
 import { twMerge } from 'tailwind-merge';
 
-import { CtfImage } from '@src/components/features/contentful';
-import { ComponentRichImage } from '@src/lib/__generated/sdk';
+import { CtfImage } from '@/components/features/contentful';
+import { ComponentRichImage } from '@/lib/__generated/sdk';
 
 interface ArticleImageProps {
   image: ComponentRichImage;

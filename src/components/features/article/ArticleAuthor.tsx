@@ -5,8 +5,8 @@ import {
   useContentfulLiveUpdates,
 } from '@contentful/live-preview/react';
 
-import { CtfImage } from '@src/components/features/contentful';
-import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
+import { CtfImage } from '@/components/features/contentful';
+import { PageBlogPostFieldsFragment } from '@/lib/__generated/sdk';
 
 interface ArticleAuthorProps {
   article: PageBlogPostFieldsFragment;
@@ -33,9 +33,8 @@ export const ArticleAuthor = ({ article }: ArticleAuthorProps) => {
         )}
       </div>
       <span
-        className="text-xs leading-none text-base-content/60"
-        {...inspectorProps({ fieldId: 'name' })}
-      >
+        className="text-base-content/60 text-xs leading-none"
+        {...inspectorProps({ fieldId: 'name' })}>
         {author?.name}
       </span>
     </div>

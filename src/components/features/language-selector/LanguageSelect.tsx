@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { useTransition } from 'react';
 import { FaGlobe, FaCheck } from 'react-icons/fa6';
-import { useRouter, usePathname } from '@src/i18n/routing';
+import { useRouter, usePathname } from '@/i18n/routing';
 import { useParams } from 'next/navigation';
 
 const LANGUAGE_NAMES = {
@@ -32,7 +32,7 @@ export default function LocaleSwitcherSelect() {
 
       <ul
         tabIndex={0}
-        className="menu dropdown-content menu-sm z-30 mt-3 w-52 rounded-box bg-base-200 p-2 shadow-lg">
+        className="menu dropdown-content menu-sm rounded-box bg-base-200 z-30 mt-3 w-52 p-2 shadow-lg">
         {Object.entries(LANGUAGE_NAMES).map(([locale, name]) => (
           <li key={locale}>
             <button

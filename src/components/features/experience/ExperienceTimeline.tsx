@@ -1,9 +1,9 @@
 // ExperienceTimeline.tsx
 'use client';
 
-import { TimelineItems } from '@src/components/features/experience/TimellineItems';
+import { TimelineItems } from '@/components/features/experience/TimellineItems';
 import { ExperienceTimelineHeader } from './ExperienceTimelineHeader';
-import type { PageExperience } from '@src/lib/__generated/sdk';
+import type { PageExperience } from '@/lib/__generated/sdk';
 
 interface ExperienceTimelineProps {
   experiences: PageExperience[];
