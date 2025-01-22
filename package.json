@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=20.0.0",
+    "node": ">=18.0.0",
     "npm": "Please use Bun"
   },
   "scripts": {
@@ -38,13 +38,11 @@
     "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.26.5",
     "@contentful/rich-text-types": "^17.0.0",
     "@graphql-codegen/cli": "5.0.3",
     "@graphql-codegen/client-preset": "4.5.1",
     "@graphql-codegen/introspection": "4.0.3",
     "@graphql-codegen/typescript-graphql-request": "^6.2.0",
-    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^0.0.0-development.1",
     "@tailwindcss/typography": "^0.5.16",
     "@types/negotiator": "^0.6.3",
