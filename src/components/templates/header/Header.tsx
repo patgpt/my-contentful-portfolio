@@ -1,10 +1,10 @@
 import { draftMode } from 'next/headers';
-import ThemeSwitcher from '@src/components/features/theme-switcher/ThemeSwitcher';
-import { client, previewClient } from '@src/lib/client';
-import { Link } from '@src/i18n/routing';
+import ThemeSwitcher from '@/components/features/theme-switcher/ThemeSwitcher';
+import { client, previewClient } from '@/lib/client';
+import { Link } from '@/i18n/routing';
 
-import LanguageSelect from '@src/components/features/language-selector/LanguageSelect';
-import NavigationLink from '@src/components/templates/header/NavigationLink';
+import LanguageSelect from '@/components/features/language-selector/LanguageSelect';
+import NavigationLink from '@/components/templates/header/NavigationLink';
 
 export const Header = async ({
   params,
@@ -26,7 +26,7 @@ export const Header = async ({
     navigation?.navigationMenuCollection?.items[0]?.navigationMenuCollection?.items || [];
 
   return (
-    <div className="navbar fixed left-0 right-0 top-0 z-50 border-b border-base-200 bg-base-100">
+    <div className="navbar border-base-200 bg-base-100 fixed top-0 right-0 left-0 z-50 border-b">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -40,7 +40,7 @@ export const Header = async ({
               <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z" />
             </svg>
           </div>
-          <ul className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
+          <ul className="menu dropdown-content menu-sm rounded-box bg-base-100 z-1 mt-3 w-52 p-2 shadow-xs">
             {menuItems.map((item, index) => (
               <li key={`mobile-${index}`}>
                 <Link href={`/${item?.href}`}>{item?.title}</Link>

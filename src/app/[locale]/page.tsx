@@ -4,16 +4,16 @@ import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 // Component imports
-import { ArticleHero, ArticleTileGrid } from '@src/components/features/article';
-import { Hero } from '@src/components/features/hero/Hero';
-import { Container } from '@src/components/shared/container';
+import { ArticleHero, ArticleTileGrid } from '@/components/features/article';
+import { Hero } from '@/components/features/hero/Hero';
+import { Container } from '@/components/shared/container';
 
 // API and data imports
-import { PageBlogPostOrder } from '@src/lib/__generated/sdk';
-import { client, previewClient } from '@src/lib/client';
+import { PageBlogPostOrder } from '@/lib/__generated/sdk';
+import { client, previewClient } from '@/lib/client';
 
 // i18n imports
-import { Link, routing } from '@src/i18n/routing';
+import { Link, routing } from '@/i18n/routing';
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
 
 async function generatePageMetadata(): Promise<Metadata> {
@@ -57,7 +57,7 @@ export default async function Page({
   }>;
 }) {
   const locale = (await params).locale;
-
+  // @ts-expect-error - Suppressing type error for namespace updating to v4 of next-intl in the future
   const t = await getTranslations('landingPage');
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;

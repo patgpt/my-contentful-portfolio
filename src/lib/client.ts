@@ -1,11 +1,24 @@
 import { GraphQLClient } from 'graphql-request';
-
-import { getSdk } from '@src/lib/__generated/sdk';
+import dotenv from 'dotenv';
+import { getSdk } from '@/lib/__generated/sdk';
 import { endpoint } from 'codegen';
+
+dotenv.config({
+  path: '.env',
+});
 
 const graphQlClient = new GraphQLClient(endpoint, {
   headers: {
     Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+  },
+  fetch: (url, options) => {
+    return fetch(url, {
+      ...options,
+      headers: {
+        ...options.headers,
+        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+      },
+    });
   },
 });
 

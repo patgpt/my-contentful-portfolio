@@ -2,8 +2,8 @@
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, Document } from '@contentful/rich-text-types';
 
-import { ArticleImage } from '@src/components/features/article';
-import { ComponentRichImage } from '@src/lib/__generated/sdk';
+import { ArticleImage } from '@/components/features/article';
+import { ComponentRichImage } from '@/lib/__generated/sdk';
 
 // Update EmbeddedEntryType to be more flexible
 export type EmbeddedEntryType = ComponentRichImage;
@@ -15,7 +15,6 @@ export interface ContentfulRichTextInterface {
         entries: {
           block: Array<EmbeddedEntryType>;
         };
-
       }
     | any;
 }

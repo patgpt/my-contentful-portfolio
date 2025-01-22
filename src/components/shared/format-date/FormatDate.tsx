@@ -1,6 +1,6 @@
 'use client';
 
-import { routing } from '@src/i18n/routing';
+import { routing } from '@/i18n/routing';
 
 interface FormatDateProps {
   date: number | Date | undefined;

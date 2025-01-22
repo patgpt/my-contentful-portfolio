@@ -5,8 +5,8 @@ import {
   useContentfulLiveUpdates,
 } from '@contentful/live-preview/react';
 
-import { CtfRichText } from '@src/components/features/contentful';
-import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
+import { CtfRichText } from '@/components/features/contentful';
+import { PageBlogPostFieldsFragment } from '@/lib/__generated/sdk';
 
 interface ArticleContentProps {
   article: PageBlogPostFieldsFragment;

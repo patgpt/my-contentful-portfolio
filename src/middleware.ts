@@ -1,4 +1,4 @@
-import { routing } from '@src/i18n/routing';
+import { routing } from '@/i18n/routing';
 import { NextRequest, NextResponse } from 'next/server';
 
 export default function middleware(request: NextRequest) {

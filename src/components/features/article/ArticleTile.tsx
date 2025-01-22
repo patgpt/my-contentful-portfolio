@@ -8,12 +8,12 @@ import {
 import { HTMLProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-import { ArticleAuthor } from '@src/components/features/article/ArticleAuthor';
-import { CtfImage } from '@src/components/features/contentful';
-import { FormatDate } from '@src/components/shared/format-date';
-import { PageBlogPostFieldsFragment } from '@src/lib/__generated/sdk';
+import { ArticleAuthor } from '@/components/features/article/ArticleAuthor';
+import { CtfImage } from '@/components/features/contentful';
+import { FormatDate } from '@/components/shared/format-date';
+import { PageBlogPostFieldsFragment } from '@/lib/__generated/sdk';
 
-import { Link } from '@src/i18n/routing';
+import { Link } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
 
 interface ArticleTileProps extends HTMLProps<HTMLDivElement> {
@@ -26,11 +26,11 @@ export const ArticleTile = ({ article, className }: ArticleTileProps) => {
   const locale = useLocale();
   return (
     <Link locale={locale} className="flex h-full flex-col no-underline" href={`/blog/${slug}`}>
-      <div className={twMerge('card h-full bg-base-100 shadow-xl', className)}>
+      <div className={twMerge('card bg-base-100 h-full shadow-xl', className)}>
         {featuredImage && (
           <figure {...inspectorProps({ fieldId: 'featuredImage' })}>
             <CtfImage
-              nextImageProps={{ className: 'w-full aspect-[16/10] object-cover' }}
+              nextImageProps={{ className: 'w-full aspect-16/10 object-cover' }}
               {...featuredImage}
             />
           </figure>
@@ -45,7 +45,7 @@ export const ArticleTile = ({ article, className }: ArticleTileProps) => {
           <div className="card-actions mt-4 items-center justify-between">
             <ArticleAuthor article={article} />
             <div
-              className="text-xs text-base-content/60"
+              className="text-base-content/60 text-xs"
               {...inspectorProps({ fieldId: 'publishedDate' })}>
               <FormatDate date={publishedDate} />
             </div>

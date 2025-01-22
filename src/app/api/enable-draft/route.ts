@@ -1,9 +1,4 @@
-import {
-  cookies,
-  draftMode,
-  type UnsafeUnwrappedCookies,
-  type UnsafeUnwrappedDraftMode,
-} from 'next/headers';
+import { cookies, draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { NextRequest } from 'next/server';
 
@@ -89,18 +84,25 @@ const buildRedirectUrl = ({
   return redirectUrl.toString();
 };
 
-function enableDraftMode() {
-  (draftMode() as unknown as UnsafeUnwrappedDraftMode).enable();
-  const cookieStore = (cookies() as unknown as UnsafeUnwrappedCookies);
-  const cookie = cookieStore.get('__prerender_bypass')!;
-  (cookies() as unknown as UnsafeUnwrappedCookies).set({
-    name: '__prerender_bypass',
-    value: cookie?.value,
-    httpOnly: true,
-    path: '/',
-    secure: true,
-    sameSite: 'none',
+async function enableDraftMode() {
+  draftMode().then(draftMode => {
+    if (draftMode.isEnabled) {
+      return;
+    }
+
+    draftMode.enable();
   });
+  // const cookieStore = await cookies();
+  cookies().then(cookie =>
+    cookie.set({
+      name: '__prerender_bypass',
+      value: cookie.get('__prerender_bypass').value,
+      httpOnly: true,
+      path: '/',
+      secure: true,
+      sameSite: 'none',
+    }),
+  );
 }
 
 export async function GET(request: NextRequest): Promise<Response | void> {

@@ -2,9 +2,9 @@ import { draftMode } from 'next/headers';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-import SocialButtonRow from '@src/components/SocialButtonRow';
-import { client, previewClient } from '@src/lib/client';
-import type { HeroFieldsFragment } from '@src/lib/__generated/sdk';
+import SocialButtonRow from '@/components/SocialButtonRow';
+import { client, previewClient } from '@/lib/client';
+import type { HeroFieldsFragment } from '@/lib/__generated/sdk';
 
 // Separate data fetching logic with error handling
 async function getHeroData(locale: string, preview: boolean): Promise<HeroFieldsFragment> {
@@ -29,11 +29,11 @@ function HeroContent({ hero }: { hero: HeroFieldsFragment }) {
   const { url } = hero.heroImage || {};
 
   return (
-    <div className="hero min-h-screen text-balance bg-gradient-to-tr from-primary/20 to-secondary/20 pt-16">
+    <div className="hero from-primary/20 to-secondary/20 min-h-screen bg-linear-to-tr pt-16 text-balance">
       <div className="hero-content flex-col items-center justify-center p-4">
         <div className="flex flex-col items-center justify-center text-center">
           <div className="avatar mb-6">
-            <div className="w-64 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+            <div className="ring-primary ring-offset-base-100 w-64 rounded-full ring-3 ring-offset-2">
               {url && (
                 <Image
                   width={300}

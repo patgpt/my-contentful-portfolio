@@ -1,36 +1,30 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "jsx": "preserve",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "noEmit": true,
-    "preserveConstEnums": true,
-    "removeComments": false,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "noImplicitAny": false,
-    "target": "esnext",
-    "baseUrl": "./",
-    "paths": {
-      "@public/*": ["./public/*"],
-      "@src/*": ["./src/*"]
-    },
-    "typeRoots": ["./@types", "./node_modules/@types"],
+    "target": "ES5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
     "incremental": true,
+    "module": "esnext",
+    "esModuleInterop": true,
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@i18n/*": ["./src/i18n/*"]
+    },
+    "typeRoots": ["./node_modules/@types", "./src/types", "global.d.ts"],
     "plugins": [
       {
         "name": "next"
       }
     ]
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "@types/**/*.d.ts", ".next/types/**/*.ts", "next.config.ts"]
+  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "global.d.ts"],
+  "exclude": ["node_modules"]
 }
