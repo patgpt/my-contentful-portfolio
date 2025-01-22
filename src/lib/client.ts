@@ -1,7 +1,11 @@
 import { GraphQLClient } from 'graphql-request';
-
+import dotenv from 'dotenv';
 import { getSdk } from '@src/lib/__generated/sdk';
 import { endpoint } from 'codegen';
+
+dotenv.config({
+  path: '.env',
+});
 
 const graphQlClient = new GraphQLClient(endpoint, {
   headers: {
