@@ -22,7 +22,7 @@
     "@contentful/rich-text-react-renderer": "^16.0.1",
     "@next/bundle-analyzer": "15.1.4",
     "clsx": "^2.1.1",
-    "daisyui": "^4.12.23",
+    "daisyui": "^5.0.0-beta.1",
     "dotenv": "^16.4.7",
     "framer-motion": "^11.16.1",
     "graphql": "^16.10.0",
