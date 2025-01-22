@@ -1,7 +1,7 @@
 @import 'tailwindcss';
-
-@plugin "@tailwindcss/typography";
 @plugin "daisyui";
+/* @plugin "@tailwindcss/typography";
+@plugin "daisyui"; */
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -11,21 +11,6 @@
   If we ever want to remove these styles, we need to add an explicit border
   color utility to any element that depends on these defaults.
 */
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
-}
-
-:root {
-  --font-display: 'Quicksand', 'sans-serif';
-  --font-body: 'Noto Serif', 'sans-serif';
-}
-
 @layer base {
   *,
   ::after,
