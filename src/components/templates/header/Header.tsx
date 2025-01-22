@@ -40,7 +40,7 @@ export const Header = async ({
               <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z" />
             </svg>
           </div>
-          <ul className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
+          <ul className="menu dropdown-content menu-sm z-1 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-sm">
             {menuItems.map((item, index) => (
               <li key={`mobile-${index}`}>
                 <Link href={`/${item?.href}`}>{item?.title}</Link>

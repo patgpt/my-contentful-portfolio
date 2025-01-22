@@ -29,11 +29,11 @@ function HeroContent({ hero }: { hero: HeroFieldsFragment }) {
   const { url } = hero.heroImage || {};
 
   return (
-    <div className="hero min-h-screen text-balance bg-gradient-to-tr from-primary/20 to-secondary/20 pt-16">
+    <div className="hero min-h-screen text-balance bg-linear-to-tr from-primary/20 to-secondary/20 pt-16">
       <div className="hero-content flex-col items-center justify-center p-4">
         <div className="flex flex-col items-center justify-center text-center">
           <div className="avatar mb-6">
-            <div className="w-64 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+            <div className="w-64 rounded-full ring-3 ring-primary ring-offset-2 ring-offset-base-100">
               {url && (
                 <Image
                   width={300}

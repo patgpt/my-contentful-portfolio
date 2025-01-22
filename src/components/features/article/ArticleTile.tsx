@@ -30,7 +30,7 @@ export const ArticleTile = ({ article, className }: ArticleTileProps) => {
         {featuredImage && (
           <figure {...inspectorProps({ fieldId: 'featuredImage' })}>
             <CtfImage
-              nextImageProps={{ className: 'w-full aspect-[16/10] object-cover' }}
+              nextImageProps={{ className: 'w-full aspect-16/10 object-cover' }}
               {...featuredImage}
             />
           </figure>

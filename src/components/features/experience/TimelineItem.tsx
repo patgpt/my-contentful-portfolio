@@ -42,7 +42,7 @@ export const TimelineItem = ({ experience, isLast, index }: TimelineItemProps) =
       {!isLast && (
         <div className="absolute left-1/2 hidden h-full w-0.5 -translate-x-1/2 transform md:block">
           <motion.div
-            className="h-full w-full bg-gradient-to-b from-primary/50 to-primary"
+            className="h-full w-full bg-linear-to-b from-primary/50 to-primary"
             initial={{ scaleY: 0, opacity: 0 }}
             whileInView={{ scaleY: 1, opacity: 1 }}
             viewport={{ once: true }}
@@ -89,7 +89,7 @@ export const TimelineItem = ({ experience, isLast, index }: TimelineItemProps) =
       </div>
       <div className="relative z-10 hidden md:block">
         <motion.div
-          className="to-primary-focus flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-primary shadow-lg"
+          className="to-primary-focus flex h-14 w-14 items-center justify-center rounded-full bg-linear-to-br from-primary shadow-lg"
           initial={{ scale: 0, rotate: -180 }}
           whileInView={{ scale: 1, rotate: 0 }}
           viewport={{ once: true }}

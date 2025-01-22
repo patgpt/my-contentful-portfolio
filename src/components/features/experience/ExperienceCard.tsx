@@ -11,7 +11,7 @@ import { Link } from '@src/i18n/routing';
 const ExperienceCardHeader = ({ experience }: { experience: PageExperience }) => (
   <div className="flex items-start gap-4">
     {experience?.companyLogo && (
-      <div className="relative h-[60px] w-[60px] flex-shrink-0">
+      <div className="relative h-[60px] w-[60px] shrink-0">
         <Image
           src={(experience.companyLogo as Asset).url || ''}
           alt={experience.companyName || 'Company logo'}
@@ -51,7 +51,7 @@ const ExperienceCardBody = ({
       <CtfRichText json={(experience.jobDescription as PageExperienceJobDescription).json} />
     </div>
     {!isExpanded && (
-      <div className="left-0py-4 absolute bottom-0 h-16 w-full bg-gradient-to-t from-base-100 to-transparent" />
+      <div className="left-0py-4 absolute bottom-0 h-16 w-full bg-linear-to-t from-base-100 to-transparent" />
     )}
     <button
       onClick={() => setIsExpanded(!isExpanded)}
