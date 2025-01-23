@@ -1,0 +1,11 @@
+
+
+
+
+query pageBlogPost($slug: String!, $locale: String, $preview: Boolean) {
+  pageBlogPostCollection(limit: 1, where: { slug: $slug }, locale: $locale, preview: $preview) {
+    items {
+      ...PageBlogPostFields
+    }
+  }
+}

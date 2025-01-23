@@ -56,8 +56,7 @@ export default async function PageLayout({ children, params }: LayoutProps) {
           attribute="data-theme"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
-        >
+          disableTransitionOnChange>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ContentfulPreviewProvider
               locale={locale || (await getLocale())}
@@ -73,7 +72,7 @@ export default async function PageLayout({ children, params }: LayoutProps) {
                 )}>
                 <Header params={params} />
                 {children}
-                <Footer />
+                <Footer params={params} />
               </main>
             </ContentfulPreviewProvider>
           </NextIntlClientProvider>

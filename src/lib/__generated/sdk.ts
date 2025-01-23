@@ -943,6 +943,7 @@ export type ComponentSeoLinkingCollections = {
   pageBlogPostCollection?: Maybe<PageBlogPostCollection>;
   pageDefaultCollection?: Maybe<PageDefaultCollection>;
   pageLandingCollection?: Maybe<PageLandingCollection>;
+  pageServiceCollection?: Maybe<PageServiceCollection>;
 };
 
 
@@ -976,6 +977,15 @@ export type ComponentSeoLinkingCollectionsPageLandingCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   order?: InputMaybe<Array<InputMaybe<ComponentSeoLinkingCollectionsPageLandingCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type ComponentSeoLinkingCollectionsPageServiceCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentSeoLinkingCollectionsPageServiceCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -1019,6 +1029,23 @@ export enum ComponentSeoLinkingCollectionsPageDefaultCollectionOrder {
 export enum ComponentSeoLinkingCollectionsPageLandingCollectionOrder {
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export enum ComponentSeoLinkingCollectionsPageServiceCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  PageTitleAsc = 'pageTitle_ASC',
+  PageTitleDesc = 'pageTitle_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -2346,6 +2373,177 @@ export enum PageLandingOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageService) */
+export type PageService = Entry & _Node & {
+  __typename?: 'PageService';
+  _id: Scalars['ID']['output'];
+  contentfulMetadata: ContentfulMetadata;
+  internalName?: Maybe<Scalars['String']['output']>;
+  linkedFrom?: Maybe<PageServiceLinkingCollections>;
+  pageContent?: Maybe<PageServicePageContent>;
+  pageSeo?: Maybe<ComponentSeo>;
+  pageTitle?: Maybe<Scalars['String']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
+  sys: Sys;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageService) */
+export type PageServiceInternalNameArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageService) */
+export type PageServiceLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageService) */
+export type PageServicePageContentArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageService) */
+export type PageServicePageSeoArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<ComponentSeoFilter>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageService) */
+export type PageServicePageTitleArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageService) */
+export type PageServiceSlugArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageServiceCollection = {
+  __typename?: 'PageServiceCollection';
+  items: Array<Maybe<PageService>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export type PageServiceFilter = {
+  AND?: InputMaybe<Array<InputMaybe<PageServiceFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PageServiceFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  internalName?: InputMaybe<Scalars['String']['input']>;
+  internalName_contains?: InputMaybe<Scalars['String']['input']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  internalName_not?: InputMaybe<Scalars['String']['input']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  pageContent_contains?: InputMaybe<Scalars['String']['input']>;
+  pageContent_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  pageContent_not_contains?: InputMaybe<Scalars['String']['input']>;
+  pageSeo?: InputMaybe<CfComponentSeoNestedFilter>;
+  pageSeo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  pageTitle?: InputMaybe<Scalars['String']['input']>;
+  pageTitle_contains?: InputMaybe<Scalars['String']['input']>;
+  pageTitle_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  pageTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  pageTitle_not?: InputMaybe<Scalars['String']['input']>;
+  pageTitle_not_contains?: InputMaybe<Scalars['String']['input']>;
+  pageTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  slug_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  slug_not?: InputMaybe<Scalars['String']['input']>;
+  slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type PageServiceLinkingCollections = {
+  __typename?: 'PageServiceLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type PageServiceLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum PageServiceOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  PageTitleAsc = 'pageTitle_ASC',
+  PageTitleDesc = 'pageTitle_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export type PageServicePageContent = {
+  __typename?: 'PageServicePageContent';
+  json: Scalars['JSON']['output'];
+  links: PageServicePageContentLinks;
+};
+
+export type PageServicePageContentAssets = {
+  __typename?: 'PageServicePageContentAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+};
+
+export type PageServicePageContentEntries = {
+  __typename?: 'PageServicePageContentEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+};
+
+export type PageServicePageContentLinks = {
+  __typename?: 'PageServicePageContentLinks';
+  assets: PageServicePageContentAssets;
+  entries: PageServicePageContentEntries;
+  resources: PageServicePageContentResources;
+};
+
+export type PageServicePageContentResources = {
+  __typename?: 'PageServicePageContentResources';
+  block: Array<PageServicePageContentResourcesBlock>;
+  hyperlink: Array<PageServicePageContentResourcesHyperlink>;
+  inline: Array<PageServicePageContentResourcesInline>;
+};
+
+export type PageServicePageContentResourcesBlock = ResourceLink & {
+  __typename?: 'PageServicePageContentResourcesBlock';
+  sys: ResourceSys;
+};
+
+export type PageServicePageContentResourcesHyperlink = ResourceLink & {
+  __typename?: 'PageServicePageContentResourcesHyperlink';
+  sys: ResourceSys;
+};
+
+export type PageServicePageContentResourcesInline = ResourceLink & {
+  __typename?: 'PageServicePageContentResourcesInline';
+  sys: ResourceSys;
+};
+
 export type Query = {
   __typename?: 'Query';
   _node?: Maybe<_Node>;
@@ -2374,6 +2572,8 @@ export type Query = {
   pageExperienceCollection?: Maybe<PageExperienceCollection>;
   pageLanding?: Maybe<PageLanding>;
   pageLandingCollection?: Maybe<PageLandingCollection>;
+  pageService?: Maybe<PageService>;
+  pageServiceCollection?: Maybe<PageServiceCollection>;
   settings?: Maybe<Settings>;
   settingsCollection?: Maybe<SettingsCollection>;
 };
@@ -2597,6 +2797,23 @@ export type QueryPageLandingCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<PageLandingFilter>;
+};
+
+
+export type QueryPageServiceArgs = {
+  id: Scalars['String']['input'];
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type QueryPageServiceCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<PageServiceOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<PageServiceFilter>;
 };
 
 
@@ -3178,95 +3395,43 @@ export type AuthorFieldsFragment = { __typename: 'ComponentAuthor', name?: strin
     & ImageFieldsFragment
   ) | null };
 
-export type GetAllExperiencesQueryVariables = Exact<{
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-}>;
+export type CtaFieldsFragment = { __typename?: 'ComponentCta', ctaText?: string | null, ctaLink?: string | null, icon?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null } | null };
 
+export type ExperienceFieldsFragment = { __typename?: 'PageExperience', slug?: string | null, companyName?: string | null, startDate?: any | null, endDate?: any | null, website?: string | null, skillsUsed?: Array<string | null> | null, positionTitle?: string | null, sys: { __typename?: 'Sys', id: string }, companyLogo?: (
+    { __typename?: 'Asset' }
+    & ImageFieldsFragment
+  ) | null, bannerImage?: (
+    { __typename?: 'Asset' }
+    & ImageFieldsFragment
+  ) | null, jobDescription?: { __typename?: 'PageExperienceJobDescription', json: any } | null };
 
-export type GetAllExperiencesQuery = { __typename?: 'Query', pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<{ __typename?: 'PageExperience', slug?: string | null, companyName?: string | null, startDate?: any | null, endDate?: any | null, website?: string | null, skillsUsed?: Array<string | null> | null, positionTitle?: string | null, sys: { __typename?: 'Sys', id: string }, companyLogo?: { __typename?: 'Asset', url?: string | null } | null, bannerImage?: { __typename?: 'Asset', url?: string | null } | null, jobDescription?: { __typename?: 'PageExperienceJobDescription', json: any } | null } | null> } | null };
+export type FooterFieldsFragment = { __typename?: 'Settings', footerCopyrightText?: string | null, footerSiteNavigationCollection?: { __typename?: 'SettingsFooterSiteNavigationCollection', items: Array<(
+      { __typename?: 'NavigationLink' }
+      & NavigationFieldsFragment
+    ) | null> } | null, footerLegalNavigationCollection?: { __typename?: 'SettingsFooterLegalNavigationCollection', items: Array<(
+      { __typename?: 'NavigationLink' }
+      & NavigationFieldsFragment
+    ) | null> } | null, footerServicesNavigationCollection?: { __typename?: 'SettingsFooterServicesNavigationCollection', items: Array<(
+      { __typename?: 'NavigationLink' }
+      & NavigationFieldsFragment
+    ) | null> } | null };
 
-export type GetExperienceBySlugQueryVariables = Exact<{
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type GetExperienceBySlugQuery = { __typename?: 'Query', pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<{ __typename?: 'PageExperience', slug?: string | null, companyName?: string | null, startDate?: any | null, endDate?: any | null, website?: string | null, skillsUsed?: Array<string | null> | null, positionTitle?: string | null, sys: { __typename?: 'Sys', id: string }, companyLogo?: { __typename?: 'Asset', url?: string | null } | null, bannerImage?: { __typename?: 'Asset', url?: string | null } | null, jobDescription?: { __typename?: 'PageExperienceJobDescription', json: any } | null } | null> } | null };
-
-export type GetFooterSettingsQueryVariables = Exact<{
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-}>;
-
-
-export type GetFooterSettingsQuery = { __typename?: 'Query', settingsCollection?: { __typename?: 'SettingsCollection', items: Array<{ __typename?: 'Settings', footerCopyrightText?: string | null, footerSiteNavigationCollection?: { __typename?: 'SettingsFooterSiteNavigationCollection', items: Array<(
-          { __typename?: 'NavigationLink' }
-          & NavigationFieldsFragment
-        ) | null> } | null, footerLegalNavigationCollection?: { __typename?: 'SettingsFooterLegalNavigationCollection', items: Array<(
-          { __typename?: 'NavigationLink' }
-          & NavigationFieldsFragment
-        ) | null> } | null, footerServicesNavigationCollection?: { __typename?: 'SettingsFooterServicesNavigationCollection', items: Array<(
-          { __typename?: 'NavigationLink' }
-          & NavigationFieldsFragment
-        ) | null> } | null } | null> } | null };
-
-export type GetHeaderSettingsQueryVariables = Exact<{
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-}>;
-
-
-export type GetHeaderSettingsQuery = { __typename?: 'Query', settingsCollection?: { __typename?: 'SettingsCollection', items: Array<{ __typename?: 'Settings', siteTitle?: string | null, logo?: (
-        { __typename?: 'Asset' }
-        & ImageFieldsFragment
-      ) | null, headerNavigationCollection?: { __typename?: 'SettingsHeaderNavigationCollection', items: Array<(
-          { __typename?: 'NavigationLink' }
-          & NavigationFieldsFragment
-        ) | null> } | null } | null> } | null };
+export type HeaderFieldsFragment = { __typename?: 'Settings', siteTitle?: string | null, logo?: (
+    { __typename?: 'Asset' }
+    & ImageFieldsFragment
+  ) | null, headerNavigationCollection?: { __typename?: 'SettingsHeaderNavigationCollection', items: Array<(
+      { __typename?: 'NavigationLink' }
+      & NavigationFieldsFragment
+    ) | null> } | null };
 
 export type HeroFieldsFragment = { __typename?: 'ComponentHero', internalName?: string | null, heading?: string | null, subHeading?: string | null, heroImage?: (
     { __typename?: 'Asset' }
     & ImageFieldsFragment
   ) | null };
 
-export type CtaFieldsFragment = { __typename?: 'ComponentCta', ctaText?: string | null, ctaLink?: string | null, icon?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null } | null };
-
-export type GetHeroQueryVariables = Exact<{
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type GetHeroQuery = { __typename?: 'Query', componentHeroCollection?: { __typename?: 'ComponentHeroCollection', items: Array<(
-      { __typename?: 'ComponentHero', ctaFieldsCollection?: { __typename?: 'ComponentHeroCtaFieldsCollection', items: Array<(
-          { __typename?: 'ComponentCta' }
-          & CtaFieldsFragment
-        ) | null> } | null }
-      & HeroFieldsFragment
-    ) | null> } | null };
-
-export type GetNavigationMenuQueryVariables = Exact<{
-  locale: Scalars['String']['input'];
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  position: Scalars['String']['input'];
-}>;
-
-
-export type GetNavigationMenuQuery = { __typename?: 'Query', navigationMenuCollection?: { __typename?: 'NavigationMenuCollection', items: Array<{ __typename?: 'NavigationMenu', internalName?: string | null, position?: string | null, navigationMenuCollection?: { __typename?: 'NavigationMenuNavigationMenuCollection', items: Array<{ __typename: 'NavigationLink', title?: string | null, href?: string | null } | null> } | null } | null> } | null };
-
 export type ImageFieldsFragment = { __typename: 'Asset', title?: string | null, description?: string | null, width?: number | null, height?: number | null, url?: string | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } };
 
 export type NavigationFieldsFragment = { __typename?: 'NavigationLink', title?: string | null, href?: string | null };
-
-export type ReferencePageBlogPostFieldsFragment = { __typename: 'PageBlogPost', slug?: string | null, publishedDate?: any | null, title?: string | null, shortDescription?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, author?: (
-    { __typename?: 'ComponentAuthor' }
-    & AuthorFieldsFragment
-  ) | null, featuredImage?: (
-    { __typename?: 'Asset' }
-    & ImageFieldsFragment
-  ) | null };
 
 export type PageBlogPostFieldsFragment = { __typename: 'PageBlogPost', internalName?: string | null, slug?: string | null, publishedDate?: any | null, title?: string | null, shortDescription?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, seoFields?: (
     { __typename?: 'ComponentSeo' }
@@ -3280,9 +3445,94 @@ export type PageBlogPostFieldsFragment = { __typename: 'PageBlogPost', internalN
   ) | null, content?: { __typename?: 'PageBlogPostContent', json: any, links: { __typename?: 'PageBlogPostContentLinks', entries: { __typename?: 'PageBlogPostContentEntries', block: Array<{ __typename?: 'ComponentAuthor' } | { __typename?: 'ComponentCta' } | { __typename?: 'ComponentHero' } | (
           { __typename?: 'ComponentRichImage' }
           & RichImageFieldsFragment
-        ) | { __typename?: 'ComponentSeo' } | { __typename?: 'NavigationLink' } | { __typename?: 'NavigationMenu' } | { __typename?: 'PageBlogPost' } | { __typename?: 'PageDefault' } | { __typename?: 'PageExperience' } | { __typename?: 'PageLanding' } | { __typename?: 'Settings' } | null> } } } | null, relatedBlogPostsCollection?: { __typename?: 'PageBlogPostRelatedBlogPostsCollection', items: Array<(
+        ) | { __typename?: 'ComponentSeo' } | { __typename?: 'NavigationLink' } | { __typename?: 'NavigationMenu' } | { __typename?: 'PageBlogPost' } | { __typename?: 'PageDefault' } | { __typename?: 'PageExperience' } | { __typename?: 'PageLanding' } | { __typename?: 'PageService' } | { __typename?: 'Settings' } | null> } } } | null, relatedBlogPostsCollection?: { __typename?: 'PageBlogPostRelatedBlogPostsCollection', items: Array<(
       { __typename?: 'PageBlogPost' }
       & ReferencePageBlogPostFieldsFragment
+    ) | null> } | null };
+
+export type PageLandingFieldsFragment = { __typename: 'PageLanding', internalName?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, seoFields?: (
+    { __typename?: 'ComponentSeo' }
+    & SeoFieldsFragment
+  ) | null, hero?: (
+    { __typename?: 'ComponentHero' }
+    & HeroFieldsFragment
+  ) | null, featuredBlogPost?: (
+    { __typename?: 'PageBlogPost' }
+    & ReferencePageBlogPostFieldsFragment
+  ) | null };
+
+export type PageServiceFieldsFragment = { __typename: 'PageService', pageTitle?: string | null, internalName?: string | null, slug?: string | null, pageSeo?: (
+    { __typename?: 'ComponentSeo' }
+    & SeoFieldsFragment
+  ) | null, pageContent?: { __typename?: 'PageServicePageContent', json: any, links: { __typename?: 'PageServicePageContentLinks', entries: { __typename?: 'PageServicePageContentEntries', block: Array<{ __typename?: 'ComponentAuthor' } | { __typename?: 'ComponentCta' } | { __typename?: 'ComponentHero' } | (
+          { __typename?: 'ComponentRichImage' }
+          & RichImageFieldsFragment
+        ) | { __typename?: 'ComponentSeo' } | { __typename?: 'NavigationLink' } | { __typename?: 'NavigationMenu' } | { __typename?: 'PageBlogPost' } | { __typename?: 'PageDefault' } | { __typename?: 'PageExperience' } | { __typename?: 'PageLanding' } | { __typename?: 'PageService' } | { __typename?: 'Settings' } | null> } } } | null };
+
+export type ReferencePageBlogPostFieldsFragment = { __typename: 'PageBlogPost', slug?: string | null, publishedDate?: any | null, title?: string | null, shortDescription?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, author?: (
+    { __typename?: 'ComponentAuthor' }
+    & AuthorFieldsFragment
+  ) | null, featuredImage?: (
+    { __typename?: 'Asset' }
+    & ImageFieldsFragment
+  ) | null };
+
+export type RichImageFieldsFragment = { __typename: 'ComponentRichImage', internalName?: string | null, caption?: string | null, fullWidth?: boolean | null, sys: { __typename?: 'Sys', id: string }, image?: (
+    { __typename?: 'Asset' }
+    & ImageFieldsFragment
+  ) | null };
+
+export type SeoFieldsFragment = { __typename: 'ComponentSeo', pageTitle?: string | null, pageDescription?: string | null, canonicalUrl?: string | null, nofollow?: boolean | null, noindex?: boolean | null, shareImagesCollection?: { __typename?: 'AssetCollection', items: Array<(
+      { __typename?: 'Asset' }
+      & ImageFieldsFragment
+    ) | null> } | null };
+
+export type GetExperienceBySlugQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetExperienceBySlugQuery = { __typename?: 'Query', pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<(
+      { __typename?: 'PageExperience' }
+      & ExperienceFieldsFragment
+    ) | null> } | null };
+
+export type GetFooterSettingsQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type GetFooterSettingsQuery = { __typename?: 'Query', settingsCollection?: { __typename?: 'SettingsCollection', items: Array<(
+      { __typename?: 'Settings' }
+      & FooterFieldsFragment
+    ) | null> } | null };
+
+export type GetHeaderSettingsQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type GetHeaderSettingsQuery = { __typename?: 'Query', settingsCollection?: { __typename?: 'SettingsCollection', items: Array<(
+      { __typename?: 'Settings' }
+      & HeaderFieldsFragment
+    ) | null> } | null };
+
+export type GetHeroQueryVariables = Exact<{
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetHeroQuery = { __typename?: 'Query', componentHeroCollection?: { __typename?: 'ComponentHeroCollection', items: Array<(
+      { __typename?: 'ComponentHero', ctaFieldsCollection?: { __typename?: 'ComponentHeroCtaFieldsCollection', items: Array<(
+          { __typename?: 'ComponentCta' }
+          & CtaFieldsFragment
+        ) | null> } | null }
+      & HeroFieldsFragment
     ) | null> } | null };
 
 export type PageBlogPostQueryVariables = Exact<{
@@ -3311,14 +3561,6 @@ export type PageBlogPostCollectionQuery = { __typename?: 'Query', pageBlogPostCo
       & PageBlogPostFieldsFragment
     ) | null> } | null };
 
-export type PageLandingFieldsFragment = { __typename: 'PageLanding', internalName?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, seoFields?: (
-    { __typename?: 'ComponentSeo' }
-    & SeoFieldsFragment
-  ) | null, hero?: { __typename?: 'ComponentHero', heroImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null } | null } | null, featuredBlogPost?: (
-    { __typename?: 'PageBlogPost' }
-    & ReferencePageBlogPostFieldsFragment
-  ) | null };
-
 export type PageLandingQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -3341,17 +3583,33 @@ export type PageLandingCollectionQuery = { __typename?: 'Query', pageLandingColl
       & PageLandingFieldsFragment
     ) | null> } | null };
 
-export type RichImageFieldsFragment = { __typename: 'ComponentRichImage', internalName?: string | null, caption?: string | null, fullWidth?: boolean | null, sys: { __typename?: 'Sys', id: string }, image?: (
-    { __typename?: 'Asset' }
-    & ImageFieldsFragment
-  ) | null };
+export type PageServiceQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['String']['input'];
+}>;
 
-export type SeoFieldsFragment = { __typename: 'ComponentSeo', pageTitle?: string | null, pageDescription?: string | null, canonicalUrl?: string | null, nofollow?: boolean | null, noindex?: boolean | null, shareImagesCollection?: { __typename?: 'AssetCollection', items: Array<(
-      { __typename?: 'Asset' }
-      & ImageFieldsFragment
+
+export type PageServiceQuery = { __typename?: 'Query', pageService?: { __typename: 'PageService', pageTitle?: string | null, internalName?: string | null, slug?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, pageSeo?: (
+      { __typename?: 'ComponentSeo' }
+      & SeoFieldsFragment
+    ) | null, pageContent?: { __typename?: 'PageServicePageContent', json: any, links: { __typename?: 'PageServicePageContentLinks', entries: { __typename?: 'PageServicePageContentEntries', block: Array<{ __typename?: 'ComponentAuthor' } | { __typename?: 'ComponentCta' } | { __typename?: 'ComponentHero' } | (
+            { __typename?: 'ComponentRichImage' }
+            & RichImageFieldsFragment
+          ) | { __typename?: 'ComponentSeo' } | { __typename?: 'NavigationLink' } | { __typename?: 'NavigationMenu' } | { __typename?: 'PageBlogPost' } | { __typename?: 'PageDefault' } | { __typename?: 'PageExperience' } | { __typename?: 'PageLanding' } | { __typename?: 'PageService' } | { __typename?: 'Settings' } | null> } } } | null } | null };
+
+export type PageServiceCollectionQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type PageServiceCollectionQuery = { __typename?: 'Query', pageServiceCollection?: { __typename?: 'PageServiceCollection', items: Array<(
+      { __typename?: 'PageService' }
+      & PageServiceFieldsFragment
     ) | null> } | null };
 
-export type SitemapPagesFieldsFragment = { __typename?: 'Query', pageBlogPostCollection?: { __typename?: 'PageBlogPostCollection', items: Array<{ __typename?: 'PageBlogPost', slug?: string | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null, pageLandingCollection?: { __typename?: 'PageLandingCollection', items: Array<{ __typename?: 'PageLanding', sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null };
+export type SitemapPagesFieldsFragment = { __typename?: 'Query', pageBlogPostCollection?: { __typename?: 'PageBlogPostCollection', items: Array<{ __typename?: 'PageBlogPost', slug?: string | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null, pageLandingCollection?: { __typename?: 'PageLandingCollection', items: Array<{ __typename?: 'PageLanding', sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null, pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<{ __typename?: 'PageExperience', slug?: string | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null, pageServiceCollection?: { __typename?: 'PageServiceCollection', items: Array<{ __typename?: 'PageService', slug?: string | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null };
 
 export type SitemapPagesQueryVariables = Exact<{
   locale: Scalars['String']['input'];
@@ -3363,6 +3621,17 @@ export type SitemapPagesQuery = (
   & SitemapPagesFieldsFragment
 );
 
+export const CtaFieldsFragmentDoc = gql`
+    fragment CTAFields on ComponentCta {
+  icon {
+    title
+    description
+    url
+  }
+  ctaText
+  ctaLink
+}
+    `;
 export const ImageFieldsFragmentDoc = gql`
     fragment ImageFields on Asset {
   __typename
@@ -3377,31 +3646,66 @@ export const ImageFieldsFragmentDoc = gql`
   contentType
 }
     `;
-export const HeroFieldsFragmentDoc = gql`
-    fragment HeroFields on ComponentHero {
-  internalName
-  heroImage {
+export const ExperienceFieldsFragmentDoc = gql`
+    fragment ExperienceFields on PageExperience {
+  sys {
+    id
+  }
+  slug
+  companyName
+  companyLogo {
     ...ImageFields
   }
-  heading
-  subHeading
-}
-    `;
-export const CtaFieldsFragmentDoc = gql`
-    fragment CTAFields on ComponentCta {
-  icon {
-    title
-    description
-    url
+  bannerImage {
+    ...ImageFields
   }
-  ctaText
-  ctaLink
+  startDate
+  endDate
+  website
+  skillsUsed
+  positionTitle
+  jobDescription {
+    json
+  }
 }
     `;
 export const NavigationFieldsFragmentDoc = gql`
     fragment NavigationFields on NavigationLink {
   title
   href
+}
+    `;
+export const FooterFieldsFragmentDoc = gql`
+    fragment FooterFields on Settings {
+  footerCopyrightText
+  footerSiteNavigationCollection {
+    items {
+      ...NavigationFields
+    }
+  }
+  footerLegalNavigationCollection {
+    items {
+      ...NavigationFields
+    }
+  }
+  footerServicesNavigationCollection {
+    items {
+      ...NavigationFields
+    }
+  }
+}
+    `;
+export const HeaderFieldsFragmentDoc = gql`
+    fragment HeaderFields on Settings {
+  siteTitle
+  logo {
+    ...ImageFields
+  }
+  headerNavigationCollection {
+    items {
+      ...NavigationFields
+    }
+  }
 }
     `;
 export const SeoFieldsFragmentDoc = gql`
@@ -3502,6 +3806,16 @@ export const PageBlogPostFieldsFragmentDoc = gql`
   }
 }
     `;
+export const HeroFieldsFragmentDoc = gql`
+    fragment HeroFields on ComponentHero {
+  internalName
+  heroImage {
+    ...ImageFields
+  }
+  heading
+  subHeading
+}
+    `;
 export const PageLandingFieldsFragmentDoc = gql`
     fragment PageLandingFields on PageLanding {
   __typename
@@ -3514,14 +3828,31 @@ export const PageLandingFieldsFragmentDoc = gql`
     ...SeoFields
   }
   hero {
-    heroImage {
-      title
-      description
-      url
-    }
+    ...HeroFields
   }
   featuredBlogPost {
     ...ReferencePageBlogPostFields
+  }
+}
+    `;
+export const PageServiceFieldsFragmentDoc = gql`
+    fragment PageServiceFields on PageService {
+  __typename
+  pageTitle
+  internalName
+  pageSeo {
+    ...SeoFields
+  }
+  slug
+  pageContent {
+    json
+    links {
+      entries {
+        block {
+          ...RichImageFields
+        }
+      }
+    }
   }
 }
     `;
@@ -3542,31 +3873,19 @@ export const SitemapPagesFieldsFragmentDoc = gql`
       }
     }
   }
-}
-    `;
-export const GetAllExperiencesDocument = gql`
-    query getAllExperiences($locale: String, $preview: Boolean) {
-  pageExperienceCollection(limit: 20, locale: $locale, preview: $preview) {
+  pageExperienceCollection(limit: 100, locale: $locale) {
     items {
+      slug
       sys {
-        id
+        publishedAt
       }
+    }
+  }
+  pageServiceCollection(limit: 100, locale: $locale) {
+    items {
       slug
-      companyName
-      companyLogo {
-        url
-      }
-      bannerImage {
-        url
-      }
-      slug
-      startDate
-      endDate
-      website
-      skillsUsed
-      positionTitle
-      jobDescription {
-        json
+      sys {
+        publishedAt
       }
     }
   }
@@ -3581,71 +3900,32 @@ export const GetExperienceBySlugDocument = gql`
     where: {slug_contains: $slug}
   ) {
     items {
-      sys {
-        id
-      }
-      slug
-      companyName
-      companyLogo {
-        url
-      }
-      bannerImage {
-        url
-      }
-      slug
-      startDate
-      endDate
-      website
-      skillsUsed
-      positionTitle
-      jobDescription {
-        json
-      }
+      ...ExperienceFields
     }
   }
 }
-    `;
+    ${ExperienceFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}`;
 export const GetFooterSettingsDocument = gql`
     query getFooterSettings($locale: String, $preview: Boolean) {
   settingsCollection(locale: $locale, preview: $preview, limit: 1) {
     items {
-      footerCopyrightText
-      footerSiteNavigationCollection {
-        items {
-          ...NavigationFields
-        }
-      }
-      footerLegalNavigationCollection {
-        items {
-          ...NavigationFields
-        }
-      }
-      footerServicesNavigationCollection {
-        items {
-          ...NavigationFields
-        }
-      }
+      ...FooterFields
     }
   }
 }
-    ${NavigationFieldsFragmentDoc}`;
+    ${FooterFieldsFragmentDoc}
+${NavigationFieldsFragmentDoc}`;
 export const GetHeaderSettingsDocument = gql`
     query getHeaderSettings($locale: String, $preview: Boolean) {
   settingsCollection(locale: $locale, preview: $preview, limit: 1) {
     items {
-      siteTitle
-      logo {
-        ...ImageFields
-      }
-      headerNavigationCollection {
-        items {
-          ...NavigationFields
-        }
-      }
+      ...HeaderFields
     }
   }
 }
-    ${ImageFieldsFragmentDoc}
+    ${HeaderFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
 ${NavigationFieldsFragmentDoc}`;
 export const GetHeroDocument = gql`
     query GetHero($preview: Boolean, $locale: String) {
@@ -3663,29 +3943,6 @@ export const GetHeroDocument = gql`
     ${HeroFieldsFragmentDoc}
 ${ImageFieldsFragmentDoc}
 ${CtaFieldsFragmentDoc}`;
-export const GetNavigationMenuDocument = gql`
-    query GetNavigationMenu($locale: String!, $preview: Boolean, $position: String!) {
-  navigationMenuCollection(
-    limit: 1
-    preview: $preview
-    where: {position_contains: $position}
-  ) {
-    items {
-      internalName
-      position
-      navigationMenuCollection {
-        items {
-          __typename
-          ... on NavigationLink {
-            title(locale: $locale)
-            href
-          }
-        }
-      }
-    }
-  }
-}
-    `;
 export const PageBlogPostDocument = gql`
     query pageBlogPost($slug: String!, $locale: String, $preview: Boolean) {
   pageBlogPostCollection(
@@ -3736,6 +3993,7 @@ export const PageLandingDocument = gql`
     ${PageLandingFieldsFragmentDoc}
 ${SeoFieldsFragmentDoc}
 ${ImageFieldsFragmentDoc}
+${HeroFieldsFragmentDoc}
 ${ReferencePageBlogPostFieldsFragmentDoc}
 ${AuthorFieldsFragmentDoc}`;
 export const PageLandingCollectionDocument = gql`
@@ -3749,8 +4007,50 @@ export const PageLandingCollectionDocument = gql`
     ${PageLandingFieldsFragmentDoc}
 ${SeoFieldsFragmentDoc}
 ${ImageFieldsFragmentDoc}
+${HeroFieldsFragmentDoc}
 ${ReferencePageBlogPostFieldsFragmentDoc}
 ${AuthorFieldsFragmentDoc}`;
+export const PageServiceDocument = gql`
+    query pageService($locale: String, $preview: Boolean, $id: String!) {
+  pageService(locale: $locale, preview: $preview, id: $id) {
+    __typename
+    sys {
+      id
+      spaceId
+    }
+    pageTitle
+    internalName
+    pageSeo {
+      ...SeoFields
+    }
+    slug
+    pageContent {
+      json
+      links {
+        entries {
+          block {
+            ...RichImageFields
+          }
+        }
+      }
+    }
+  }
+}
+    ${SeoFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
+${RichImageFieldsFragmentDoc}`;
+export const PageServiceCollectionDocument = gql`
+    query pageServiceCollection($locale: String, $preview: Boolean) {
+  pageServiceCollection(locale: $locale, preview: $preview, limit: 10) {
+    items {
+      ...PageServiceFields
+    }
+  }
+}
+    ${PageServiceFieldsFragmentDoc}
+${SeoFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
+${RichImageFieldsFragmentDoc}`;
 export const SitemapPagesDocument = gql`
     query sitemapPages($locale: String!) {
   ...sitemapPagesFields
@@ -3764,9 +4064,6 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    getAllExperiences(variables?: GetAllExperiencesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAllExperiencesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAllExperiencesQuery>(GetAllExperiencesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllExperiences', 'query', variables);
-    },
     getExperienceBySlug(variables?: GetExperienceBySlugQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetExperienceBySlugQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetExperienceBySlugQuery>(GetExperienceBySlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getExperienceBySlug', 'query', variables);
     },
@@ -3779,9 +4076,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetHero(variables?: GetHeroQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetHeroQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetHeroQuery>(GetHeroDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetHero', 'query', variables);
     },
-    GetNavigationMenu(variables: GetNavigationMenuQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetNavigationMenuQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetNavigationMenuQuery>(GetNavigationMenuDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetNavigationMenu', 'query', variables);
-    },
     pageBlogPost(variables: PageBlogPostQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageBlogPostQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PageBlogPostQuery>(PageBlogPostDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pageBlogPost', 'query', variables);
     },
@@ -3793,6 +4087,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     pageLandingCollection(variables?: PageLandingCollectionQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageLandingCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PageLandingCollectionQuery>(PageLandingCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pageLandingCollection', 'query', variables);
+    },
+    pageService(variables: PageServiceQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageServiceQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PageServiceQuery>(PageServiceDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pageService', 'query', variables);
+    },
+    pageServiceCollection(variables?: PageServiceCollectionQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageServiceCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PageServiceCollectionQuery>(PageServiceCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pageServiceCollection', 'query', variables);
     },
     sitemapPages(variables: SitemapPagesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SitemapPagesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<SitemapPagesQuery>(SitemapPagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'sitemapPages', 'query', variables);

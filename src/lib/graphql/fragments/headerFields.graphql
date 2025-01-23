@@ -1,0 +1,14 @@
+#import "./navigationFields.graphql"
+#import "./imageFields.graphql"
+
+fragment HeaderFields on Settings {
+  siteTitle
+  logo {
+    ...ImageFields
+  }
+  headerNavigationCollection {
+    items {
+      ...NavigationFields
+    }
+  }
+}

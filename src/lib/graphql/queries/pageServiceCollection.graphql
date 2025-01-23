@@ -1,0 +1,7 @@
+query pageServiceCollection($locale: String, $preview: Boolean) {
+  pageServiceCollection(locale: $locale, preview: $preview, limit: 10) {
+    items {
+      ...PageServiceFields
+    }
+  }
+}

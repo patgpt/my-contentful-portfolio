@@ -1,0 +1,17 @@
+fragment ReferencePageBlogPostFields on PageBlogPost {
+  __typename
+  sys {
+    id
+    spaceId
+  }
+  slug
+  author {
+    ...AuthorFields
+  }
+  publishedDate
+  title
+  shortDescription
+  featuredImage {
+    ...ImageFields
+  }
+}

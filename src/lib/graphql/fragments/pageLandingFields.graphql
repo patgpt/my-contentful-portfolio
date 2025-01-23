@@ -1,0 +1,17 @@
+fragment PageLandingFields on PageLanding {
+  __typename
+  sys {
+    id
+    spaceId
+  }
+  internalName
+  seoFields {
+    ...SeoFields
+  }
+  hero {
+    ...HeroFields
+  }
+  featuredBlogPost {
+    ...ReferencePageBlogPostFields
+  }
+}

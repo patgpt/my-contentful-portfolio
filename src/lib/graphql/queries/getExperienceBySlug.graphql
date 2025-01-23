@@ -1,0 +1,12 @@
+query getExperienceBySlug($locale: String, $preview: Boolean, $slug: String) {
+  pageExperienceCollection(
+    limit: 1
+    locale: $locale
+    preview: $preview
+    where: { slug_contains: $slug }
+  ) {
+    items {
+      ...ExperienceFields
+    }
+  }
+}

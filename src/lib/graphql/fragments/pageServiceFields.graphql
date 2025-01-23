@@ -1,0 +1,19 @@
+fragment PageServiceFields on PageService {
+  __typename
+  pageTitle
+  internalName
+  pageSeo {
+    ...SeoFields
+  }
+  slug
+  pageContent {
+    json
+    links {
+      entries {
+        block {
+          ...RichImageFields
+        }
+      }
+    }
+  }
+}

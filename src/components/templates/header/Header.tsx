@@ -18,7 +18,7 @@ export const Header = async ({
   const gqlClient = preview ? previewClient : client;
 
   const headerSettings = await gqlClient.getHeaderSettings({
-    preview,
+    preview: preview,
     locale: locale,
   });
 

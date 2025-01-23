@@ -1,0 +1,25 @@
+query pageService($locale: String, $preview: Boolean, $id: String!) {
+  pageService(locale: $locale, preview: $preview, id: $id) {
+    __typename
+    sys {
+      id
+      spaceId
+    }
+    pageTitle
+    internalName
+    pageSeo {
+      ...SeoFields
+    }
+    slug
+    pageContent {
+      json
+      links {
+        entries {
+          block {
+            ...RichImageFields
+          }
+        }
+      }
+    }
+  }
+}

@@ -63,7 +63,7 @@ export default async function Page({
   setRequestLocale(locale);
   try {
     // Fetch landing page data
-    const landingPageData = await gqlClient.pageLanding({ locale, preview });
+    const landingPageData = await gqlClient.pageLanding({ locale: locale, preview: preview });
     const page = landingPageData.pageLandingCollection?.items[0];
     if (!page) notFound();
 

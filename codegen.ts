@@ -26,7 +26,11 @@ export const config: CodegenConfig = {
       plugins: ['schema-ast'],
     },
     'src/lib/__generated/sdk.ts': {
-      documents: ['src/lib/graphql/**/*.graphql'],
+      documents: [
+        'src/lib/graphql/**/*.graphql',
+        'src/lib/fragments/**/*.graphql',
+        'src/lib/queries/**/*.graphql',
+      ],
       plugins: ['typescript', 'typescript-operations', 'typescript-graphql-request'],
       config: {
         rawRequest: false,

@@ -18,7 +18,7 @@
       "@/*": ["./src/*"],
       "@i18n/*": ["./src/i18n/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./src/types", "global.d.ts"],
+    "typeRoots": ["./node_modules/@types", "./src/types", "global.d.ts", "./src/lib/sdk"],
     "plugins": [
       {
         "name": "next"

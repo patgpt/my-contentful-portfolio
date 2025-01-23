@@ -1,21 +1,3 @@
-fragment ReferencePageBlogPostFields on PageBlogPost {
-  __typename
-  sys {
-    id
-    spaceId
-  }
-  slug
-  author {
-    ...AuthorFields
-  }
-  publishedDate
-  title
-  shortDescription
-  featuredImage {
-    ...ImageFields
-  }
-}
-
 fragment PageBlogPostFields on PageBlogPost {
   __typename
   sys {
@@ -49,14 +31,6 @@ fragment PageBlogPostFields on PageBlogPost {
   relatedBlogPostsCollection(limit: 2) {
     items {
       ...ReferencePageBlogPostFields
-    }
-  }
-}
-
-query pageBlogPost($slug: String!, $locale: String, $preview: Boolean) {
-  pageBlogPostCollection(limit: 1, where: { slug: $slug }, locale: $locale, preview: $preview) {
-    items {
-      ...PageBlogPostFields
     }
   }
 }

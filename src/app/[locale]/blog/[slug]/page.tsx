@@ -32,6 +32,7 @@ export async function generateStaticParams() {
             })) || []
         );
       } catch (error) {
+        // TODO: Replace console.error with a centralized logging service
         console.error(`Failed to fetch blog posts for locale: ${locale}`, error);
         return [];
       }

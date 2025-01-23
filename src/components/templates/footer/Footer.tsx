@@ -6,29 +6,44 @@
 import { FooterLink } from '@/components/templates/footer/FooterLink';
 import { FooterNav } from '@/components/templates/footer/FooterNav';
 import { FooterSocial } from '@/components/templates/footer/FooterSocial';
+import { client, previewClient } from '@/lib/client';
+import { draftMode } from 'next/headers';
 import { FaXTwitter, FaGithub, FaLinkedin } from 'react-icons/fa6';
 
-/**
- * Footer Component
- *
- * @returns {JSX.Element} The rendered footer element.
- */
-export const Footer = () => {
+type FooterProps = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+export const Footer = async ({ params }: FooterProps) => {
+  const locale = (await params).locale;
+  const { isEnabled: preview } = await draftMode();
+  const gqlClient = preview ? previewClient : client;
+  const settings = await gqlClient.getFooterSettings({
+    preview,
+    locale: locale,
+  });
+  const footerSettings = settings?.settingsCollection?.items[0];
+  const siteNavigation = footerSettings?.footerSiteNavigationCollection?.items || [];
+  const servicesNavigation = footerSettings?.footerServicesNavigationCollection?.items || [];
   return (
     <footer
       className="footer sm:footer-horizontal bg-base-300 text-base-content p-10"
       aria-label="Footer">
       <FooterNav title="Services">
-        <FooterLink href="/branding">Branding</FooterLink>
-        <FooterLink href="/design">Design</FooterLink>
-        <FooterLink href="/marketing">Marketing</FooterLink>
-        <FooterLink href="/advertisement">Advertisement</FooterLink>
+        {servicesNavigation.map(item => (
+          <FooterLink key={item.href} href={`services/${item.href}`}>
+            {item.title}
+          </FooterLink>
+        ))}
       </FooterNav>
-      <FooterNav title="Company">
-        <FooterLink href="/about">About us</FooterLink>
-        <FooterLink href="/contact">Contact</FooterLink>
-        <FooterLink href="/jobs">Jobs</FooterLink>
-        <FooterLink href="/press-kit">Press kit</FooterLink>
+      <FooterNav title="Site">
+        {siteNavigation.map(item => (
+          <FooterLink key={item.href} href={item.href}>
+            {item.title}
+          </FooterLink>
+        ))}
       </FooterNav>
       <FooterNav title="Social">
         <div className="grid grid-flow-col gap-4">

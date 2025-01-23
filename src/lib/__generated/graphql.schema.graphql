@@ -546,6 +546,7 @@ type ComponentSeoLinkingCollections {
   pageBlogPostCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageBlogPostCollectionOrder], preview: Boolean, skip: Int = 0): PageBlogPostCollection
   pageDefaultCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageDefaultCollectionOrder], preview: Boolean, skip: Int = 0): PageDefaultCollection
   pageLandingCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+  pageServiceCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageServiceCollectionOrder], preview: Boolean, skip: Int = 0): PageServiceCollection
 }
 
 enum ComponentSeoLinkingCollectionsPageBlogPostCollectionOrder {
@@ -587,6 +588,23 @@ enum ComponentSeoLinkingCollectionsPageDefaultCollectionOrder {
 enum ComponentSeoLinkingCollectionsPageLandingCollectionOrder {
   internalName_ASC
   internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum ComponentSeoLinkingCollectionsPageServiceCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  pageTitle_ASC
+  pageTitle_DESC
+  slug_ASC
+  slug_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1573,6 +1591,122 @@ enum PageLandingOrder {
 }
 
 """
+[See type definition](https://app.contentful.com/spaces/z7u9lztnactc/content_types/pageService)
+"""
+type PageService implements Entry & _Node {
+  _id: ID!
+  contentfulMetadata: ContentfulMetadata!
+  internalName(locale: String): String
+  linkedFrom(allowedLocales: [String]): PageServiceLinkingCollections
+  pageContent(locale: String): PageServicePageContent
+  pageSeo(locale: String, preview: Boolean, where: ComponentSeoFilter): ComponentSeo
+  pageTitle(locale: String): String
+  slug(locale: String): String
+  sys: Sys!
+}
+
+type PageServiceCollection {
+  items: [PageService]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input PageServiceFilter {
+  AND: [PageServiceFilter]
+  OR: [PageServiceFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  pageContent_contains: String
+  pageContent_exists: Boolean
+  pageContent_not_contains: String
+  pageSeo: cfComponentSeoNestedFilter
+  pageSeo_exists: Boolean
+  pageTitle: String
+  pageTitle_contains: String
+  pageTitle_exists: Boolean
+  pageTitle_in: [String]
+  pageTitle_not: String
+  pageTitle_not_contains: String
+  pageTitle_not_in: [String]
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+}
+
+type PageServiceLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum PageServiceOrder {
+  internalName_ASC
+  internalName_DESC
+  pageTitle_ASC
+  pageTitle_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type PageServicePageContent {
+  json: JSON!
+  links: PageServicePageContentLinks!
+}
+
+type PageServicePageContentAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type PageServicePageContentEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type PageServicePageContentLinks {
+  assets: PageServicePageContentAssets!
+  entries: PageServicePageContentEntries!
+  resources: PageServicePageContentResources!
+}
+
+type PageServicePageContentResources {
+  block: [PageServicePageContentResourcesBlock!]!
+  hyperlink: [PageServicePageContentResourcesHyperlink!]!
+  inline: [PageServicePageContentResourcesInline!]!
+}
+
+type PageServicePageContentResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageServicePageContentResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageServicePageContentResourcesInline implements ResourceLink {
+  sys: ResourceSys!
+}
+
+"""
 The 'Quality' type represents quality as whole numeric values between `1` and `100`.
 """
 scalar Quality
@@ -1604,6 +1738,8 @@ type Query {
   pageExperienceCollection(limit: Int = 100, locale: String, order: [PageExperienceOrder], preview: Boolean, skip: Int = 0, where: PageExperienceFilter): PageExperienceCollection
   pageLanding(id: String!, locale: String, preview: Boolean): PageLanding
   pageLandingCollection(limit: Int = 100, locale: String, order: [PageLandingOrder], preview: Boolean, skip: Int = 0, where: PageLandingFilter): PageLandingCollection
+  pageService(id: String!, locale: String, preview: Boolean): PageService
+  pageServiceCollection(limit: Int = 100, locale: String, order: [PageServiceOrder], preview: Boolean, skip: Int = 0, where: PageServiceFilter): PageServiceCollection
   settings(id: String!, locale: String, preview: Boolean): Settings
   settingsCollection(limit: Int = 100, locale: String, order: [SettingsOrder], preview: Boolean, skip: Int = 0, where: SettingsFilter): SettingsCollection
 }

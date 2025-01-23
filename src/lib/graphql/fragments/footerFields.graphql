@@ -1,0 +1,20 @@
+#import "./navigationFields.graphql"
+
+fragment FooterFields on Settings {
+  footerCopyrightText
+  footerSiteNavigationCollection {
+    items {
+      ...NavigationFields
+    }
+  }
+  footerLegalNavigationCollection {
+    items {
+      ...NavigationFields
+    }
+  }
+  footerServicesNavigationCollection {
+    items {
+      ...NavigationFields
+    }
+  }
+}

@@ -1,0 +1,7 @@
+query getFooterSettings($locale: String, $preview: Boolean) {
+  settingsCollection(locale: $locale, preview: $preview, limit: 1) {
+    items {
+      ...FooterFields
+    }
+  }
+}

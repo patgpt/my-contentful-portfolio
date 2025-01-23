@@ -1,0 +1,10 @@
+# Fragment for CTA Fields
+fragment CTAFields on ComponentCta {
+  icon {
+    title
+    description
+    url
+  }
+  ctaText
+  ctaLink
+}

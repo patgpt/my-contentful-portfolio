@@ -1,0 +1,9 @@
+# Fragment for Hero Fields
+fragment HeroFields on ComponentHero {
+  internalName
+  heroImage {
+    ...ImageFields
+  }
+  heading
+  subHeading
+}

@@ -1,0 +1,23 @@
+#import "../imageFields.graphql"
+
+fragment ExperienceFields on PageExperience {
+  sys {
+    id
+  }
+  slug
+  companyName
+  companyLogo {
+    ...ImageFields
+  }
+  bannerImage {
+    ...ImageFields
+  }
+  startDate
+  endDate
+  website
+  skillsUsed
+  positionTitle
+  jobDescription {
+    json
+  }
+}
