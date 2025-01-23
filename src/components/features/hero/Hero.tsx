@@ -6,69 +6,46 @@ import SocialButtonRow from '@/components/SocialButtonRow';
 import { client, previewClient } from '@/lib/client';
 import type { HeroFieldsFragment } from '@/lib/__generated/sdk';
 
-// Separate data fetching logic with error handling
 async function getHeroData(locale: string, preview: boolean): Promise<HeroFieldsFragment> {
-  try {
-    const gqlClient = preview ? previewClient : client;
-    const data = await gqlClient.GetHero({ locale, preview });
+  const gqlClient = preview ? previewClient : client;
+  const data = await gqlClient.GetHero({ locale, preview });
 
-    if (!data.componentHeroCollection?.items[0]) {
-      throw new Error('Hero data not found');
-    }
-
-    return data.componentHeroCollection.items[0];
-  } catch (error) {
-    console.error('Failed to fetch hero data:', error);
-    console.error(`Locale: ${locale}, Preview: ${preview}`);
+  if (!data.componentHeroCollection?.items[0]) {
     notFound();
   }
+
+  return data.componentHeroCollection.items[0];
 }
 
-// Separate UI component
 function HeroContent({ hero }: { hero: HeroFieldsFragment }) {
   const { url } = hero.heroImage || {};
-
+  const { heading, subHeading } = hero;
   return (
     <div className="hero from-primary/20 to-secondary/20 min-h-screen bg-linear-to-tr pt-16 text-balance">
-      <div className="hero-content flex-col items-center justify-center p-4">
-        <div className="flex flex-col items-center justify-center text-center">
-          <div className="avatar mb-6">
-            <div className="ring-primary ring-offset-base-100 w-64 rounded-full ring-3 ring-offset-2">
-              {url && (
-                <Image
-                  width={300}
-                  height={300}
-                  src={url}
-                  alt="Hero Image"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 300px"
-                  quality={90}
-                  aria-hidden="false"
-                />
-              )}
-            </div>
-          </div>
-          <h1 className="mb-4 text-5xl font-bold">{hero.heading}</h1>
-          <p className="mb-6 max-w-prose">{hero.subHeading}</p>
-          <SocialButtonRow />
+      <div className="hero-content flex-col items-center justify-center p-4 text-center">
+        <div className="avatar mb-6">
+          {url && (
+            <Image
+              width={300}
+              height={300}
+              src={url}
+              alt="Hero Image"
+              priority
+              sizes="(max-width: 768px) 100vw, 300px"
+              quality={90}
+            />
+          )}
         </div>
+        <h1 className="mb-4 text-5xl font-bold">{heading}</h1>
+        <p className="mb-6 max-w-prose">{subHeading}</p>
+        <SocialButtonRow />
       </div>
     </div>
   );
 }
 
-type HeroProps = HeroFieldsFragment & { locale: string };
-
-export default async function Hero({ locale }: HeroProps) {
+export default async function Hero({ locale }: { locale: string }) {
   const { isEnabled: preview } = await draftMode();
-
-  try {
-    const heroData = await getHeroData(locale, preview);
-    return <HeroContent hero={heroData} />;
-  } catch (error) {
-    console.error('Error rendering hero component:', error);
-    notFound();
-  }
+  const heroData = await getHeroData(locale, preview);
+  return <HeroContent hero={heroData} />;
 }
-
-export { Hero };
