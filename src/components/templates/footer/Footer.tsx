@@ -1,43 +1,54 @@
+/**
+ * The Footer component renders a complete footer section with navigation and social links.
+ * It uses subcomponents to separate concerns and improve maintainability.
+ */
+
+import { FooterLink } from '@/components/templates/footer/FooterLink';
+import { FooterNav } from '@/components/templates/footer/FooterNav';
+import { FooterSocial } from '@/components/templates/footer/FooterSocial';
+import { FaXTwitter, FaGithub, FaLinkedin } from 'react-icons/fa6';
+
+/**
+ * Footer Component
+ *
+ * @returns {JSX.Element} The rendered footer element.
+ */
 export const Footer = () => {
   return (
-    <footer className="footer bg-base-200 p-10 text-base-content">
-      <nav>
-        <h6 className="footer-title">Services</h6>
-        <a className="link-hover link">Branding</a>
-        <a className="link-hover link">Design</a>
-        <a className="link-hover link">Marketing</a>
-        <a className="link-hover link">Advertisement</a>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Company</h6>
-        <a className="link-hover link">About us</a>
-        <a className="link-hover link">Contact</a>
-        <a className="link-hover link">Jobs</a>
-        <a className="link-hover link">Press kit</a>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Legal</h6>
-        <a className="link-hover link">Terms of use</a>
-        <a className="link-hover link">Privacy policy</a>
-        <a className="link-hover link">Cookie policy</a>
-      </nav>
-      <form>
-        <h6 className="footer-title">Newsletter</h6>
-        <fieldset className="form-control w-80">
-          <label htmlFor="newsletter-email" className="label">
-            <span className="label-text">Enter your email address</span>
-          </label>
-          <div className="join">
-            <input
-              id="newsletter-email"
-              type="text"
-              placeholder="username@site.com"
-              className="input join-item input-bordered"
-            />
-            <button className="btn btn-primary join-item">Subscribe</button>
-          </div>
-        </fieldset>
-      </form>
+    <footer
+      className="footer sm:footer-horizontal bg-base-300 text-base-content p-10"
+      aria-label="Footer">
+      <FooterNav title="Services">
+        <FooterLink href="/branding">Branding</FooterLink>
+        <FooterLink href="/design">Design</FooterLink>
+        <FooterLink href="/marketing">Marketing</FooterLink>
+        <FooterLink href="/advertisement">Advertisement</FooterLink>
+      </FooterNav>
+      <FooterNav title="Company">
+        <FooterLink href="/about">About us</FooterLink>
+        <FooterLink href="/contact">Contact</FooterLink>
+        <FooterLink href="/jobs">Jobs</FooterLink>
+        <FooterLink href="/press-kit">Press kit</FooterLink>
+      </FooterNav>
+      <FooterNav title="Social">
+        <div className="grid grid-flow-col gap-4">
+          <FooterSocial
+            href="https://twitter.com"
+            icon={<FaXTwitter className="h-6 w-6" />}
+            label="Twitter Profile"
+          />
+          <FooterSocial
+            href="https://github.com"
+            icon={<FaGithub className="h-6 w-6" />}
+            label="GitHub Profile"
+          />
+          <FooterSocial
+            href="https://linkedin.com"
+            icon={<FaLinkedin className="h-6 w-6" />}
+            label="LinkedIn Profile"
+          />
+        </div>
+      </FooterNav>
     </footer>
   );
 };
