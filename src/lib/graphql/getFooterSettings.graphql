@@ -1,0 +1,22 @@
+query getFooterSettings($locale: String, $preview: Boolean) {
+  settingsCollection(locale: $locale, preview: $preview, limit: 1) {
+    items {
+      footerCopyrightText
+      footerSiteNavigationCollection {
+        items {
+          ...NavigationFields
+        }
+      }
+      footerLegalNavigationCollection {
+        items {
+          ...NavigationFields
+        }
+      }
+      footerServicesNavigationCollection {
+        items {
+          ...NavigationFields
+        }
+      }
+    }
+  }
+}

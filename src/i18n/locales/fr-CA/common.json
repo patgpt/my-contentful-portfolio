@@ -36,11 +36,15 @@
     "linkedin": "LinkedIn",
     "twitter": "Twitter"
   },
-  "nav": {
-    "home": "Accueil",
-    "about": "À propos",
-    "experience": "Expérience",
-    "services": "Services",
-    "contact": "Contact"
+  "navigation": {
+    "mobileNav": "Navigation mobile",
+    "openMenu": "Ouvrir le menu mobile",
+    "closeMenu": "Fermer le menu mobile",
+    "toggleMenu": "Basculer le menu mobile",
+    "mobileMenuTitle": "Menu mobile",
+    "menuDialog": "Dialogue du menu mobile",
+    "desktopNav": "Navigation bureau",
+    "mainMenu": "Menu principal",
+    "currentPage": "Page actuelle"
   }
 }
