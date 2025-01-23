@@ -45,6 +45,9 @@
     "menuDialog": "Dialogue du menu mobile",
     "desktopNav": "Navigation bureau",
     "mainMenu": "Menu principal",
-    "currentPage": "Page actuelle"
+    "currentPage": "Page actuelle",
+    "themeSwitch": "Basculer entre le thème sombre et clair",
+    "lightMode": "Mode clair",
+    "darkMode": "Mode sombre"
   }
 }
