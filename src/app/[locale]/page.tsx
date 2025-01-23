@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 
 // Component imports
 import { ArticleHero, ArticleTileGrid } from '@/components/features/article';
-import { Hero } from '@/components/features/hero/Hero';
+import Hero from '@/components/features/hero/Hero';
 import { Container } from '@/components/shared/container';
 
 // API and data imports

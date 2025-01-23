@@ -26,8 +26,7 @@ export default function LocaleSwitcherSelect() {
 
   return (
     <div className="flex items-center gap-1">
-      <div className="dropdown dropdown-end flex items-center gap-1" key={activeLocale}>
-        <p>{LANGUAGE_NAMES[activeLocale]}</p>
+      <div className="dropdown dropdown-end" key={activeLocale}>
         <label
           tabIndex={0}
           className={clsx('btn btn-circle btn-ghost mr-4 flex', isPending && 'opacity-50')}>
