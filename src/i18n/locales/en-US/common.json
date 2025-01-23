@@ -36,11 +36,15 @@
     "linkedin": "LinkedIn",
     "twitter": "Twitter"
   },
-  "nav": {
-    "home": "Home",
-    "about": "About",
-    "experience": "Experience",
-    "services": "Services",
-    "contact": "Contact"
+  "navigation": {
+    "mobileNav": "Mobile navigation",
+    "openMenu": "Open mobile menu",
+    "closeMenu": "Close mobile menu",
+    "toggleMenu": "Toggle mobile menu",
+    "mobileMenuTitle": "Mobile menu",
+    "menuDialog": "Mobile menu dialog",
+    "desktopNav": "Desktop navigation",
+    "mainMenu": "Main menu",
+    "currentPage": "Current page"
   }
 }
