@@ -1,0 +1,7 @@
+query pageExperienceCollection($locale: String, $preview: Boolean, $limit: Int = 10) {
+  pageExperienceCollection(limit: $limit, locale: $locale, preview: $preview) {
+    items {
+      ...PageExperienceFields
+    }
+  }
+}

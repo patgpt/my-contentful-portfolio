@@ -6,7 +6,9 @@ import { ExperienceTimelineHeader } from './ExperienceTimelineHeader';
 import type { PageExperience } from '@/lib/__generated/sdk';
 
 interface ExperienceTimelineProps {
-  experiences: PageExperience[];
+  experiences: ({
+    __typename?: 'PageExperience';
+  } & PageExperienceFieldsFragment)[];
 }
 
 export const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => (

@@ -1,0 +1,5 @@
+query getExperiencePageByID($locale: String, $preview: Boolean, $id: String!) {
+  pageExperience(preview: $preview, locale: $locale, id: $id) {
+    ...PageExperienceFields
+  }
+}

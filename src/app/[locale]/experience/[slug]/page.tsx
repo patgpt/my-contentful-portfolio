@@ -1,58 +1,44 @@
+import { setRequestLocale } from 'next-intl/server';
 import { draftMode } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaGlobe } from 'react-icons/fa';
-import { setRequestLocale } from 'next-intl/server';
 
 import { CtfRichText } from '@/components/features/contentful';
-import type { PageExperience } from '@/lib/__generated/sdk';
+import { routing } from '@/i18n/routing';
 import { client, previewClient } from '@/lib/client';
 import { formatDate } from '@/utils/date';
-import { routing } from '@/i18n/routing';
+import { notFound } from 'next/navigation';
 
-interface ExperiencePageParams {
-  locale: string;
-  slug: string;
+export async function generateStaticParams() {
+  const { locales } = routing;
+  const experiences = await client.pageExperienceCollection({ limit: 10 });
+
+  return locales.flatMap(locale => {
+    const localeExperiences = experiences.pageExperienceCollection?.items ?? [];
+    return localeExperiences.map(experience => ({
+      params: {
+        locale,
+        slug: experience.slug,
+      },
+    }));
+  });
 }
 
-interface ExperienceDetailPageProps {
-  params: Promise<ExperiencePageParams>;
-}
-
-export async function generateStaticParams(): Promise<ExperiencePageParams[]> {
-  const defaultLocale = routing.defaultLocale;
-  const gqlClient = client;
-  const { pageExperienceCollection } = await gqlClient.getAllExperiences({ locale: defaultLocale });
-
-  if (!pageExperienceCollection?.items) {
-    return [];
-  }
-
-  const paths: ExperiencePageParams[] = [];
-  for (const locale of routing.locales) {
-    for (const experience of pageExperienceCollection.items) {
-      if (experience?.slug) {
-        paths.push({
-          locale: locale,
-          slug: experience.slug,
-        });
-      }
-    }
-  }
-
-  return paths;
-}
-
-async function ExperienceDetailPage({ params: paramsPromise }: ExperienceDetailPageProps) {
-  const { locale, slug } = await paramsPromise;
+async function ExperienceDetailPage({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}) {
+  const { locale, slug } = await params;
   setRequestLocale(locale);
 
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
-  const experience = await gqlClient.getExperienceBySlug({ locale, preview, slug });
-  const data = experience.pageExperienceCollection?.items[0] as PageExperience | undefined;
+  const experience = await gqlClient.getExperiencePageBySlug({ locale, preview, slug });
+  const data = experience.pageExperienceCollection?.items[0];
   if (!data) {
-    return <div className="container mx-auto">Experience not found</div>;
+    return notFound();
   }
 
   return (
