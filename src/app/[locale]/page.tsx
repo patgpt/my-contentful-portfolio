@@ -57,7 +57,6 @@ export default async function Page({
   }>;
 }) {
   const locale = (await params).locale;
-  // @ts-expect-error - Suppressing type error for namespace updating to v4 of next-intl in the future
   const t = await getTranslations('landingPage');
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;

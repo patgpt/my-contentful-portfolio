@@ -3,9 +3,7 @@ import { Container } from '@/components/shared/container';
 import { Link } from '@/i18n/routing';
 
 export default async function NotFound() {
-  // @ts-expect-error - Suppressing type error for namespace
   const t = await getTranslations('notFound');
-  console.log(t, 'notFound'); // notFound
   return (
     <Container className="flex min-h-screen items-center justify-center">
       <div className="card bg-base-100 w-96 shadow-xl">

@@ -5,7 +5,6 @@ import { FiSun, FiMoon } from 'react-icons/fi';
 
 function ThemeSwitcher() {
   const [theme, setTheme] = useState('light');
-  // @ts-expect-error - Suppressing type error for namespace updating to v4 of next-intl in the future
   const t = useTranslations('common');
   useEffect(() => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -20,7 +19,6 @@ function ThemeSwitcher() {
 
   return (
     <div className="flex items-center gap-2">
-      {/* @ts-expect-error - will update wwith next-intl */}
       <span className="text-sm font-medium">{t('theme')}</span>
       <label className="swap swap-rotate">
         <input

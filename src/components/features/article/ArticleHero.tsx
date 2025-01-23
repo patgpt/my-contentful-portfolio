@@ -26,7 +26,6 @@ export const ArticleHero = ({
   isFeatured,
   isReversedLayout = false,
 }: ArticleHeroProps) => {
-  // @ts-expect-error - Suppressing type error for namespace updating to v4 of next-intl in the future
   const t = useTranslations('article');
   const inspectorProps = useContentfulInspectorMode({ entryId: article.sys.id });
   const { title, shortDescription, publishedDate } = useContentfulLiveUpdates(article);
@@ -59,7 +58,6 @@ export const ArticleHero = ({
                 'ml-auto pl-2 lg:absolute lg:top-8 xl:top-12',
                 isReversedLayout ? 'lg:left-6 xl:left-12' : 'lg:right-6 xl:right-12',
               )}>
-              {/* @ts-expect-error - will update next-intl */}
               {t('featured')}
             </ArticleLabel>
           )}

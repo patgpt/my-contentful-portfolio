@@ -64,7 +64,6 @@ const MainContent = ({ blogPost }: { blogPost: PageBlogPostFieldsFragment }) => 
 );
 
 const RelatedPosts = async ({ relatedPosts }: { relatedPosts: PageBlogPostFieldsFragment[] }) => {
-  // @ts-expect-error - Suppressing type error for namespace updating to v4 of next-intl in the future
   const t = await getTranslations('article');
 
   return (
