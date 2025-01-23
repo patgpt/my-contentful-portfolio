@@ -1,72 +1,54 @@
-import { draftMode } from 'next/headers';
-import ThemeSwitcher from '@/components/features/theme-switcher/ThemeSwitcher';
-import { client, previewClient } from '@/lib/client';
 import { Link } from '@/i18n/routing';
-
+import ThemeSwitcher from '@/components/features/theme-switcher/ThemeSwitcher';
 import LanguageSelect from '@/components/features/language-selector/LanguageSelect';
-import NavigationLink from '@/components/templates/header/NavigationLink';
+import { MobileMenu } from './MobileMenu';
+import { DesktopMenu } from './DesktopMenu';
+import { client, previewClient } from '@/lib/client';
+import { draftMode } from 'next/headers';
+import { MenuProps } from './types';
 
-export const Header = async ({
-  params,
-}: {
-  params: Promise<{
-    locale: string;
-  }>;
-}) => {
-  const locale = (await params).locale;
-  const { isEnabled: preview } = await draftMode();
-  const gqlClient = preview ? previewClient : client;
-  const navigation = await gqlClient.GetNavigationMenu({
-    preview,
-    locale: locale,
-    position: 'Header',
-  });
-
-  const menuItems =
-    navigation?.navigationMenuCollection?.items[0]?.navigationMenuCollection?.items || [];
-
+export const Header = ({ menuItems = [], locale }: MenuProps) => {
   return (
-    <div className="navbar border-base-200 bg-base-100 fixed top-0 right-0 left-0 z-50 border-b">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            Menu
-            <svg
-              width="12px"
-              height="12px"
-              className="inline-block h-2 w-2 fill-current opacity-60"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 2048 2048">
-              <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z" />
-            </svg>
+    <div className="drawer">
+      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content">
+        <div className="navbar border-base-200 bg-base-100 fixed top-0 right-0 left-0 z-50 border-b">
+          <div className="navbar-start">
+            <MobileMenu menuItems={menuItems} />
+            <Link className="btn btn-ghost text-xl" href="/">
+              Patrick Kelly
+            </Link>
           </div>
-          <ul className="menu dropdown-content menu-sm rounded-box bg-base-100 z-1 mt-3 w-52 p-2 shadow-xs">
-            {menuItems.map((item, index) => (
-              <li key={`mobile-${index}`}>
-                <Link href={`/${item?.href}`}>{item?.title}</Link>
-              </li>
-            ))}
-          </ul>
+          <DesktopMenu menuItems={menuItems} locale={locale} />
+          <div className="navbar-end flex gap-2">
+            <ThemeSwitcher />
+            <LanguageSelect />
+          </div>
         </div>
-        <Link className="btn btn-ghost text-xl" href="/">
-          Patrick Kelly
-        </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {menuItems.map((item, index) => (
-            <li key={`desktop-${index}`}>
-              <NavigationLink locale={locale} href={`/${item?.href}`}>
-                {item?.title}
-              </NavigationLink>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="navbar-end flex gap-2">
-        <ThemeSwitcher />
-        <LanguageSelect />
-      </div>
+      <MobileMenu menuItems={menuItems} />
     </div>
   );
+};
+
+// Create a server component wrapper to handle the data fetching
+export const HeaderWrapper = async ({ params }: { params: Promise<{ locale: string }> }) => {
+  try {
+    const locale = (await params).locale;
+    const { isEnabled: preview } = await draftMode();
+    const gqlClient = preview ? previewClient : client;
+    const navigation = await gqlClient.GetNavigationMenu({
+      preview,
+      locale: locale,
+      position: 'Header',
+    });
+
+    const menuItems =
+      navigation?.navigationMenuCollection?.items[0]?.navigationMenuCollection?.items || [];
+
+    return <Header menuItems={menuItems} locale={locale} />;
+  } catch (error) {
+    console.error('Error fetching menu items:', error);
+    return <Header menuItems={[]} locale={(await params).locale} />;
+  }
 };
