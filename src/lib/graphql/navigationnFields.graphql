@@ -1,0 +1,4 @@
+fragment NavigationFields on NavigationLink {
+  title
+  href
+}

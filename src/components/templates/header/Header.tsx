@@ -17,14 +17,15 @@ export const Header = async ({
   const locale = (await params).locale;
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
-  const navigation = await gqlClient.GetNavigationMenu({
+
+  const headerSettings = await gqlClient.getHeaderSettings({
     preview,
     locale: locale,
-    position: 'Header',
   });
 
-  const menuItems =
-    navigation?.navigationMenuCollection?.items[0]?.navigationMenuCollection?.items || [];
+  const settings = headerSettings?.settingsCollection?.items[0];
+  const navigation = settings?.headerNavigationCollection?.items;
+  const title = settings?.siteTitle;
 
   return (
     <div className="drawer">
@@ -41,18 +42,18 @@ export const Header = async ({
               <RiCloseLine className="swap-on h-5 w-5" />
             </label>
             <Link className="btn btn-ghost text-xl" href="/">
-              Patrick Kelly
+              {title}
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
-              {menuItems.map((item, index) => (
+              {navigation.map((item, index) => (
                 <li key={`desktop-${index}`}>
                   <NavigationLink locale={locale} href={`/${item?.href}`}>
                     {item?.title}
                   </NavigationLink>
                 </li>
-              ))}
+              ))} 
             </ul>
           </div>
           <div className="navbar-end flex gap-2">
@@ -65,7 +66,7 @@ export const Header = async ({
       <div className="drawer-side">
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu bg-base-200 min-h-full w-80 p-4">
-          {menuItems.map((item, index) => (
+          {navigation.map((item, index) => (
             <li key={`mobile-${index}`}>
               <Link href={`/${item?.href}`}>{item?.title}</Link>
             </li>
