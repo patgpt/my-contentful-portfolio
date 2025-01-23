@@ -45,6 +45,9 @@
     "menuDialog": "Mobile menu dialog",
     "desktopNav": "Desktop navigation",
     "mainMenu": "Main menu",
-    "currentPage": "Current page"
+    "currentPage": "Current page",
+    "themeSwitch": "Switch between dark and light theme",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode"
   }
 }

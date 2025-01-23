@@ -52,7 +52,12 @@ export default async function PageLayout({ children, params }: LayoutProps) {
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
       </head>
       <body className="bg-base-100 text-base-content min-h-screen">
-        <ThemeProvider attribute="class">
+        <ThemeProvider
+          attribute="data-theme"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ContentfulPreviewProvider
               locale={locale || (await getLocale())}
