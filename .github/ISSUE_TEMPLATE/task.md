@@ -1,7 +1,7 @@
 ---
-name: 'Task'
+name: '\U0001F4A1 Task'
 about: Internal Task Template
-title: 'Task - Inernal Only'
+title: '\U0001F4A1 Task - '
 labels: needs review, needs triage, task
 ---
 

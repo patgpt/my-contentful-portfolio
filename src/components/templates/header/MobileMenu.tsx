@@ -1,5 +1,5 @@
 import { Link } from '@/i18n/routing';
-import type { NavigationLink, NavigationLinkCollection } from '@/lib/__generated/sdk';
+import type { NavigationFieldsFragment } from '@/lib/__generated/sdk';
 
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
