@@ -1,9 +1,10 @@
 // TimelineItems.tsx
-import type { PageExperience } from '@/lib/__generated/sdk';
+
 import { TimelineItem } from './TimelineItem';
 
 interface TimelineItemsProps {
-  experiences: PageExperience[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  experiences: any[];
 }
 
 export const TimelineItems = ({ experiences }: TimelineItemsProps) => (

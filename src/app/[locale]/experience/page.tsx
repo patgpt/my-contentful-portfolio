@@ -16,6 +16,7 @@ async function ExperiencePage(props: ExperiencePageProps) {
   const { locale } = params;
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
+
   const pageExperienceCollection = await gqlClient.pageExperienceCollection({
     locale,
     preview,

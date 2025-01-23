@@ -3,7 +3,7 @@
 
 import { TimelineItems } from '@/components/features/experience/TimellineItems';
 import { ExperienceTimelineHeader } from './ExperienceTimelineHeader';
-import type { PageExperience } from '@/lib/__generated/sdk';
+import type { PageExperienceFieldsFragment } from '@/lib/__generated/sdk';
 
 interface ExperienceTimelineProps {
   experiences: ({
