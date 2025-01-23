@@ -1,9 +1,21 @@
-function ThemeSwitcher() {
-  return (
-    <label className="toggle text-base-content">
-      <input type="checkbox" value="dark" className="theme-controller" />
+import { useTranslations } from 'next-intl';
 
-      <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+function ThemeSwitcher() {
+  const t = useTranslations('navigation');
+
+  return (
+    <label
+      className="toggle text-base-content"
+      aria-label={t('themeSwitch')}
+      title={t('themeSwitch')}>
+      <input
+        type="checkbox"
+        value="dark"
+        className="theme-controller"
+        aria-label={t('themeSwitch')}
+      />
+
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <g
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -22,7 +34,7 @@ function ThemeSwitcher() {
         </g>
       </svg>
 
-      <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <g
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -32,6 +44,8 @@ function ThemeSwitcher() {
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
         </g>
       </svg>
+
+      <span className="sr-only">{t('themeSwitch')}</span>
     </label>
   );
 }
