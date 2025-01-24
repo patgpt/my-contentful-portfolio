@@ -73,3 +73,21 @@
    ## License
 
    MIT License, see [LICENSE](./LICENSE).
+
+   ## How Can I Contribute?
+
+   Before creating a new issue; please check out the open issues as someone might have already created one for you! Please use the recommended templates for each section as helps us resolve issues faster.
+
+   ### Reporting Bugs
+
+   Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/). If you are sure there's currently not an issue that describes the bug you're experiencing, create an issue on the repository and provide the following information by filling in [the bug report template](https://github.com/patgpt/my-contentful-portfolio/blob/main/.github/ISSUE_TEMPLATE/bug-report.yml).
+
+   > **Note:** If you find a **Closed** issue that seems like it is the same thing that you're experiencing, open a new issue and include a link to the original issue in the body of your new one.
+
+   ### Proposals
+
+   Want to make an enhancement proposal, including completely new features and minor improvements to existing functionality? Please create an issue with [the proposal template](https://github.com/patgpt/my-contentful-portfolio/blob/main/.github/ISSUE_TEMPLATE/proposal.yml).
+
+   ### General feedback
+
+   Not experiencing a bug or wanting to make a proposal, but still want to reach out? Feel free to open a general feedback issue using [this template](https://github.com/patgpt/my-contentful-portfolio/blob/main/.github/ISSUE_TEMPLATE/feedback.yml).
