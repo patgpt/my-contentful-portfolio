@@ -9,6 +9,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { routing } from '@/i18n/routing';
 import type { PageBlogPostFieldsFragment, PageLandingFieldsFragment } from '@/lib/__generated/sdk';
+import type { PageParams } from '@/types/types';
 
 export async function generateStaticParams() {
   const gqlClient = client;
@@ -76,11 +77,7 @@ const RelatedPosts = async ({ relatedPosts }: { relatedPosts: PageBlogPostFields
     )
   );
 };
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ locale: string; slug: string }>;
-}) {
+export default async function Page({ params }: PageParams) {
   const { locale, slug } = await params;
 
   const { isEnabled: preview } = await draftMode();
