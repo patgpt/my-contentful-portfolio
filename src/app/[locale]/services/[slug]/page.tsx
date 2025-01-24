@@ -1,4 +1,5 @@
 import { CtfRichText } from '@/components/features/contentful';
+import PageTitle from '@/components/features/PageTitle';
 import { routing } from '@/i18n/routing';
 import { client, previewClient } from '@/lib/client';
 import { draftMode } from 'next/headers';
@@ -43,7 +44,7 @@ async function Servicepage({ params }: IServicePageProps) {
   console.log(page);
   return (
     <div className="container mx-auto p-12">
-      <h1 className="my-4 text-2xl tracking-tight">{page?.pageTitle}</h1>
+      <PageTitle titleText={page?.pageTitle} />
       <CtfRichText proseSize="prose-xl" json={page?.pageContent.json} />
     </div>
   );
