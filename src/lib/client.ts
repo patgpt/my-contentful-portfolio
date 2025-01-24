@@ -12,15 +12,6 @@ const graphQlClient = new GraphQLClient(endpoint, {
   headers: {
     Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
   },
-  fetch: (url, options) => {
-    return fetch(url, {
-      ...options,
-      headers: {
-        ...options.headers,
-        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-      },
-    });
-  },
 });
 
 const previewGraphQlClient = new GraphQLClient(endpoint, {

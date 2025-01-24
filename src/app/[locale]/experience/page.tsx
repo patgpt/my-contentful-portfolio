@@ -1,7 +1,8 @@
 import { draftMode } from 'next/headers';
 
-import { ExperienceTimeline } from '@/components/features/experience/ExperienceTimeline';
 import { client, previewClient } from '@/lib/client';
+import ExperienceTimeline from '@/components/features/experience/ExperienceTimeline';
+import type { PageExperience } from '@/lib/__generated/sdk';
 
 interface ExperiencePageProps {
   params: Promise<{
@@ -22,14 +23,14 @@ async function ExperiencePage(props: ExperiencePageProps) {
     preview,
     limit: 10,
   });
-  const pages = pageExperienceCollection.pageExperienceCollection?.items;
+  const pages = pageExperienceCollection.pageExperienceCollection?.items as PageExperience[];
 
   return (
-    <main className="bg-base-100 relative min-h-screen w-full overflow-hidden">
+
       <div className="relative container mx-auto px-4">
         <ExperienceTimeline experiences={pages} />
       </div>
-    </main>
+    
   );
 }
 

@@ -1,13 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, Document } from '@contentful/rich-text-types';
-
 import { ArticleImage } from '@/components/features/article';
 import { ComponentRichImage } from '@/lib/__generated/sdk';
+import { cn } from '@/utils/cn';
 
-// Update EmbeddedEntryType to be more flexible
+/**
+ * Type representing an embedded entry, which can be a ComponentRichImage.
+ */
 export type EmbeddedEntryType = ComponentRichImage;
 
+/**
+ * Interface for the ContentfulRichText component props.
+ */
 export interface ContentfulRichTextInterface {
   json: Document;
   links?:
@@ -16,12 +20,19 @@ export interface ContentfulRichTextInterface {
           block: Array<EmbeddedEntryType>;
         };
       }
-    | any;
+    | any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  proseSize?: ProseSize;
 }
 
+type ProseSize = 'prose-sm' | 'prose-lg' | 'prose-xl' | 'prose-2xl' | 'prose-3xl';
+
+/**
+ * Component to render an embedded entry.
+ * @param entry - The embedded entry to render.
+ * @returns The rendered embedded entry component.
+ */
 export const EmbeddedEntry = (entry: EmbeddedEntryType) => {
   if (!entry) return null;
-
   switch (entry.__typename) {
     case 'ComponentRichImage':
       return <ArticleImage image={entry} />;
@@ -30,6 +41,11 @@ export const EmbeddedEntry = (entry: EmbeddedEntryType) => {
   }
 };
 
+/**
+ * Function to generate base options for rendering Contentful rich text.
+ * @param links - The links object containing embedded entries.
+ * @returns The options for rendering Contentful rich text.
+ */
 export const contentfulBaseRichTextOptions = ({ links }: ContentfulRichTextInterface): Options => ({
   renderNode: {
     [BLOCKS.EMBEDDED_ENTRY]: node => {
@@ -44,11 +60,18 @@ export const contentfulBaseRichTextOptions = ({ links }: ContentfulRichTextInter
   },
 });
 
-export const CtfRichText = ({ json, links }: ContentfulRichTextInterface) => {
+/**
+ * Component to render Contentful rich text.
+ * @param json - The rich text document to render.
+ * @param links - The links object containing embedded entries.
+ * @param proseSize - The size of the prose.
+ * @returns The rendered rich text component.
+ */
+export const CtfRichText = ({ json, links, proseSize }: ContentfulRichTextInterface) => {
   const baseOptions = contentfulBaseRichTextOptions({ links, json });
 
   return (
-    <article className="prose prose-xl max-w-none">
+    <article className={cn('prose max-w-none', proseSize)}>
       {documentToReactComponents(json, baseOptions)}
     </article>
   );
