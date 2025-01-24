@@ -35,9 +35,6 @@ export const routing = defineRouting({
   defaultLocale: 'en-US',
 });
 
-/** Type representing supported locales */
-export type Locale = (typeof routing.locales)[number];
-
 /**
  * Navigation utilities configured with internationalization support
  * @see {@link https://next-intl-docs.vercel.app/docs/routing/navigation Next-intl Navigation}

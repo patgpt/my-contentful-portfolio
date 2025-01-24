@@ -11,36 +11,19 @@ import { routing } from '@/i18n/routing';
 import type { PageBlogPostFieldsFragment, PageLandingFieldsFragment } from '@/lib/__generated/sdk';
 import type { PageParams } from '@/types/types';
 
-export async function generateStaticParams() {
-  const gqlClient = client;
+export async function generateStaticParams(): Promise<PageParams[]> {
+  const { locales } = routing;
+  const experiences = await client.pageBlogPostCollection({ limit: 10 });
 
-  const params = await Promise.all(
-    routing.locales.map(async locale => {
-      try {
-        const { pageBlogPostCollection } = await gqlClient.pageBlogPostCollection({
-          locale,
-          limit: 100,
-        });
-
-        return (
-          pageBlogPostCollection?.items
-            ?.filter((blogPost): blogPost is PageBlogPostFieldsFragment & { slug: string } =>
-              Boolean(blogPost?.slug),
-            )
-            .map(blogPost => ({
-              locale,
-              slug: `blog/${blogPost.slug}`,
-            })) || []
-        );
-      } catch (error) {
-        // TODO: Replace console.error with a centralized logging service
-        console.error(`Failed to fetch blog posts for locale: ${locale}`, error);
-        return [];
-      }
-    }),
-  );
-
-  return params.flat();
+  return locales.flatMap(locale => {
+    const localeExperiences = experiences.pageBlogPostCollection?.items ?? [];
+    return localeExperiences.map(experience => ({
+      params: {
+        locale,
+        slug: experience.slug,
+      },
+    }));
+  });
 }
 
 function checkIfFeatured(blogPostSlug: string, featuredSlug?: string): boolean {
