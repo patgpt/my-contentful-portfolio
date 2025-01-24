@@ -15,4 +15,3 @@ body:
       label: Feedback
       description: Please provide us with your feedback on the template
       placeholder: Your feedback
-      required: true

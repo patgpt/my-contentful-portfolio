@@ -17,7 +17,6 @@ body:
       label: Problem Statement
       description: Describe the current situation and why it needs to be addressed
       placeholder: Problem statement
-      required: true
 
   - type: textarea
     id: proposed_solution
@@ -25,7 +24,6 @@ body:
       label: Proposed Solution
       description: Outline your proposed approach to solving the problem
       placeholder: Proposed solution
-      required: true
 
   - type: textarea
     id: acceptance_criteria
@@ -33,7 +31,6 @@ body:
       label: Acceptance Criteria
       description: List specific, measurable outcomes that define when this task is complete
       placeholder: Acceptance criteria
-      required: true
 
   - type: checkboxes
     id: task_size_estimation
@@ -49,7 +46,6 @@ body:
           value: large
         - label: Extra Large (8+ hours)
           value: extra_large
-      required: true
 
   - type: textarea
     id: dependencies
@@ -57,7 +53,6 @@ body:
       label: Dependencies
       description: List any dependencies or blockers
       placeholder: Dependencies
-      required: true
 
   - type: textarea
     id: breaking_changes
@@ -65,7 +60,6 @@ body:
       label: Breaking Changes
       description: Document any breaking changes this task might introduce
       placeholder: Breaking changes
-      required: true
 
   - type: textarea
     id: additional_notes
@@ -73,4 +67,3 @@ body:
       label: Additional Notes
       description: Any other relevant information
       placeholder: Additional notes
-      required: true
