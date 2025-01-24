@@ -2,8 +2,8 @@
 import type { Locale } from 'next-intl';
 
 export type PageParams = {
-  params: {
+  params: Promise<{
     locale: Locale;
     slug: string;
-  };
+  }>;
 };

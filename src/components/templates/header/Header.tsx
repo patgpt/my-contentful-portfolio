@@ -5,14 +5,9 @@ import MobileMenu from './MobileMenu';
 import DesktopMenu from './DesktopMenu';
 import ThemeSwitcher from '@/components/features/theme-switcher/ThemeSwitcher';
 import LanguageSelect from '@/components/features/language-selector/LanguageSelect';
+import type { PageParams } from '@/types/types';
 
-export const Header = async ({
-  params,
-}: {
-  params: Promise<{
-    locale: string;
-  }>;
-}) => {
+export const Header = async ({ params }: PageParams) => {
   const locale = (await params).locale;
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;

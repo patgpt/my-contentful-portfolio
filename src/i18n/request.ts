@@ -4,7 +4,8 @@
  */
 
 import { getRequestConfig } from 'next-intl/server';
-import { routing, type Locale } from './routing';
+import { routing } from './routing';
+import type { Locale } from 'next-intl';
 
 /**
  * Represents the structure of locale-specific messages and current locale

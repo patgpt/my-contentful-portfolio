@@ -5,20 +5,21 @@ import { useTransition } from 'react';
 import { FaGlobe, FaCheck } from 'react-icons/fa6';
 import { useRouter, usePathname } from '@/i18n/routing';
 import { useParams } from 'next/navigation';
+import type { Locale } from 'next-intl';
 
 const LANGUAGE_NAMES = {
   'en-US': 'English',
   'fr-CA': 'Français',
-} as const;
+} as Record<Locale, string>;
 
 export default function LocaleSwitcherSelect() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
-  const activeLocale = params.locale as string;
+  const activeLocale = params.locale;
 
-  function onSelectLocale(nextLocale: string) {
+  function onSelectLocale(nextLocale) {
     startTransition(() => {
       router.replace(pathname, { locale: nextLocale });
     });
@@ -26,7 +27,7 @@ export default function LocaleSwitcherSelect() {
 
   return (
     <div className="flex items-center gap-1">
-      <div className="dropdown dropdown-end" key={activeLocale}>
+      <div className="dropdown dropdown-end" key={activeLocale as string}>
         <label
           tabIndex={0}
           className={clsx('btn btn-circle btn-ghost mr-4 flex', isPending && 'opacity-50')}>

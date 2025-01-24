@@ -1,11 +1,11 @@
 import NavigationLink from '@/components/templates/header/NavigationLink';
 import type { NavigationFieldsFragment } from '@/lib/__generated/sdk';
-import { useTranslations } from 'next-intl';
+import { useTranslations, type Locale } from 'next-intl';
 import { FC } from 'react';
 
 interface DesktopMenuProps {
   navigation: NavigationFieldsFragment[];
-  locale: string;
+  locale: Locale;
 }
 
 const DesktopMenu: FC<DesktopMenuProps> = ({ navigation, locale }) => {

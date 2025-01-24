@@ -13,6 +13,7 @@ import { routing } from '@/i18n/routing';
 import { console } from 'inspector';
 import { fonts } from '@/app/fonts';
 import { NextIntlClientProvider } from 'next-intl';
+import type { PageParams } from '@/types/types';
 
 export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
@@ -31,12 +32,9 @@ export const viewport: Viewport = {
 
 const allowedOriginList = ['https://app.contentful.com', 'https://app.eu.contentful.com'];
 
-interface LayoutProps {
+type LayoutProps = PageParams & {
   children: ReactNode;
-  params: Promise<{
-    locale: string;
-  }>;
-}
+};
 export default async function PageLayout({ children, params }: LayoutProps) {
   const { isEnabled: preview } = await draftMode();
 

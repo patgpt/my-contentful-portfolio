@@ -11,7 +11,7 @@ import { routing } from '@/i18n/routing';
 import type { PageBlogPostFieldsFragment, PageLandingFieldsFragment } from '@/lib/__generated/sdk';
 import type { PageParams } from '@/types/types';
 
-export async function generateStaticParams(): Promise<PageParams[]> {
+export async function generateStaticParams() {
   const { locales } = routing;
   const experiences = await client.pageBlogPostCollection({ limit: 10 });
 

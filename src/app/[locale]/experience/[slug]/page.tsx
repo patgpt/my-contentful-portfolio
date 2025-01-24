@@ -10,6 +10,7 @@ import { client, previewClient } from '@/lib/client';
 import { formatDate } from '@/utils/date';
 import { notFound } from 'next/navigation';
 import ParallaxImage from '@/components/features/ParallaxImage';
+import type { PageParams } from '@/types/types';
 
 export async function generateStaticParams() {
   const { locales } = routing;
@@ -48,11 +49,7 @@ function BadgeRow({ skillsUsed }: IBadgeRowProps) {
   );
 }
 
-interface IExperienceDetailPageProps {
-  params: Promise<{ locale: string; slug: string }>;
-}
-
-async function ExperienceDetailPage({ params }: IExperienceDetailPageProps) {
+async function ExperienceDetailPage({ params }: PageParams) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
 

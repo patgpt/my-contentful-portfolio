@@ -7,16 +7,11 @@ import { FooterLink } from '@/components/templates/footer/FooterLink';
 import { FooterNav } from '@/components/templates/footer/FooterNav';
 import { FooterSocial } from '@/components/templates/footer/FooterSocial';
 import { client, previewClient } from '@/lib/client';
+import type { PageParams } from '@/types/types';
 import { draftMode } from 'next/headers';
 import { FaXTwitter, FaGithub, FaLinkedin } from 'react-icons/fa6';
 
-type FooterProps = {
-  params: Promise<{
-    locale: string;
-  }>;
-};
-
-export const Footer = async ({ params }: FooterProps) => {
+export const Footer = async ({ params }: PageParams) => {
   const locale = (await params).locale;
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;

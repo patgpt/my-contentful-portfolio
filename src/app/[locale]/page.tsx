@@ -15,6 +15,7 @@ import { client, previewClient } from '@/lib/client';
 // i18n imports
 import { Link, routing } from '@/i18n/routing';
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
+import type { PageParams } from '@/types/types';
 
 async function generatePageMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -49,13 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return generatePageMetadata();
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{
-    locale: string;
-  }>;
-}) {
+export default async function Page({ params }: PageParams) {
   const locale = (await params).locale;
   const t = await getTranslations('landingPage');
   const { isEnabled: preview } = await draftMode();
