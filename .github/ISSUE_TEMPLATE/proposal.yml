@@ -1,0 +1,36 @@
+name: "\U0001F4A1 Proposal"
+description: Want to extend the template or modify existing functionality? Send us a proposal
+title: "\U0001F4A1 Proposal - "
+labels: 
+  - needs review
+  - needs triage
+  - proposal
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Template contribution proposal
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: Start with describing the problem you want to solve
+      placeholder: Describe the problem
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: The proposed solution
+      description: Detail the solution you're proposing to the problem above
+      placeholder: Describe the proposed solution
+      required: true
+
+  - type: textarea
+    id: breaking_changes
+    attributes:
+      label: Breaking changes
+      description: Are there any breaking changes with this proposal? If so, please detail them here
+      placeholder: Describe any breaking changes
+      required: true
