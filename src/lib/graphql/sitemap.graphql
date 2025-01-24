@@ -14,7 +14,14 @@ fragment sitemapPagesFields on Query {
       }
     }
   }
-  pageExperienceCollection(limit: 100, locale: $locale) {
+  pageExperienceCollection(limit: 10, locale: $locale) {
+    items {
+      sys {
+        publishedAt
+      }
+    }
+  }
+  pageServiceCollection(limit: 100, locale: $locale) {
     items {
       slug
       sys {

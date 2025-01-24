@@ -1,37 +1,24 @@
-// TimelineItem.tsx
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { FaAward, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
-
-import ExperienceCard from '@/components/features/experience/ExperienceCard';
+/*
+ * Copyright (c) 2025.
+ * Patrick Kelly.
+ */
+'use client';
 import type { PageExperience } from '@/lib/__generated/sdk';
-import { formatDate } from '@/utils/date';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import CardSection from '@/components/features/experience/CardSection';
+import { FaBriefcase } from 'react-icons/fa6';
+import TimeDisplay from '@/components/features/experience/TimeDisplay';
 
-interface TimelineItemProps {
-  experience: PageExperience & { type?: string };
+interface ITimeLineItemProps {
+  experience: PageExperience;
   isLast: boolean;
   index: number;
 }
 
-type IconType = {
-  work: typeof FaBriefcase;
-  education: typeof FaGraduationCap;
-  award: typeof FaAward;
-};
-
-const getTimelineIcon = (type?: string) => {
-  const icons: IconType = {
-    work: FaBriefcase,
-    education: FaGraduationCap,
-    award: FaAward,
-  };
-  return icons[type as keyof IconType] || FaBriefcase;
-};
-
-export const TimelineItem = ({ experience, isLast, index }: TimelineItemProps) => {
+const TimelineItem = ({ experience, isLast, index }: ITimeLineItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isEven = index % 2 === 0;
-  const Icon = getTimelineIcon(experience.type);
 
   return (
     <motion.li
@@ -50,80 +37,50 @@ export const TimelineItem = ({ experience, isLast, index }: TimelineItemProps) =
           />
         </div>
       )}
-      <div className="mb-4 text-center md:hidden">
-        <motion.span
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-base-200 text-base-content/70 rounded-full px-4 py-1 text-sm">
-          {formatDate(experience.startDate)} -{' '}
-          {experience.endDate ? formatDate(experience.endDate) : 'Present'}
-        </motion.span>
-      </div>
-      <div className={`col-span-1 md:${!isEven && 'opacity-0'}`}>
-        {isEven ? (
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex items-center justify-end gap-4">
-            <ExperienceCard
-              experience={experience}
-              isExpanded={isExpanded}
-              setIsExpanded={setIsExpanded}
-              isEven={isEven}
-            />
-          </motion.div>
-        ) : (
-          <div className="hidden items-center justify-end md:flex">
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+      {isEven ? (
+        <>
+          <CardSection
+            experience={experience}
+            isExpanded={isExpanded}
+            setIsExpanded={setIsExpanded}
+            isEven={isEven}
+          />
+          <div className="relative z-10 hidden md:block">
+            <motion.div
+              className="to-primary-focus from-primary flex h-14 w-14 items-center justify-center rounded-full bg-linear-to-br shadow-lg"
+              initial={{ scale: 0, rotate: -180 }}
+              whileInView={{ scale: 1, rotate: 0 }}
               viewport={{ once: true }}
-              className="bg-base-200 text-base-content/70 rounded-full px-4 py-1 text-2xl">
-              {formatDate(experience.startDate)}
-            </motion.span>
+              transition={{ duration: 0.5 }}>
+              <FaBriefcase className="text-primary-content h-6 w-6" />
+            </motion.div>
           </div>
-        )}
-      </div>
-      <div className="relative z-10 hidden md:block">
-        <motion.div
-          className="to-primary-focus from-primary flex h-14 w-14 items-center justify-center rounded-full bg-linear-to-br shadow-lg"
-          initial={{ scale: 0, rotate: -180 }}
-          whileInView={{ scale: 1, rotate: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}>
-          <Icon className="text-primary-content h-6 w-6" />
-        </motion.div>
-      </div>
-      <div className={`col-span-1 md:${isEven && 'opacity-0'}`}>
-        {!isEven ? (
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex items-center justify-start gap-4">
-            <ExperienceCard
-              experience={experience}
-              isExpanded={isExpanded}
-              setIsExpanded={setIsExpanded}
-              isEven={isEven}
-            />
-          </motion.div>
-        ) : (
-          <div className="hidden items-center justify-start md:flex">
-            <motion.span
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+          <TimeDisplay isEven={isEven} experience={experience} />
+        </>
+      ) : (
+        <>
+          <TimeDisplay isEven={isEven} experience={experience} />
+          <div className="relative z-10 hidden md:block">
+            <motion.div
+              className="to-primary-focus from-primary flex h-14 w-14 items-center justify-center rounded-full bg-linear-to-br shadow-lg"
+              initial={{ scale: 0, rotate: -180 }}
+              whileInView={{ scale: 1, rotate: 0 }}
               viewport={{ once: true }}
-              className="bg-base-200 text-base-content/70 rounded-full px-4 py-1 text-2xl">
-              {formatDate(experience.startDate)}
-            </motion.span>
+              transition={{ duration: 0.5 }}>
+              <FaBriefcase className="text-primary-content h-6 w-6" />
+            </motion.div>
           </div>
-        )}
-      </div>
+          <CardSection
+            experience={experience}
+            isExpanded={isExpanded}
+            setIsExpanded={setIsExpanded}
+            isEven={isEven}
+          />
+        </>
+      )}
     </motion.li>
   );
 };
+
+TimelineItem.displayName = 'TimelineItem';
+export default TimelineItem;

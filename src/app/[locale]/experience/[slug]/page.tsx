@@ -1,71 +1,78 @@
+import { setRequestLocale } from 'next-intl/server';
 import { draftMode } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaGlobe } from 'react-icons/fa';
-import { setRequestLocale } from 'next-intl/server';
 
 import { CtfRichText } from '@/components/features/contentful';
-import type { PageExperience } from '@/lib/__generated/sdk';
+import { routing } from '@/i18n/routing';
 import { client, previewClient } from '@/lib/client';
 import { formatDate } from '@/utils/date';
-import { routing } from '@/i18n/routing';
+import { notFound } from 'next/navigation';
+import ParallaxImage from '@/components/features/ParallaxImage';
 
-interface ExperiencePageParams {
-  locale: string;
-  slug: string;
+export async function generateStaticParams() {
+  const { locales } = routing;
+  const experiences = await client.pageExperienceCollection({ limit: 10 });
+
+  return locales.flatMap(locale => {
+    const localeExperiences = experiences.pageExperienceCollection?.items ?? [];
+    return localeExperiences.map(experience => ({
+      params: {
+        locale,
+        slug: experience.slug,
+      },
+    }));
+  });
 }
 
-interface ExperienceDetailPageProps {
-  params: Promise<ExperiencePageParams>;
+type IBadgeRowProps = {
+  skillsUsed: string[];
+};
+
+function BadgeRow({ skillsUsed }: IBadgeRowProps) {
+  return (
+    <>
+      {skillsUsed && skillsUsed.length > 0 && (
+        <div className="flex flex-wrap gap-4">
+          {skillsUsed.map(skill => (
+            <span
+              key={skill}
+              className="badge badge-primary p-4 shadow-2xl transition-shadow hover:shadow-sm">
+              {skill}
+            </span>
+          ))}
+        </div>
+      )}
+    </>
+  );
 }
 
-export async function generateStaticParams(): Promise<ExperiencePageParams[]> {
-  const defaultLocale = routing.defaultLocale;
-  const gqlClient = client;
-  const { pageExperienceCollection } = await gqlClient.getAllExperiences({ locale: defaultLocale });
-
-  if (!pageExperienceCollection?.items) {
-    return [];
-  }
-
-  const paths: ExperiencePageParams[] = [];
-  for (const locale of routing.locales) {
-    for (const experience of pageExperienceCollection.items) {
-      if (experience?.slug) {
-        paths.push({
-          locale: locale,
-          slug: experience.slug,
-        });
-      }
-    }
-  }
-
-  return paths;
+interface IExperienceDetailPageProps {
+  params: Promise<{ locale: string; slug: string }>;
 }
 
-async function ExperienceDetailPage({ params: paramsPromise }: ExperienceDetailPageProps) {
-  const { locale, slug } = await paramsPromise;
+async function ExperienceDetailPage({ params }: IExperienceDetailPageProps) {
+  const { locale, slug } = await params;
   setRequestLocale(locale);
 
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
-  const experience = await gqlClient.getExperienceBySlug({ locale, preview, slug });
-  const data = experience.pageExperienceCollection?.items[0] as PageExperience | undefined;
+  const experience = await gqlClient.getExperiencePageBySlug({ locale, preview, slug });
+  const data = experience.pageExperienceCollection?.items[0];
   if (!data) {
-    return <div className="container mx-auto">Experience not found</div>;
+    return notFound();
   }
 
   return (
     <article className="min-h-screen">
-      <div
-        className="relative h-[300px] w-full bg-cover bg-fixed bg-center bg-no-repeat md:h-[400px]"
-        style={{
-          backgroundImage: `url(${data.bannerImage?.url ?? '/default-banner.jpg'})`,
-        }}
-      />
+      <ParallaxImage src={data?.bannerImage?.url || ''} alt={data.bannerImage.description || ''} />
 
-      <main className="container mx-auto px-4 py-8 md:px-8">
-        <div className="prose prose-lg mx-auto max-w-4xl">
+      <div className="container mx-auto px-4 py-8 md:px-8">
+        <div className="mx-auto max-w-4xl">
+          <Link href={`/${locale}/experience`} className="btn btn-ghost mb-8 no-underline">
+            ← Back to all experiences
+          </Link>
           <header className="mb-8">
             {data.companyLogo?.url && (
               <Image
@@ -73,7 +80,7 @@ async function ExperienceDetailPage({ params: paramsPromise }: ExperienceDetailP
                 alt={data.companyName || ''}
                 width={200}
                 height={200}
-                className="mb-4 object-contain"
+                className="mb-4 rounded-sm object-contain shadow-lg"
               />
             )}
             <h1 className="mb-2">{data.companyName}</h1>
@@ -86,26 +93,17 @@ async function ExperienceDetailPage({ params: paramsPromise }: ExperienceDetailP
           </header>
 
           <section className="mb-8">
-            <CtfRichText json={data.jobDescription?.json} />
+            <CtfRichText proseSize="prose-2xl" json={data.jobDescription?.json} />
           </section>
 
           <footer className="mt-8 space-y-6">
-            {data.skillsUsed && data.skillsUsed.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {data.skillsUsed.map(skill => (
-                  <span
-                    key={skill}
-                    className="badge badge-primary p-4 transition-shadow hover:shadow-lg">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            )}
+            {/* TODO: Make this filterable */}
+            <BadgeRow skillsUsed={data?.skillsUsed} />
 
             {data.website && (
               <Link
                 href={data.website}
-                className="btn btn-ghost hover:bg-base-200 gap-2"
+                className="btn btn-ghost hover:bg-base-200 gap-2 no-underline"
                 target="_blank"
                 rel="noopener noreferrer">
                 <FaGlobe />
@@ -114,7 +112,7 @@ async function ExperienceDetailPage({ params: paramsPromise }: ExperienceDetailP
             )}
           </footer>
         </div>
-      </main>
+      </div>
     </article>
   );
 }

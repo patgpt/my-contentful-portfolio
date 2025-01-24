@@ -1,6 +1,4 @@
-#import "../imageFields.graphql"
-
-fragment ExperienceFields on PageExperience {
+fragment PageExperienceFields on PageExperience {
   sys {
     id
   }
@@ -14,10 +12,17 @@ fragment ExperienceFields on PageExperience {
   }
   startDate
   endDate
-  website
-  skillsUsed
   positionTitle
   jobDescription {
     json
+    links {
+      entries {
+        block {
+          ...RichImageFields
+        }
+      }
+    }
   }
+  website
+  skillsUsed
 }

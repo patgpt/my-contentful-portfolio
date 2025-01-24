@@ -3397,13 +3397,16 @@ export type AuthorFieldsFragment = { __typename: 'ComponentAuthor', name?: strin
 
 export type CtaFieldsFragment = { __typename?: 'ComponentCta', ctaText?: string | null, ctaLink?: string | null, icon?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null } | null };
 
-export type ExperienceFieldsFragment = { __typename?: 'PageExperience', slug?: string | null, companyName?: string | null, startDate?: any | null, endDate?: any | null, website?: string | null, skillsUsed?: Array<string | null> | null, positionTitle?: string | null, sys: { __typename?: 'Sys', id: string }, companyLogo?: (
+export type PageExperienceFieldsFragment = { __typename?: 'PageExperience', slug?: string | null, companyName?: string | null, startDate?: any | null, endDate?: any | null, positionTitle?: string | null, website?: string | null, skillsUsed?: Array<string | null> | null, sys: { __typename?: 'Sys', id: string }, companyLogo?: (
     { __typename?: 'Asset' }
     & ImageFieldsFragment
   ) | null, bannerImage?: (
     { __typename?: 'Asset' }
     & ImageFieldsFragment
-  ) | null, jobDescription?: { __typename?: 'PageExperienceJobDescription', json: any } | null };
+  ) | null, jobDescription?: { __typename?: 'PageExperienceJobDescription', json: any, links: { __typename?: 'PageExperienceJobDescriptionLinks', entries: { __typename?: 'PageExperienceJobDescriptionEntries', block: Array<{ __typename?: 'ComponentAuthor' } | { __typename?: 'ComponentCta' } | { __typename?: 'ComponentHero' } | (
+          { __typename?: 'ComponentRichImage' }
+          & RichImageFieldsFragment
+        ) | { __typename?: 'ComponentSeo' } | { __typename?: 'NavigationLink' } | { __typename?: 'NavigationMenu' } | { __typename?: 'PageBlogPost' } | { __typename?: 'PageDefault' } | { __typename?: 'PageExperience' } | { __typename?: 'PageLanding' } | { __typename?: 'PageService' } | { __typename?: 'Settings' } | null> } } } | null };
 
 export type FooterFieldsFragment = { __typename?: 'Settings', footerCopyrightText?: string | null, footerSiteNavigationCollection?: { __typename?: 'SettingsFooterSiteNavigationCollection', items: Array<(
       { __typename?: 'NavigationLink' }
@@ -3487,16 +3490,17 @@ export type SeoFieldsFragment = { __typename: 'ComponentSeo', pageTitle?: string
       & ImageFieldsFragment
     ) | null> } | null };
 
-export type GetExperienceBySlugQueryVariables = Exact<{
+export type GetExperiencePageBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
+  slug: Scalars['String']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetExperienceBySlugQuery = { __typename?: 'Query', pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<(
+export type GetExperiencePageBySlugQuery = { __typename?: 'Query', pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<(
       { __typename?: 'PageExperience' }
-      & ExperienceFieldsFragment
+      & PageExperienceFieldsFragment
     ) | null> } | null };
 
 export type GetFooterSettingsQueryVariables = Exact<{
@@ -3561,6 +3565,30 @@ export type PageBlogPostCollectionQuery = { __typename?: 'Query', pageBlogPostCo
       & PageBlogPostFieldsFragment
     ) | null> } | null };
 
+export type GetExperiencePageByIdQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['String']['input'];
+}>;
+
+
+export type GetExperiencePageByIdQuery = { __typename?: 'Query', pageExperience?: (
+    { __typename?: 'PageExperience' }
+    & PageExperienceFieldsFragment
+  ) | null };
+
+export type PageExperienceCollectionQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type PageExperienceCollectionQuery = { __typename?: 'Query', pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<(
+      { __typename?: 'PageExperience' }
+      & PageExperienceFieldsFragment
+    ) | null> } | null };
+
 export type PageLandingQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -3609,7 +3637,7 @@ export type PageServiceCollectionQuery = { __typename?: 'Query', pageServiceColl
       & PageServiceFieldsFragment
     ) | null> } | null };
 
-export type SitemapPagesFieldsFragment = { __typename?: 'Query', pageBlogPostCollection?: { __typename?: 'PageBlogPostCollection', items: Array<{ __typename?: 'PageBlogPost', slug?: string | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null, pageLandingCollection?: { __typename?: 'PageLandingCollection', items: Array<{ __typename?: 'PageLanding', sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null, pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<{ __typename?: 'PageExperience', slug?: string | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null, pageServiceCollection?: { __typename?: 'PageServiceCollection', items: Array<{ __typename?: 'PageService', slug?: string | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null };
+export type SitemapPagesFieldsFragment = { __typename?: 'Query', pageBlogPostCollection?: { __typename?: 'PageBlogPostCollection', items: Array<{ __typename?: 'PageBlogPost', slug?: string | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null, pageLandingCollection?: { __typename?: 'PageLandingCollection', items: Array<{ __typename?: 'PageLanding', sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null, pageExperienceCollection?: { __typename?: 'PageExperienceCollection', items: Array<{ __typename?: 'PageExperience', sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null, pageServiceCollection?: { __typename?: 'PageServiceCollection', items: Array<{ __typename?: 'PageService', slug?: string | null, sys: { __typename?: 'Sys', publishedAt?: any | null } } | null> } | null };
 
 export type SitemapPagesQueryVariables = Exact<{
   locale: Scalars['String']['input'];
@@ -3646,8 +3674,22 @@ export const ImageFieldsFragmentDoc = gql`
   contentType
 }
     `;
-export const ExperienceFieldsFragmentDoc = gql`
-    fragment ExperienceFields on PageExperience {
+export const RichImageFieldsFragmentDoc = gql`
+    fragment RichImageFields on ComponentRichImage {
+  __typename
+  internalName
+  sys {
+    id
+  }
+  image {
+    ...ImageFields
+  }
+  caption
+  fullWidth
+}
+    `;
+export const PageExperienceFieldsFragmentDoc = gql`
+    fragment PageExperienceFields on PageExperience {
   sys {
     id
   }
@@ -3661,12 +3703,19 @@ export const ExperienceFieldsFragmentDoc = gql`
   }
   startDate
   endDate
-  website
-  skillsUsed
   positionTitle
   jobDescription {
     json
+    links {
+      entries {
+        block {
+          ...RichImageFields
+        }
+      }
+    }
   }
+  website
+  skillsUsed
 }
     `;
 export const NavigationFieldsFragmentDoc = gql`
@@ -3733,20 +3782,6 @@ export const AuthorFieldsFragmentDoc = gql`
   avatar {
     ...ImageFields
   }
-}
-    `;
-export const RichImageFieldsFragmentDoc = gql`
-    fragment RichImageFields on ComponentRichImage {
-  __typename
-  internalName
-  sys {
-    id
-  }
-  image {
-    ...ImageFields
-  }
-  caption
-  fullWidth
 }
     `;
 export const ReferencePageBlogPostFieldsFragmentDoc = gql`
@@ -3873,7 +3908,14 @@ export const SitemapPagesFieldsFragmentDoc = gql`
       }
     }
   }
-  pageExperienceCollection(limit: 100, locale: $locale) {
+  pageExperienceCollection(limit: 10, locale: $locale) {
+    items {
+      sys {
+        publishedAt
+      }
+    }
+  }
+  pageServiceCollection(limit: 100, locale: $locale) {
     items {
       slug
       sys {
@@ -3891,21 +3933,22 @@ export const SitemapPagesFieldsFragmentDoc = gql`
   }
 }
     `;
-export const GetExperienceBySlugDocument = gql`
-    query getExperienceBySlug($locale: String, $preview: Boolean, $slug: String) {
+export const GetExperiencePageBySlugDocument = gql`
+    query getExperiencePageBySlug($locale: String, $preview: Boolean, $slug: String!, $limit: Int = 1) {
   pageExperienceCollection(
-    limit: 1
-    locale: $locale
     preview: $preview
-    where: {slug_contains: $slug}
+    locale: $locale
+    limit: $limit
+    where: {slug: $slug}
   ) {
     items {
-      ...ExperienceFields
+      ...PageExperienceFields
     }
   }
 }
-    ${ExperienceFieldsFragmentDoc}
-${ImageFieldsFragmentDoc}`;
+    ${PageExperienceFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
+${RichImageFieldsFragmentDoc}`;
 export const GetFooterSettingsDocument = gql`
     query getFooterSettings($locale: String, $preview: Boolean) {
   settingsCollection(locale: $locale, preview: $preview, limit: 1) {
@@ -3982,6 +4025,26 @@ ${ImageFieldsFragmentDoc}
 ${AuthorFieldsFragmentDoc}
 ${RichImageFieldsFragmentDoc}
 ${ReferencePageBlogPostFieldsFragmentDoc}`;
+export const GetExperiencePageByIdDocument = gql`
+    query getExperiencePageByID($locale: String, $preview: Boolean, $id: String!) {
+  pageExperience(preview: $preview, locale: $locale, id: $id) {
+    ...PageExperienceFields
+  }
+}
+    ${PageExperienceFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
+${RichImageFieldsFragmentDoc}`;
+export const PageExperienceCollectionDocument = gql`
+    query pageExperienceCollection($locale: String, $preview: Boolean, $limit: Int = 10) {
+  pageExperienceCollection(limit: $limit, locale: $locale, preview: $preview) {
+    items {
+      ...PageExperienceFields
+    }
+  }
+}
+    ${PageExperienceFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
+${RichImageFieldsFragmentDoc}`;
 export const PageLandingDocument = gql`
     query pageLanding($locale: String, $preview: Boolean) {
   pageLandingCollection(limit: 1, locale: $locale, preview: $preview) {
@@ -4064,8 +4127,8 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    getExperienceBySlug(variables?: GetExperienceBySlugQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetExperienceBySlugQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetExperienceBySlugQuery>(GetExperienceBySlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getExperienceBySlug', 'query', variables);
+    getExperiencePageBySlug(variables: GetExperiencePageBySlugQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetExperiencePageBySlugQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetExperiencePageBySlugQuery>(GetExperiencePageBySlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getExperiencePageBySlug', 'query', variables);
     },
     getFooterSettings(variables?: GetFooterSettingsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetFooterSettingsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetFooterSettingsQuery>(GetFooterSettingsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getFooterSettings', 'query', variables);
@@ -4081,6 +4144,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     pageBlogPostCollection(variables?: PageBlogPostCollectionQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageBlogPostCollectionQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PageBlogPostCollectionQuery>(PageBlogPostCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pageBlogPostCollection', 'query', variables);
+    },
+    getExperiencePageByID(variables: GetExperiencePageByIdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetExperiencePageByIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetExperiencePageByIdQuery>(GetExperiencePageByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getExperiencePageByID', 'query', variables);
+    },
+    pageExperienceCollection(variables?: PageExperienceCollectionQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageExperienceCollectionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PageExperienceCollectionQuery>(PageExperienceCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pageExperienceCollection', 'query', variables);
     },
     pageLanding(variables?: PageLandingQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageLandingQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PageLandingQuery>(PageLandingDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pageLanding', 'query', variables);
