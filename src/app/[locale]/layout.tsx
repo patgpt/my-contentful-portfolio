@@ -47,13 +47,13 @@ export default async function PageLayout({ children, params }: LayoutProps) {
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html data-theme="light" lang={locale} suppressHydrationWarning>
       <head>
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
       </head>
       <body className="bg-base-100 text-base-content min-h-screen">
         <ThemeProvider
-          attribute="data-theme"
+          attribute="data-class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange>

@@ -1,3 +1,4 @@
+import PageTitle from '@/components/features/PageTitle';
 import { Link } from '@/i18n/routing';
 import { client, previewClient } from '@/lib/client';
 import { draftMode } from 'next/headers';
@@ -16,7 +17,7 @@ const ServicesPage = async ({
   const pageCollection = data.pageServiceCollection;
   return (
     <div className="container mx-auto h-screen p-12">
-      <h1 className="my-4 text-2xl tracking-tight">Services</h1>
+      <PageTitle titleText="Services" />
       {pageCollection?.items.map(page => (
         <Link
           key={page.slug}
