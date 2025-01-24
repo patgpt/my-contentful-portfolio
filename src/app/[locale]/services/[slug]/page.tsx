@@ -1,35 +1,52 @@
+import { CtfRichText } from '@/components/features/contentful';
 import { routing } from '@/i18n/routing';
 import { client, previewClient } from '@/lib/client';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
-  const locales = routing.locales;
   const params = await Promise.all(
-    locales.map(async locale => {
-      const pageCollection = await client.pageServiceCollection({ locale: locale });
-      const pages = pageCollection.pageServiceCollection?.items || [];
-
-      return pages.map(page => ({
-        locale,
-        slug: `services/${page.slug}`,
-      }));
+    routing.locales.map(async locale => {
+      try {
+        const pages = await client.pageServiceCollection({ locale: locale });
+        return (
+          pages.pageServiceCollection?.items.map(page => ({
+            locale,
+            slug: page.slug,
+          })) || []
+        );
+      } catch (error) {
+        console.error(`Error generating params for locale ${locale}:`, error);
+        return [];
+      }
     }),
   );
-  return params;
+
+  return params.flat();
 }
-async function Servicepage({ params }) {
+
+interface IServicePageProps {
+  params: Promise<{
+    locale: string;
+    slug: string;
+  }>;
+}
+
+async function Servicepage({ params }: IServicePageProps) {
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
-  const locale = (await params).locale;
-  const slug = (await params).slug;
+  const { locale, slug } = await params;
   const pageCollection = await gqlClient.pageServiceCollection({ locale: locale, preview });
 
-  console.log(pageCollection);
   if (!pageCollection.pageServiceCollection?.items) notFound();
   const page = pageCollection.pageServiceCollection?.items.find(page => page.slug === slug);
   console.log(page);
-  return <div>hi</div>;
+  return (
+    <div className="container mx-auto p-12">
+      <h1 className="my-4 text-2xl tracking-tight">{page?.pageTitle}</h1>
+      <CtfRichText proseSize="prose-xl" json={page?.pageContent.json} />
+    </div>
+  );
 }
 
 export default Servicepage;

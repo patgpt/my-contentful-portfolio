@@ -1,3 +1,7 @@
+import { Link } from '@/i18n/routing';
+import { client, previewClient } from '@/lib/client';
+import { draftMode } from 'next/headers';
+
 const ServicesPage = async ({
   params,
 }: {
@@ -5,8 +9,24 @@ const ServicesPage = async ({
     locale: string;
   }>;
 }) => {
-  const locale = (await params).locale;
-  return <div>{locale}</div>;
+  const { isEnabled: preview } = await draftMode();
+  const gqlClient = preview ? previewClient : client;
+  const { locale } = await params;
+  const data = await gqlClient.pageServiceCollection({ locale: locale });
+  const pageCollection = data.pageServiceCollection;
+  return (
+    <div className="container mx-auto h-screen p-12">
+      <h1 className="my-4 text-2xl tracking-tight">Services</h1>
+      {pageCollection?.items.map(page => (
+        <Link
+          key={page.slug}
+          href={`/services/${page.slug}`}
+          className="text-primary-500 my-4 block text-lg font-semibold">
+          {page.pageTitle}
+        </Link>
+      ))}
+    </div>
+  );
 };
 
 export default ServicesPage;
