@@ -2,7 +2,17 @@
 
 @plugin "daisyui";
 @plugin "@tailwindcss/typography";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dark --prefersdark;
+  root: ':root';
+
+  logs: true;
+}
+
+@theme {
+}
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
