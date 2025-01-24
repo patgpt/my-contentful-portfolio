@@ -1,9 +1,9 @@
-import type { Locale } from '@/i18n/routing';
+// types/pageParams.ts
+import type { Locale } from 'next-intl';
 
-// Type representing the parameters for a page
 export type PageParams = {
-  params: Promise<{
+  params: {
     locale: Locale;
     slug: string;
-  }>;
+  };
 };
