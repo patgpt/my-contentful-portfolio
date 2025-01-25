@@ -1,8 +1,50 @@
 import { routing } from '@/i18n/routing';
+import { configDotenv } from 'dotenv';
+import type { Locale } from 'next-intl';
 import { NextRequest, NextResponse } from 'next/server';
 
+configDotenv();
+
+// Allow CORS requests from the specified origins
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
+// Define CORS headers
+const corsOptions = {
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+};
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Handle CORS for API routes
+  if (pathname.startsWith('/api/')) {
+    const origin = request.headers.get('origin') || '';
+    const isAllowedOrigin = allowedOrigins.includes(origin);
+
+    // Handle preflighted requests
+    if (request.method === 'OPTIONS') {
+      const preflightHeaders: Record<string, string> = {
+        ...corsOptions,
+      };
+
+      if (isAllowedOrigin) {
+        preflightHeaders['Access-Control-Allow-Origin'] = origin;
+      }
+
+      return NextResponse.json({}, { headers: preflightHeaders });
+    }
+    // Handle simple requests
+    const response = NextResponse.next();
+
+    if (isAllowedOrigin) {
+      response.headers.set('Access-Control-Allow-Origin', origin);
+    }
+    // Set other CORS headers
+    Object.entries(corsOptions).forEach(([key, value]) => {
+      response.headers.set(key, value);
+    });
+
+    return response;
+  }
 
   // If the pathname already includes a locale, proceed normally
   const isLocalePath = routing.locales.some(locale => pathname.startsWith(`/${locale}`));
@@ -15,7 +57,7 @@ export default function middleware(request: NextRequest) {
   const preferredLocale = acceptLanguage?.split(',')[0] || routing.defaultLocale;
 
   // Validate the preferred locale or fall back to the default
-  const localeToUse = routing.locales.includes(preferredLocale as (typeof routing.locales)[number])
+  const localeToUse = routing.locales.includes(preferredLocale as Locale)
     ? preferredLocale
     : routing.defaultLocale;
 
