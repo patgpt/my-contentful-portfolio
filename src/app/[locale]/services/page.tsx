@@ -1,15 +1,10 @@
 import PageTitle from '@/components/features/PageTitle';
 import { Link } from '@/i18n/routing';
 import { client, previewClient } from '@/lib/client';
+import type { PageParams } from '@/types/types';
 import { draftMode } from 'next/headers';
 
-const ServicesPage = async ({
-  params,
-}: {
-  params: Promise<{
-    locale: string;
-  }>;
-}) => {
+const ServicesPage = async ({ params }: PageParams) => {
   const { isEnabled: preview } = await draftMode();
   const gqlClient = preview ? previewClient : client;
   const { locale } = await params;
