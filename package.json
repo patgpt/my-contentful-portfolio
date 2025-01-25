@@ -7,7 +7,7 @@
     "npm": "Please use Bun"
   },
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --experimental-https --turbopack",
     "dev:inspect": "NODE_OPTIONS='--inspect' next dev --turbopack",
     "build": "next build",
     "start": "next start",

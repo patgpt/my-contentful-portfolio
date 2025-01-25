@@ -1,9 +1,6 @@
 import { routing } from '@/i18n/routing';
-import { configDotenv } from 'dotenv';
 import type { Locale } from 'next-intl';
 import { NextRequest, NextResponse } from 'next/server';
-
-configDotenv();
 
 // Allow CORS requests from the specified origins
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
