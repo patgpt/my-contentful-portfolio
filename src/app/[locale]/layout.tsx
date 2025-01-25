@@ -30,8 +30,6 @@ export const viewport: Viewport = {
   themeColor: 'rebeccapurple',
 };
 
-const allowedOriginList = ['https://app.contentful.com', 'https://app.eu.contentful.com'];
-
 type LayoutProps = PageParams & {
   children: ReactNode;
 };
@@ -60,7 +58,7 @@ export default async function PageLayout({ children, params }: LayoutProps) {
               locale={locale || (await getLocale())}
               enableInspectorMode={preview}
               enableLiveUpdates={preview}
-              targetOrigin={allowedOriginList}>
+              targetOrigin={process.env.NEXT_PUBLIC_ALLOWED_ORIGINS}>
               <main
                 className={cn(
                   fonts.fontDisplay.variable,
